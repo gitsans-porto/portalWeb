@@ -35,18 +35,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-18 lg:h-20">
 
-                {{-- Logo —}}
-                <a href="{{ route('beranda') }}" class="flex items-center gap-3 no-underline">
-                    <div
-                        class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M2 10l10-7 10 7M4 10v10a1 1 0 001 1h14a1 1 0 001-1V10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M9 21v-6a1 1 0 011-1h4a1 1 0 011 1v6" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </div>
+                {{-- Logo --}}
+                <a href="{{ route('beranda') }}" class="flex items-center gap-3 no-underline shrink-0">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo SMKN 1 Limboto" class="w-auto h-12 object-contain drop-shadow-md">
                     <div>
                         <span
                             class="nav-logo-text text-white font-bold text-base leading-tight block transition-colors duration-300">SMKN
@@ -117,15 +108,8 @@
                 {{-- Column 1: About --}}
                 <div class="lg:col-span-1">
                     <div class="flex items-center gap-3 mb-5">
-                        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
-                            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M2 10l10-7 10 7M4 10v10a1 1 0 001 1h14a1 1 0 001-1V10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M9 21v-6a1 1 0 011-1h4a1 1 0 011 1v6" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo SMKN 1 Limboto"
+                            class="w-auto h-11 object-contain">
                         <div>
                             <span class="text-white font-bold text-sm block">SMKN 1 Limboto</span>
                             <span class="text-white/40 text-xs">Portal Layanan Digital</span>

@@ -19,7 +19,7 @@ class PortalController extends Controller
                 'description' => 'Sistem pelaporan hasil belajar siswa berbasis digital yang memudahkan guru dalam menginput nilai dan orang tua dalam memantau perkembangan akademik anak.',
                 'long_description' => 'E-Raport adalah sistem penilaian dan pelaporan hasil belajar siswa secara elektronik yang dikembangkan oleh Kementerian Pendidikan. Sistem ini menggantikan raport konvensional berbasis kertas dengan platform digital yang lebih efisien, akurat, dan mudah diakses oleh seluruh pemangku kepentingan pendidikan.',
                 'color' => 'blue',
-                'icon' => 'chart',
+                'icon' => 'document-chart-bar',
                 'url' => 'https://erapor.kemdikbud.go.id',
                 'audiences' => ['Guru', 'Staf Administrasi', 'Wali Kelas'],
                 'sop' => [
@@ -53,7 +53,7 @@ class PortalController extends Controller
                 'description' => 'Sistem pendataan pendidikan nasional untuk mengelola data sekolah, guru, dan peserta didik secara terpusat dan akurat.',
                 'long_description' => 'Dapodik (Data Pokok Pendidikan) adalah sistem pendataan skala nasional yang dikelola oleh Kementerian Pendidikan. Sistem ini menjadi sumber data utama untuk perencanaan, pelaksanaan, pelaporan, dan evaluasi program pendidikan nasional. Data yang dikelola meliputi data satuan pendidikan, peserta didik, pendidik dan tenaga kependidikan.',
                 'color' => 'amber',
-                'icon' => 'database',
+                'icon' => 'academic-cap',
                 'url' => 'https://dapo.kemdikbud.go.id',
                 'audiences' => ['Operator Sekolah', 'Staf Administrasi'],
                 'sop' => [
