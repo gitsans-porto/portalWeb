@@ -117,16 +117,13 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(145deg, #1a0000 0%, #3d0001 30%, var(--color-primary-800) 60%, var(--color-primary) 100%);
     overflow: hidden;
 }
 .hero-section::before {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(254, 0, 2, 0.15), transparent),
-        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(254, 0, 2, 0.08), transparent);
+    background: rgba(0, 0, 0, 0.65);
     pointer-events: none;
 }
 .hero-section::after {

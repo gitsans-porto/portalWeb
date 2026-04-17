@@ -6,7 +6,7 @@
 @section('content')
 
     {{-- ======== HERO SECTION ======== --}}
-    <section class="hero-section" id="layanan">
+    <section class="hero-section" id="layanan" style="background-image: url('{{ asset('images/gambarSekolah.jpeg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         {{-- Decorative Elements --}}
         <div class="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-white/[0.02] blur-3xl"
             style="animation: float 8s ease-in-out infinite;"></div>
