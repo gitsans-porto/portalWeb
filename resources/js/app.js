@@ -42,6 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', closeMenu);
     });
 
+    // — Mobile dropdown toggle —
+    const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
+
+    mobileDropdownBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const submenu = btn.nextElementSibling;
+            btn.classList.toggle('active');
+            submenu?.classList.toggle('active');
+        });
+    });
+
     // — Scroll Reveal (Intersection Observer) —
     const reveals = document.querySelectorAll('.reveal');
     if (reveals.length) {
@@ -103,4 +114,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         counters.forEach(el => counterObserver.observe(el));
     }
+    // — Login Modal —
+    const loginModalBtn = document.getElementById('login-modal-btn');
+    const loginModalClose = document.getElementById('login-modal-close');
+    const loginModalOverlay = document.getElementById('login-modal-overlay');
+
+    function openLoginModal() {
+        loginModalOverlay?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLoginModal() {
+        loginModalOverlay?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    loginModalBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLoginModal();
+    });
+    loginModalClose?.addEventListener('click', closeLoginModal);
+    loginModalOverlay?.addEventListener('click', (e) => {
+        if (e.target === loginModalOverlay) closeLoginModal();
+    });
 });
