@@ -1,13 +1,11 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', 'Beranda'); ?>
+<?php $__env->startSection('meta_description', 'Portal Layanan Sistem Informasi Terpadu SMKN 1 Limboto — Akses E-Raport, LMS, Dapodik, dan PeKaeL dengan mudah.'); ?>
 
-@section('title', 'Beranda')
-@section('meta_description', 'Portal Layanan Sistem Informasi Terpadu SMKN 1 Limboto — Akses E-Raport, LMS, Dapodik, dan PeKaeL dengan mudah.')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-    {{-- ======== HERO SECTION ======== --}}
-    <section class="hero-section" id="layanan" style="background-image: url('{{ asset('images/gambarSekolah.jpeg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        {{-- Decorative Elements --}}
+    
+    <section class="hero-section" id="layanan" style="background-image: url('<?php echo e(asset('images/gambarSekolah.jpeg')); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        
         <div class="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-white/[0.02] blur-3xl"
             style="animation: float 8s ease-in-out infinite;"></div>
         <div class="absolute bottom-1/4 right-10 w-80 h-80 rounded-full bg-red-500/[0.04] blur-3xl"
@@ -17,7 +15,7 @@
 
         <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-0">
             <div class="text-center mb-12 lg:mb-16">
-                {{-- School Badge --}}
+                
                 <div
                     class="inline-flex items-center gap-2 px-4 py-2 bg-white/[0.08] border border-white/[0.12] rounded-full mb-6 backdrop-blur-sm">
                     <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
@@ -35,11 +33,11 @@
                 </p>
             </div>
 
-            {{-- ======== SERVICE CARDS GRID ======== --}}
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 max-w-5xl mx-auto">
 
-                @foreach($layananList as $index => $item)
-                    @php
+                <?php $__currentLoopData = $layananList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php
                         $colors = [
                             'blue' => ['bg' => 'bg-blue-500/20', 'text' => 'text-blue-300', 'border' => 'border-blue-400/20'],
                             'green' => ['bg' => 'bg-emerald-500/20', 'text' => 'text-emerald-300', 'border' => 'border-emerald-400/20'],
@@ -47,41 +45,41 @@
                             'purple' => ['bg' => 'bg-purple-500/20', 'text' => 'text-purple-300', 'border' => 'border-purple-400/20'],
                         ];
                         $c = $colors[$item['color']] ?? $colors['blue'];
-                    @endphp
+                    ?>
 
-                    <a href="{{ route('layanan.detail', $item['slug']) }}"
-                        class="service-card reveal reveal-delay-{{ $index + 1 }}">
+                    <a href="<?php echo e(route('layanan.detail', $item['slug'])); ?>"
+                        class="service-card reveal reveal-delay-<?php echo e($index + 1); ?>">
 
                         <div class="flex flex-col items-center text-center mb-4">
                             <div class="mb-4">
-                                @if($item['icon'] === 'document-chart-bar')
-                                    <svg class="w-10 h-10 {{ $c['text'] }}" viewBox="0 0 24 24" fill="currentColor">
+                                <?php if($item['icon'] === 'document-chart-bar'): ?>
+                                    <svg class="w-10 h-10 <?php echo e($c['text']); ?>" viewBox="0 0 24 24" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM9.75 17.25a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-.75Zm2.25-3a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3a.75.75 0 0 1 .75-.75Zm3.75-1.5a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-5.25Z" clip-rule="evenodd" />
                                         <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
                                     </svg>
-                                @elseif($item['icon'] === 'book')
-                                    <svg class="w-10 h-10 {{ $c['text'] }}" viewBox="0 0 24 24" fill="currentColor">
+                                <?php elseif($item['icon'] === 'book'): ?>
+                                    <svg class="w-10 h-10 <?php echo e($c['text']); ?>" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
                                     </svg>
-                                @elseif($item['icon'] === 'academic-cap')
-                                    <svg class="w-10 h-10 {{ $c['text'] }}" viewBox="0 0 24 24" fill="currentColor">
+                                <?php elseif($item['icon'] === 'academic-cap'): ?>
+                                    <svg class="w-10 h-10 <?php echo e($c['text']); ?>" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.174v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z" />
                                         <path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.711 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286a48.4 48.4 0 0 1 9.786 3.283.75.75 0 0 0 .832-.005h-.002Z" />
                                         <path d="M7.084 14.292a.75.75 0 0 0-1.5.036 20.026 20.026 0 0 0 .345 4.084.75.75 0 0 0 1.472-.29 18.56 18.56 0 0 1-.317-3.83Z" />
                                     </svg>
-                                @elseif($item['icon'] === 'briefcase')
-                                    <svg class="w-10 h-10 {{ $c['text'] }}" viewBox="0 0 24 24" fill="currentColor">
+                                <?php elseif($item['icon'] === 'briefcase'): ?>
+                                    <svg class="w-10 h-10 <?php echo e($c['text']); ?>" viewBox="0 0 24 24" fill="currentColor">
                                         <path fill-rule="evenodd" d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75a24.726 24.726 0 0 1-7.814-1.259c-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25ZM13.5 4.5h-3a1.5 1.5 0 0 0-1.5 1.5v.054A50.352 50.352 0 0 1 12 6a50.352 50.352 0 0 1 3 .054V6a1.5 1.5 0 0 0-1.5-1.5Z" clip-rule="evenodd" />
                                         <path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.93 0 5.738-.478 8.287-1.336.252-.085.5-.18.713-.31V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 0 1-6.477-.427C4.047 21.128 3 19.852 3 18.4Z" />
                                     </svg>
-                                @endif
+                                <?php endif; ?>
                             </div>
 
-                            <h3 class="text-white font-bold text-lg mb-1">{{ $item['name'] }}</h3>
-                            <p class="text-white text-xs font-medium uppercase tracking-wider opacity-70">{{ $item['tagline'] }}</p>
+                            <h3 class="text-white font-bold text-lg mb-1"><?php echo e($item['name']); ?></h3>
+                            <p class="text-white text-xs font-medium uppercase tracking-wider opacity-70"><?php echo e($item['tagline']); ?></p>
                         </div>
 
-                        <p class="text-white text-sm leading-relaxed mb-4 opacity-80">{{ Str::limit($item['description'], 80) }}</p>
+                        <p class="text-white text-sm leading-relaxed mb-4 opacity-80"><?php echo e(Str::limit($item['description'], 80)); ?></p>
 
                         <div
                             class="flex items-center gap-1.5 text-white text-sm font-medium opacity-80 hover:opacity-100 transition-opacity">
@@ -92,11 +90,11 @@
                             </svg>
                         </div>
                     </a>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             </div>
 
-            {{-- Quick Stats below cards --}}
+            
             <div class="flex flex-wrap items-center justify-center gap-8 lg:gap-14 mt-14 text-center">
                 <div>
                     <div class="text-2xl font-bold text-white">4</div>
@@ -116,12 +114,12 @@
         </div>
     </section>
 
-    {{-- ======== PROFIL SEKOLAH & STATISTIK ======== --}}
+    
     <section class="py-20 lg:py-28 bg-white relative overflow-hidden" id="profil">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 
-                {{-- Left Image Column --}}
+                
                 <style>
                     .profil-gambar-wrapper {
                         width: 100%;
@@ -158,9 +156,9 @@
                 </style>
                 <div class="reveal relative flex justify-center lg:justify-end">
                     <div class="profil-gambar-wrapper">
-                        <img src="{{ asset('images/foto_siswa.png') }}" alt="Siswa SMKN 1 Limboto" class="w-full h-auto relative pointer-events-none" style="filter: drop-shadow(0 20px 25px rgba(0,0,0,0.15));">
+                        <img src="<?php echo e(asset('images/foto_siswa.png')); ?>" alt="Siswa SMKN 1 Limboto" class="w-full h-auto relative pointer-events-none" style="filter: drop-shadow(0 20px 25px rgba(0,0,0,0.15));">
                         
-                        {{-- Floating Badge --}}
+                        
                         <div class="profil-badge">
                             <div class="flex items-center justify-center flex-shrink-0" style="width: 2.75rem; height: 2.75rem; border-radius: 9999px; background-color: #fef2f2;">
                                 <svg class="text-primary" style="width: 1.5rem; height: 1.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
@@ -175,7 +173,7 @@
                     </div>
                 </div>
 
-                {{-- Right Content Column --}}
+                
                 <div class="reveal reveal-delay-2 lg:pl-6">
                     <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-50 text-primary text-xs font-bold tracking-wide mb-6">
                         <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
@@ -196,7 +194,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
-                        {{-- Misi List --}}
+                        
                         <div>
                             <div class="flex items-center gap-2.5 mb-4">
                                 <svg class="w-[1.15rem] h-[1.15rem] text-primary" fill="currentColor" viewBox="0 0 24 24">
@@ -226,7 +224,7 @@
                             </ul>
                         </div>
 
-                        {{-- Keunggulan List --}}
+                        
                         <div>
                             <div class="flex items-center gap-2.5 mb-4">
                                 <svg class="w-[1.15rem] h-[1.15rem] text-amber-500" fill="currentColor" viewBox="0 0 24 24">
@@ -259,10 +257,10 @@
                 </div>
             </div>
 
-            {{-- Divider --}}
+            
             <div class="w-full h-px bg-gray-200 mt-24 mb-16 max-w-6xl mx-auto"></div>
 
-            {{-- Statistik (Inline with design) --}}
+            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-6 lg:gap-10 text-center reveal reveal-delay-3 max-w-6xl mx-auto">
                 <div class="flex flex-col items-center justify-center">
                     <div class="text-[2.75rem] lg:text-[3.25rem] font-black text-primary leading-none mb-3">1200+</div>
@@ -285,7 +283,7 @@
         </div>
     </section>
 
-    {{-- ======== BERITA & KEGIATAN ======== --}}
+    
     <section class="py-20 lg:py-28 bg-white" id="berita">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -310,7 +308,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                {{-- News 1 --}}
+                
                 <div class="news-card reveal reveal-delay-1">
                     <div class="news-card-image"
                         style="background: linear-gradient(135deg, #FE0002 0%, #CC0001 100%); display:flex; align-items:center; justify-content:center;">
@@ -333,7 +331,7 @@
                     </div>
                 </div>
 
-                {{-- News 2 --}}
+                
                 <div class="news-card reveal reveal-delay-2">
                     <div class="news-card-image"
                         style="background: linear-gradient(135deg, #059669 0%, #047857 100%); display:flex; align-items:center; justify-content:center;">
@@ -356,7 +354,7 @@
                     </div>
                 </div>
 
-                {{-- News 3 --}}
+                
                 <div class="news-card reveal reveal-delay-3">
                     <div class="news-card-image"
                         style="background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); display:flex; align-items:center; justify-content:center;">
@@ -383,7 +381,7 @@
         </div>
     </section>
 
-    {{-- ======== CTA SECTION ======== --}}
+    
     <section class="py-20 lg:py-24 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full">
@@ -412,4 +410,5 @@
         </div>
     </section>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\PortalWeb\resources\views/beranda.blade.php ENDPATH**/ ?>
