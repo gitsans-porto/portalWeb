@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Profile;
 
 class PortalController extends Controller
 {
@@ -114,5 +115,32 @@ class PortalController extends Controller
         $layanan = $allLayanan[$slug];
 
         return view('layanan', compact('layanan'));
+    }
+
+    /**
+     * Halaman Tentang Sekolah
+     */
+    public function tentangSekolah()
+    {
+        $profile = Profile::where('section', 'tentang_sekolah')->firstOrFail();
+        return view('profil.tentang-sekolah', compact('profile'));
+    }
+
+    /**
+     * Halaman Visi & Misi
+     */
+    public function visiMisi()
+    {
+        $profile = Profile::where('section', 'visi_misi')->firstOrFail();
+        return view('profil.visi-misi', compact('profile'));
+    }
+
+    /**
+     * Halaman Kepala Sekolah
+     */
+    public function kepalaSekolah()
+    {
+        $profile = Profile::where('section', 'kepala_sekolah')->firstOrFail();
+        return view('profil.kepala-sekolah', compact('profile'));
     }
 }
