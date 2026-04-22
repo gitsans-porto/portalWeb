@@ -6,8 +6,8 @@
     
     <section class="detail-hero">
         
-        <div class="absolute top-1/3 right-10 w-64 h-64 rounded-full bg-white/[0.03] blur-3xl"></div>
-        <div class="absolute bottom-0 left-1/4 w-48 h-48 rounded-full bg-red-500/[0.05] blur-2xl"></div>
+        <div class="detail-hero-bg" style="background-image: url('<?php echo e(asset('images/stock_service.png')); ?>')"></div>
+        <div class="detail-hero-overlay"></div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
