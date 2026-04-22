@@ -25,51 +25,6 @@
 
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                 <div class="max-w-2xl">
-                    
-                    <?php
-                        $colorMap = [
-                            'blue' => ['bg' => 'bg-blue-500/20', 'text' => 'text-blue-300', 'border' => 'border-blue-400/30'],
-                            'green' => ['bg' => 'bg-emerald-500/20', 'text' => 'text-emerald-300', 'border' => 'border-emerald-400/30'],
-                            'amber' => ['bg' => 'bg-amber-500/20', 'text' => 'text-amber-300', 'border' => 'border-amber-400/30'],
-                            'purple' => ['bg' => 'bg-purple-500/20', 'text' => 'text-purple-300', 'border' => 'border-purple-400/30'],
-                        ];
-                        $c = $colorMap[$layanan['color']] ?? $colorMap['blue'];
-                    ?>
-
-                    <div
-                        class="w-16 h-16 rounded-2xl <?php echo e($c['bg']); ?> border <?php echo e($c['border']); ?> flex items-center justify-center mb-6">
-                        <?php if($layanan['icon'] === 'document-chart-bar'): ?>
-                            <svg class="w-8 h-8 <?php echo e($c['text']); ?>" viewBox="0 0 24 24" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM9.75 17.25a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-.75Zm2.25-3a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3a.75.75 0 0 1 .75-.75Zm3.75-1.5a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-5.25Z"
-                                    clip-rule="evenodd" />
-                                <path
-                                    d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
-                            </svg>
-                        <?php elseif($layanan['icon'] === 'book'): ?>
-                            <svg class="w-8 h-8 <?php echo e($c['text']); ?>" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
-                            </svg>
-                        <?php elseif($layanan['icon'] === 'academic-cap'): ?>
-                            <svg class="w-8 h-8 <?php echo e($c['text']); ?>" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.174v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z" />
-                                <path
-                                    d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.711 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286a48.4 48.4 0 0 1 9.786 3.283.75.75 0 0 0 .832-.005h-.002Z" />
-                                <path
-                                    d="M7.084 14.292a.75.75 0 0 0-1.5.036 20.026 20.026 0 0 0 .345 4.084.75.75 0 0 0 1.472-.29 18.56 18.56 0 0 1-.317-3.83Z" />
-                            </svg>
-                        <?php elseif($layanan['icon'] === 'briefcase'): ?>
-                            <svg class="w-8 h-8 <?php echo e($c['text']); ?>" viewBox="0 0 24 24" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75a24.726 24.726 0 0 1-7.814-1.259c-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25ZM13.5 4.5h-3a1.5 1.5 0 0 0-1.5 1.5v.054A50.352 50.352 0 0 1 12 6a50.352 50.352 0 0 1 3 .054V6a1.5 1.5 0 0 0-1.5-1.5Z"
-                                    clip-rule="evenodd" />
-                                <path
-                                    d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.93 0 5.738-.478 8.287-1.336.252-.085.5-.18.713-.31V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 0 1-6.477-.427C4.047 21.128 3 19.852 3 18.4Z" />
-                            </svg>
-                        <?php endif; ?>
-                    </div>
 
                     <p class="text-white/40 text-sm font-semibold uppercase tracking-wider mb-2"><?php echo e($layanan['tagline']); ?>
 
@@ -229,6 +184,12 @@
             </div>
 
             <?php
+                $colorMap = [
+                    'blue' => ['bg' => 'bg-blue-500/20', 'text' => 'text-blue-300', 'border' => 'border-blue-400/30'],
+                    'green' => ['bg' => 'bg-emerald-500/20', 'text' => 'text-emerald-300', 'border' => 'border-emerald-400/30'],
+                    'amber' => ['bg' => 'bg-amber-500/20', 'text' => 'text-amber-300', 'border' => 'border-amber-400/30'],
+                    'purple' => ['bg' => 'bg-purple-500/20', 'text' => 'text-purple-300', 'border' => 'border-purple-400/30'],
+                ];
                 $allLayanan = [
                     'e-raport' => ['name' => 'E-Raport', 'tagline' => 'Sistem Penilaian Digital', 'color' => 'blue', 'icon' => 'document-chart-bar'],
                     'lms' => ['name' => 'LMS', 'tagline' => 'Learning Management System', 'color' => 'green', 'icon' => 'book'],
