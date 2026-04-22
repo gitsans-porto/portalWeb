@@ -343,10 +343,14 @@
     transform: translateY(-4px);
 }
 .news-card-image {
-    height: 12rem;
-    background-size: cover;
-    background-position: center;
+    width: 100%;
     position: relative;
+    background: #f3f4f6;
+}
+.news-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .news-card-image::after {
     content: '';
@@ -731,14 +735,14 @@
 }
 
 .admin-btn-primary {
-    background: #5D5FEF;
+    background: #FE0002;
     color: white;
 }
 
 .admin-btn-primary:hover {
-    background: #4B4DDB;
+    background: #CC0001;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(93, 95, 239, 0.25);
+    box-shadow: 0 4px 12px rgba(254, 0, 2, 0.25);
 }
 
 .admin-stat-icon {
@@ -788,9 +792,9 @@
 
 .form-control:focus {
     outline: none;
-    border-color: #5D5FEF;
+    border-color: #FE0002;
     background: white;
-    box-shadow: 0 0 0 5px rgba(93, 95, 239, 0.1);
+    box-shadow: 0 0 0 5px rgba(254, 0, 2, 0.1);
     transform: translateY(-1px);
 }
 

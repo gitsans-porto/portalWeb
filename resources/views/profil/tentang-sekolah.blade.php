@@ -5,14 +5,25 @@
 @section('content')
     {{-- ======== HERO SECTION ======== --}}
     <section class="detail-hero">
+        {{-- Photo background + dark overlay --}}
+        <div class="detail-hero-bg" style="background-image: url('{{ asset('images/gambarSekolah.jpeg') }}')"></div>
+        <div class="detail-hero-overlay"></div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {{-- Breadcrumb --}}
+            <nav class="flex items-center justify-center gap-2 text-sm text-white/40 mb-8">
+                <a href="{{ route('beranda') }}" class="hover:text-white/70 transition-colors">Beranda</a>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <a href="{{ route('beranda') }}#profil" class="hover:text-white/70 transition-colors">Profil</a>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <span class="text-white/70">Tentang Sekolah</span>
+            </nav>
+
             <div class="flex flex-col items-center text-center">
-                <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-bold tracking-wide mb-6 backdrop-blur-md border border-white/10">
-                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
-                    </svg>
-                    Profil Sekolah
-                </span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
                     {{ $profile->title }}
                 </h1>
@@ -59,7 +70,7 @@
                     <div class="mt-16">
                         <div class="text-center mb-12">
                             <span class="inline-block px-4 py-1.5 rounded-full bg-primary/5 text-primary text-xs font-bold uppercase tracking-widest mb-4">Akses & Lokasi</span>
-                            <h2 class="text-2xl md:text-4xl font-black text-gray-900">Lokasi {{ $profile->title }}</h2>
+                            <h2 class="text-2xl md:text-4xl font-black text-gray-900">Lokasi SMKN 1 Limboto</h2>
                             <div class="w-16 h-1 bg-primary mx-auto mt-6 rounded-full"></div>
                         </div>
 

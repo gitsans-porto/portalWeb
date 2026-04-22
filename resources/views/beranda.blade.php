@@ -46,30 +46,30 @@
                             'amber' => ['bg' => 'bg-amber-500/20', 'text' => 'text-amber-300', 'border' => 'border-amber-400/20'],
                             'purple' => ['bg' => 'bg-purple-500/20', 'text' => 'text-purple-300', 'border' => 'border-purple-400/20'],
                         ];
-                        $c = $colors[$item['color']] ?? $colors['blue'];
+                        $c = $colors[$item->color] ?? $colors['blue'];
                     @endphp
 
-                    <a href="{{ route('layanan.detail', $item['slug']) }}"
+                    <a href="{{ route('layanan.detail', $item->slug) }}"
                         class="service-card reveal reveal-delay-{{ $index + 1 }}">
 
                         <div class="flex flex-col items-center text-center mb-4">
                             <div class="mb-4">
-                                @if($item['icon'] === 'document-chart-bar')
+                                @if($item->icon === 'document-chart-bar')
                                     <svg class="w-10 h-10 {{ $c['text'] }}" viewBox="0 0 24 24" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM9.75 17.25a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-.75Zm2.25-3a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3a.75.75 0 0 1 .75-.75Zm3.75-1.5a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-5.25Z" clip-rule="evenodd" />
                                         <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
                                     </svg>
-                                @elseif($item['icon'] === 'book')
+                                @elseif($item->icon === 'book')
                                     <svg class="w-10 h-10 {{ $c['text'] }}" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
                                     </svg>
-                                @elseif($item['icon'] === 'academic-cap')
+                                @elseif($item->icon === 'academic-cap')
                                     <svg class="w-10 h-10 {{ $c['text'] }}" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.174v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z" />
                                         <path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.711 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286a48.4 48.4 0 0 1 9.786 3.283.75.75 0 0 0 .832-.005h-.002Z" />
                                         <path d="M7.084 14.292a.75.75 0 0 0-1.5.036 20.026 20.026 0 0 0 .345 4.084.75.75 0 0 0 1.472-.29 18.56 18.56 0 0 1-.317-3.83Z" />
                                     </svg>
-                                @elseif($item['icon'] === 'briefcase')
+                                @elseif($item->icon === 'briefcase')
                                     <svg class="w-10 h-10 {{ $c['text'] }}" viewBox="0 0 24 24" fill="currentColor">
                                         <path fill-rule="evenodd" d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75a24.726 24.726 0 0 1-7.814-1.259c-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25ZM13.5 4.5h-3a1.5 1.5 0 0 0-1.5 1.5v.054A50.352 50.352 0 0 1 12 6a50.352 50.352 0 0 1 3 .054V6a1.5 1.5 0 0 0-1.5-1.5Z" clip-rule="evenodd" />
                                         <path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.93 0 5.738-.478 8.287-1.336.252-.085.5-.18.713-.31V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 0 1-6.477-.427C4.047 21.128 3 19.852 3 18.4Z" />
@@ -77,11 +77,11 @@
                                 @endif
                             </div>
 
-                            <h3 class="text-white font-bold text-lg mb-1">{{ $item['name'] }}</h3>
-                            <p class="text-white text-xs font-medium uppercase tracking-wider opacity-70">{{ $item['tagline'] }}</p>
+                            <h3 class="text-white font-bold text-lg mb-1">{{ $item->name }}</h3>
+                            <p class="text-white text-xs font-medium uppercase tracking-wider opacity-70">{{ $item->tagline }}</p>
                         </div>
 
-                        <p class="text-white text-sm leading-relaxed mb-4 opacity-80">{{ Str::limit($item['description'], 80) }}</p>
+                        <p class="text-white text-sm leading-relaxed mb-4 opacity-80">{{ Str::limit($item->description, 80) }}</p>
 
                         <div
                             class="flex items-center gap-1.5 text-white text-sm font-medium opacity-80 hover:opacity-100 transition-opacity">
@@ -300,7 +300,7 @@
                     </span>
                     <h2 class="section-title">Informasi Terbaru</h2>
                 </div>
-                <a href="#" class="btn-outline text-sm flex-shrink-0 self-start sm:self-auto">
+                <a href="{{ route('berita.index') }}" class="btn-outline text-sm flex-shrink-0 self-start sm:self-auto">
                     Lihat Semua
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -310,74 +310,43 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                {{-- News 1 --}}
-                <div class="news-card reveal reveal-delay-1">
-                    <div class="news-card-image"
-                        style="background: linear-gradient(135deg, #FE0002 0%, #CC0001 100%); display:flex; align-items:center; justify-content:center;">
-                        <svg class="w-16 h-16 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="text-xs font-semibold text-primary bg-red-50 px-2.5 py-1 rounded-full">Akademik</span>
-                            <span class="text-xs text-gray-400">28 Feb 2026</span>
+                @forelse($latestNews as $index => $item)
+                    <div class="news-card group reveal reveal-delay-{{ $index + 1 }}">
+                        <div class="news-card-image overflow-hidden aspect-video relative">
+                            @if($item->image)
+                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            @else
+                                <div class="w-full h-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                                    <svg class="w-16 h-16 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                    </svg>
+                                </div>
+                            @endif
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-2 leading-snug">Peluncuran Sistem E-Raport Semester Genap
-                            Tahun Ajaran 2025/2026</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Sistem E-Raport telah diperbarui dengan fitur baru
-                            untuk memudahkan proses penilaian semester genap.</p>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="text-xs font-semibold text-primary bg-red-50 px-2.5 py-1 rounded-full">
+                                    {{ $item->category ?? 'Umum' }}
+                                </span>
+                                <span class="text-xs text-gray-400">
+                                    {{ $item->published_at ? $item->published_at->format('d M Y') : $item->created_at->format('d M Y') }}
+                                </span>
+                            </div>
+                            <h3 class="font-bold text-gray-900 mb-2 leading-snug hover:text-red-600 transition-colors">
+                                <a href="{{ route('berita.show', $item->slug) }}">{{ $item->title }}</a>
+                            </h3>
+                            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
+                                {{ Str::limit(strip_tags($item->content), 100) }}
+                            </p>
+                        </div>
                     </div>
-                </div>
+                @empty
+                    <div class="col-span-full py-12 text-center">
+                        <p class="text-gray-400 italic">Belum ada berita terbaru saat ini.</p>
+                    </div>
+                @endforelse
 
-                {{-- News 2 --}}
-                <div class="news-card reveal reveal-delay-2">
-                    <div class="news-card-image"
-                        style="background: linear-gradient(135deg, #059669 0%, #047857 100%); display:flex; align-items:center; justify-content:center;">
-                        <svg class="w-16 h-16 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0" />
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">PKL</span>
-                            <span class="text-xs text-gray-400">25 Feb 2026</span>
-                        </div>
-                        <h3 class="font-bold text-gray-900 mb-2 leading-snug">Penerjunan PKL Gelombang II ke 25 Perusahaan
-                            Mitra</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Sebanyak 200 siswa kelas XI resmi diterjunkan ke
-                            lokasi PKL di berbagai perusahaan mitra industri.</p>
-                    </div>
-                </div>
-
-                {{-- News 3 --}}
-                <div class="news-card reveal reveal-delay-3">
-                    <div class="news-card-image"
-                        style="background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); display:flex; align-items:center; justify-content:center;">
-                        <svg class="w-16 h-16 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full">Teknologi</span>
-                            <span class="text-xs text-gray-400">20 Feb 2026</span>
-                        </div>
-                        <h3 class="font-bold text-gray-900 mb-2 leading-snug">Workshop Digitalisasi Pendidikan bagi Guru dan
-                            Tenaga Kependidikan</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Pelatihan penggunaan platform LMS dan tools digital
-                            untuk meningkatkan kualitas pembelajaran.</p>
-                    </div>
-                </div>
+            </div>
 
             </div>
         </div>

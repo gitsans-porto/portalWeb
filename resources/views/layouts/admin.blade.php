@@ -44,8 +44,8 @@
         }
 
         .sidebar-link:hover, .sidebar-link.active {
-            background: #F5F7FF; /* Very light indigo background */
-            color: #5D5FEF; /* TwitHR purple text */
+            background: #FEF2F2; /* Very light red background */
+            color: #FE0002; /* School red text */
         }
 
         /* Dropdown Styles */
@@ -84,7 +84,7 @@
         }
 
         .dropdown-link:hover {
-            color: #5D5FEF;
+            color: #FE0002;
             padding-left: 30px;
         }
 
@@ -97,8 +97,8 @@
         }
 
         .dropdown-link:hover i {
-            background: #5D5FEF;
-            box-shadow: 0 0 8px rgba(93, 95, 239, 0.3);
+            background: #FE0002;
+            box-shadow: 0 0 8px rgba(254, 0, 2, 0.3);
         }
         
         .section-tag {
@@ -152,12 +152,12 @@
     <aside class="admin-sidebar" id="adminSidebar">
         {{-- Logo Area --}}
         <div class="px-8 py-10 flex items-center gap-3">
-            <div class="w-12 h-12 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center justify-center p-1.5 overflow-hidden shadow-sm">
+            <div class="w-12 h-12 bg-red-50 border border-red-100 rounded-xl flex items-center justify-center p-1.5 overflow-hidden shadow-sm">
                 <img src="{{ asset('images/LogoSMKN1LimbotoNoBG.png') }}" alt="Logo SMKN 1 Limboto" class="w-full h-full object-contain">
             </div>
             <div>
                 <h2 class="font-black text-lg leading-none text-gray-900">Admin</h2>
-                <p class="text-[0.65rem] text-indigo-600 font-bold uppercase tracking-widest mt-1">Portal Layanan</p>
+                <p class="text-[0.65rem] text-red-600 font-bold uppercase tracking-widest mt-1">Portal Layanan</p>
             </div>
         </div>
 
@@ -195,6 +195,24 @@
                     </a>
                 </div>
             </div>
+
+            <div class="px-8 py-4 text-[0.65rem] font-black uppercase tracking-[0.2em] text-slate-300">Berita & Kegiatan</div>
+
+            <a href="{{ route('admin.news.index') }}" class="sidebar-link {{ request()->is('admin/news*') ? 'active' : '' }}">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+                <span>Kelola Berita</span>
+            </a>
+
+            <div class="px-8 py-4 text-[0.65rem] font-black uppercase tracking-[0.2em] text-slate-300">Konfigurasi Sistem</div>
+
+            <a href="{{ route('admin.services.index') }}" class="sidebar-link {{ request()->is('admin/services*') ? 'active' : '' }}">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                <span>Kelola Layanan</span>
+            </a>
 
             {{-- Logout --}}
             <div class="absolute bottom-6 left-0 right-0 px-4">
@@ -240,7 +258,7 @@
                         <p class="text-sm font-bold text-gray-900">{{ Auth::user()->name }}</p>
                         <p class="text-[0.65rem] text-gray-400 uppercase font-black tracking-widest">Administrator</p>
                     </div>
-                    <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
+                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold">
                         {{ substr(Auth::user()->name, 0, 1) }}
                     </div>
                 </div>
