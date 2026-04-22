@@ -11,6 +11,23 @@ use App\Models\Service;
 class PortalController extends Controller
 {
     /**
+     * Halaman Beranda
+     */
+    public function index()
+    {
+        $layananList = Service::select(['slug', 'name', 'tagline', 'description', 'color', 'icon'])
+                             ->get();
+
+        $latestNews = News::whereNotNull('published_at')
+                          ->where('published_at', '<=', now())
+                          ->orderBy('published_at', 'desc')
+                          ->take(3)
+                          ->get();
+
+        return view('beranda', compact('layananList', 'latestNews'));
+    }
+
+    /**
      * Halaman Detail Layanan
      */
     public function layanan(string $slug)
