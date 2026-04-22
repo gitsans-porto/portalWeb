@@ -5,14 +5,25 @@
 @section('content')
     {{-- ======== HERO SECTION ======== --}}
     <section class="detail-hero">
+        {{-- Photo background + dark overlay --}}
+        <div class="detail-hero-bg" style="background-image: url('{{ asset('images/gambarSekolah.jpeg') }}')"></div>
+        <div class="detail-hero-overlay"></div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {{-- Breadcrumb --}}
+            <nav class="flex items-center justify-center gap-2 text-sm text-white/40 mb-8">
+                <a href="{{ route('beranda') }}" class="hover:text-white/70 transition-colors">Beranda</a>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <a href="{{ route('beranda') }}#profil" class="hover:text-white/70 transition-colors">Profil</a>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <span class="text-white/70">Visi & Misi</span>
+            </nav>
+
             <div class="flex flex-col items-center text-center">
-                <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-bold tracking-wide mb-6 backdrop-blur-md border border-white/10">
-                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                    </svg>
-                    Tujuan & Arah
-                </span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
                     {{ $profile->title }}
                 </h1>
@@ -30,7 +41,7 @@
     {{-- ======== MAIN CONTENT ======== --}}
     <section class="py-16 bg-gray-50/50">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/40 p-8 md:p-16 reveal border border-gray-100">
+            <div class="bg-white rounded-[3rem] shadow-2xl shadow-gray-200/50 p-8 md:p-16 relative z-10 reveal overflow-hidden border border-gray-100/50">
                 
                 {{-- Visi Section --}}
                 <div class="text-center mb-16">
@@ -42,8 +53,15 @@
                     </div>
                 </div>
 
+                {{-- Divider --}}
+                <div class="my-20 flex items-center gap-4">
+                    <div class="h-px bg-gray-100 flex-grow"></div>
+                    <div class="w-2 h-2 rounded-full bg-primary/20"></div>
+                    <div class="h-px bg-gray-100 flex-grow"></div>
+                </div>
+
                 {{-- Misi Section --}}
-                <div class="max-w-3xl mx-auto pt-12 border-t border-gray-100">
+                <div class="max-w-3xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-black text-gray-900 text-center mb-12 tracking-tight">Misi</h2>
                     <div class="text-gray-600">
                         @if(!empty($profile->additional_data['missions']))

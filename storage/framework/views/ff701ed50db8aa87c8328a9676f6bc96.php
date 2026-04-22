@@ -298,7 +298,7 @@
                     </span>
                     <h2 class="section-title">Informasi Terbaru</h2>
                 </div>
-                <a href="#" class="btn-outline text-sm flex-shrink-0 self-start sm:self-auto">
+                <a href="<?php echo e(route('berita.index')); ?>" class="btn-outline text-sm flex-shrink-0 self-start sm:self-auto">
                     Lihat Semua
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -308,74 +308,46 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                
-                <div class="news-card reveal reveal-delay-1">
-                    <div class="news-card-image"
-                        style="background: linear-gradient(135deg, #FE0002 0%, #CC0001 100%); display:flex; align-items:center; justify-content:center;">
-                        <svg class="w-16 h-16 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="text-xs font-semibold text-primary bg-red-50 px-2.5 py-1 rounded-full">Akademik</span>
-                            <span class="text-xs text-gray-400">28 Feb 2026</span>
+                <?php $__empty_1 = true; $__currentLoopData = $latestNews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <div class="news-card group reveal reveal-delay-<?php echo e($index + 1); ?>">
+                        <div class="news-card-image overflow-hidden aspect-video relative">
+                            <?php if($item->image): ?>
+                                <img src="<?php echo e(asset('storage/' . $item->image)); ?>" alt="<?php echo e($item->title); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <?php else: ?>
+                                <div class="w-full h-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                                    <svg class="w-16 h-16 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                    </svg>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-2 leading-snug">Peluncuran Sistem E-Raport Semester Genap
-                            Tahun Ajaran 2025/2026</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Sistem E-Raport telah diperbarui dengan fitur baru
-                            untuk memudahkan proses penilaian semester genap.</p>
-                    </div>
-                </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="text-xs font-semibold text-primary bg-red-50 px-2.5 py-1 rounded-full">
+                                    <?php echo e($item->category ?? 'Umum'); ?>
 
-                
-                <div class="news-card reveal reveal-delay-2">
-                    <div class="news-card-image"
-                        style="background: linear-gradient(135deg, #059669 0%, #047857 100%); display:flex; align-items:center; justify-content:center;">
-                        <svg class="w-16 h-16 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0" />
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">PKL</span>
-                            <span class="text-xs text-gray-400">25 Feb 2026</span>
-                        </div>
-                        <h3 class="font-bold text-gray-900 mb-2 leading-snug">Penerjunan PKL Gelombang II ke 25 Perusahaan
-                            Mitra</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Sebanyak 200 siswa kelas XI resmi diterjunkan ke
-                            lokasi PKL di berbagai perusahaan mitra industri.</p>
-                    </div>
-                </div>
+                                </span>
+                                <span class="text-xs text-gray-400">
+                                    <?php echo e($item->published_at ? $item->published_at->format('d M Y') : $item->created_at->format('d M Y')); ?>
 
-                
-                <div class="news-card reveal reveal-delay-3">
-                    <div class="news-card-image"
-                        style="background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); display:flex; align-items:center; justify-content:center;">
-                        <svg class="w-16 h-16 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full">Teknologi</span>
-                            <span class="text-xs text-gray-400">20 Feb 2026</span>
+                                </span>
+                            </div>
+                            <h3 class="font-bold text-gray-900 mb-2 leading-snug hover:text-red-600 transition-colors">
+                                <a href="<?php echo e(route('berita.show', $item->slug)); ?>"><?php echo e($item->title); ?></a>
+                            </h3>
+                            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
+                                <?php echo e(Str::limit(strip_tags($item->content), 100)); ?>
+
+                            </p>
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-2 leading-snug">Workshop Digitalisasi Pendidikan bagi Guru dan
-                            Tenaga Kependidikan</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Pelatihan penggunaan platform LMS dan tools digital
-                            untuk meningkatkan kualitas pembelajaran.</p>
                     </div>
-                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                    <div class="col-span-full py-12 text-center">
+                        <p class="text-gray-400 italic">Belum ada berita terbaru saat ini.</p>
+                    </div>
+                <?php endif; ?>
+
+            </div>
 
             </div>
         </div>

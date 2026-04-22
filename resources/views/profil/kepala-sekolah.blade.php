@@ -5,14 +5,25 @@
 @section('content')
     {{-- ======== HERO SECTION ======== --}}
     <section class="detail-hero">
+        {{-- Photo background + dark overlay --}}
+        <div class="detail-hero-bg" style="background-image: url('{{ asset('images/gambarSekolah.jpeg') }}')"></div>
+        <div class="detail-hero-overlay"></div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {{-- Breadcrumb --}}
+            <nav class="flex items-center justify-center gap-2 text-sm text-white/40 mb-8">
+                <a href="{{ route('beranda') }}" class="hover:text-white/70 transition-colors">Beranda</a>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <a href="{{ route('beranda') }}#profil" class="hover:text-white/70 transition-colors">Profil</a>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <span class="text-white/70">Kepala Sekolah</span>
+            </nav>
+
             <div class="flex flex-col items-center text-center">
-                <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-bold tracking-wide mb-6 backdrop-blur-md border border-white/10">
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.1">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    Pimpinan Sekolah
-                </span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
                     {{ $profile->title }}
                 </h1>

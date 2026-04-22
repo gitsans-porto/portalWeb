@@ -1,3 +1,5 @@
+﻿
+
 <?php $__env->startSection('title', 'Kelola Profil Sekolah'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -9,10 +11,10 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php $__currentLoopData = $profiles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $profile): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="admin-card group hover:shadow-2xl transition-all duration-500 border-t-4 <?php echo e($profile->section === 'tentang_sekolah' ? 'border-indigo-600' : ($profile->section === 'visi_misi' ? 'border-emerald-600' : 'border-amber-600')); ?>">
+                <div class="admin-card group hover:shadow-2xl transition-all duration-500 border-t-4 <?php echo e($profile->section === 'tentang_sekolah' ? 'border-red-600' : ($profile->section === 'visi_misi' ? 'border-emerald-600' : 'border-amber-600')); ?>">
                     <div class="flex flex-col h-full">
                         <div class="mb-6">
-                            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 <?php echo e($profile->section === 'tentang_sekolah' ? 'bg-indigo-50 text-indigo-600' : ($profile->section === 'visi_misi' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600')); ?>">
+                            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 <?php echo e($profile->section === 'tentang_sekolah' ? 'bg-red-50 text-red-600' : ($profile->section === 'visi_misi' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600')); ?>">
                                 <?php if($profile->section === 'tentang_sekolah'): ?>
                                     <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />

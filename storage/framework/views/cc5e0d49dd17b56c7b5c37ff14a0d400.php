@@ -2,15 +2,40 @@
 
 <?php $__env->startSection('content'); ?>
     
-    <section class="relative py-24 overflow-hidden" style="background: linear-gradient(to right, #b91c1c, #7f1d1d);">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-white blur-[100px] rounded-full"></div>
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-black blur-[80px] rounded-full"></div>
+    <section class="detail-hero">
+        
+        <div class="detail-hero-bg" style="background-image: url('<?php echo e(asset('images/gambarSekolah.jpeg')); ?>')"></div>
+        <div class="detail-hero-overlay"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <nav class="flex items-center justify-center gap-2 text-sm text-white/40 mb-8">
+                <a href="<?php echo e(route('beranda')); ?>" class="hover:text-white/70 transition-colors">Beranda</a>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <a href="<?php echo e(route('beranda')); ?>#profil" class="hover:text-white/70 transition-colors">Profil</a>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <span class="text-white/70">Kepala Sekolah</span>
+            </nav>
+
+            <div class="flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
+                    <?php echo e($profile->title); ?>
+
+                </h1>
+                <p class="text-lg text-white/70 max-w-2xl leading-relaxed">
+                    <?php echo e($profile->short_description); ?>
+
+                </p>
+            </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
-            <h2 class="text-white text-6xl md:text-8xl font-black tracking-[0.2em] mb-[-1.5rem] opacity-20" style="color: rgba(255,255,255,0.15);">PROFILE</h2>
-            <p class="text-white text-xl font-bold tracking-widest uppercase">Kepala Sekolah</p>
-        </div>
+        
+        
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none"></div>
     </section>
 
     
