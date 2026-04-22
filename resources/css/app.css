@@ -685,3 +685,125 @@
     color: var(--color-text-primary);
     margin-bottom: 0.5rem;
 }
+
+/* ============================================
+   Admin Sidebar & Dashboard Components
+   ============================================ */
+
+.admin-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.admin-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #F1F4F9;
+}
+
+.admin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.admin-btn-primary {
+    background: #5D5FEF;
+    color: white;
+}
+
+.admin-btn-primary:hover {
+    background: #4B4DDB;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(93, 95, 239, 0.25);
+}
+
+.admin-stat-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #94A3B8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    color: #1E293B;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #5D5FEF;
+    background: white;
+    box-shadow: 0 0 0 5px rgba(93, 95, 239, 0.1);
+    transform: translateY(-1px);
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+input[type="file"].form-control {
+    padding: 0.75rem;
+    cursor: pointer;
+}
+
+.admin-card {
+    background: white;
+    border-radius: 2.5rem;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    border: 1px solid #F1F5F9;
+    transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+}

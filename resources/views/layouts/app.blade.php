@@ -86,15 +86,15 @@
                             </svg>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="{{ route('beranda') }}#profil" class="dropdown-link">
+                            <a href="{{ route('profil.tentang') }}" class="dropdown-link">
                                 <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
                                 Tentang Sekolah
                             </a>
-                            <a href="{{ route('beranda') }}#profil" class="dropdown-link">
+                            <a href="{{ route('profil.visi-misi') }}" class="dropdown-link">
                                 <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
                                 Visi & Misi
                             </a>
-                            <a href="{{ route('beranda') }}#profil" class="dropdown-link">
+                            <a href="{{ route('profil.kepala-sekolah') }}" class="dropdown-link">
                                 <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
                                 Kepala Sekolah
                             </a>
@@ -166,9 +166,9 @@
                     </svg>
                 </button>
                 <div class="mobile-submenu">
-                    <a href="{{ route('beranda') }}#profil" class="nav-link !pl-10 !border-none !text-sm">Tentang Sekolah</a>
-                    <a href="{{ route('beranda') }}#profil" class="nav-link !pl-10 !border-none !text-sm">Visi & Misi</a>
-                    <a href="{{ route('beranda') }}#profil" class="nav-link !pl-10 !border-none !text-sm">Kepala Sekolah</a>
+                    <a href="{{ route('profil.tentang') }}" class="nav-link !pl-10 !border-none !text-sm">Tentang Sekolah</a>
+                    <a href="{{ route('profil.visi-misi') }}" class="nav-link !pl-10 !border-none !text-sm">Visi & Misi</a>
+                    <a href="{{ route('profil.kepala-sekolah') }}" class="nav-link !pl-10 !border-none !text-sm">Kepala Sekolah</a>
                 </div>
             </div>
             <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
