@@ -87,19 +87,6 @@
             color: #FE0002;
             padding-left: 30px;
         }
-
-        .dropdown-link i {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #E2E8F0;
-            margin-right: 12px;
-        }
-
-        .dropdown-link:hover i {
-            background: #FE0002;
-            box-shadow: 0 0 8px rgba(254, 0, 2, 0.3);
-        }
         
         .section-tag {
             color: #94A3B8;
@@ -170,10 +157,9 @@
                 <span>Dashboard</span>
             </a>
 
-            <div class="px-8 py-4 text-[0.65rem] font-black uppercase tracking-[0.2em] text-slate-300">Konten Profil</div>
             
             <div class="sidebar-dropdown-wrapper">
-                <a href="{{ route('admin.profiles.index') }}" class="sidebar-link {{ request()->is('admin/profiles*') ? 'active' : '' }}">
+                <a href="javascript:void(0)" class="sidebar-link {{ request()->is('admin/profiles*') ? 'active' : '' }}">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
@@ -185,18 +171,17 @@
                 
                 <div class="sidebar-dropdown">
                     <a href="{{ route('admin.profiles.edit', 'tentang_sekolah') }}" class="dropdown-link">
-                        <i></i> <span>Tentang Sekolah</span>
+                        <span>Tentang Sekolah</span>
                     </a>
                     <a href="{{ route('admin.profiles.edit', 'visi_misi') }}" class="dropdown-link">
-                        <i></i> <span>Visi & Misi</span>
+                        <span>Visi & Misi</span>
                     </a>
                     <a href="{{ route('admin.profiles.edit', 'kepala_sekolah') }}" class="dropdown-link">
-                        <i></i> <span>Kepala Sekolah</span>
+                        <span>Kepala Sekolah</span>
                     </a>
                 </div>
             </div>
 
-            <div class="px-8 py-4 text-[0.65rem] font-black uppercase tracking-[0.2em] text-slate-300">Berita & Kegiatan</div>
 
             <a href="{{ route('admin.news.index') }}" class="sidebar-link {{ request()->is('admin/news*') ? 'active' : '' }}">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -204,14 +189,31 @@
                 </svg>
                 <span>Kelola Berita</span>
             </a>
-
-            <div class="px-8 py-4 text-[0.65rem] font-black uppercase tracking-[0.2em] text-slate-300">Konfigurasi Sistem</div>
-
-            <a href="{{ route('admin.services.index') }}" class="sidebar-link {{ request()->is('admin/services*') ? 'active' : '' }}">
+            <div class="sidebar-dropdown-wrapper">
+                <a href="javascript:void(0)" class="sidebar-link {{ request()->is('admin/services*') ? 'active' : '' }}">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <span>Kelola Layanan</span>
+                    <svg class="w-4 h-4 ml-auto dropdown-arrow transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </a>
+                
+                <div class="sidebar-dropdown">
+                    @php $sidebarServices = \App\Models\Service::all(); @endphp
+                    @foreach($sidebarServices as $service)
+                        <a href="{{ route('admin.services.edit', $service->id) }}" class="dropdown-link">
+                            <span>{{ $service->name }}</span>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            <a href="{{ route('admin.reports.index') }}" class="sidebar-link {{ request()->is('admin/reports*') ? 'active' : '' }}">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
-                <span>Kelola Layanan</span>
+                <span>Laporan Masalah</span>
             </a>
 
             {{-- Logout --}}

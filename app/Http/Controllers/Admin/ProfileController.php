@@ -94,6 +94,6 @@ class ProfileController extends Controller
 
         $profile->save();
 
-        return redirect()->route('admin.profiles.index')->with('success', 'Profil berhasil diperbarui!');
+        return back()->with('success', 'Profil berhasil diperbarui!');
     }
 }

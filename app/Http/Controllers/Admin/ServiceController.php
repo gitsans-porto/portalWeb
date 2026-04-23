@@ -41,7 +41,6 @@ class ServiceController extends Controller
             'sop' => array_values($validated['sop']), // ensure numeric keys
         ]);
 
-        return redirect()->route('admin.services.index')
-                         ->with('success', 'Tata cara penggunaan ' . $service->name . ' berhasil diperbarui.');
+        return back()->with('success', 'Tata cara penggunaan ' . $service->name . ' berhasil diperbarui!');
     }
 }

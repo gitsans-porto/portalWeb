@@ -168,7 +168,7 @@
                                 </svg>
                             </div>
                             <div class="text-left">
-                                <h4 class="font-bold text-gray-900 leading-tight" style="font-size: 1rem; margin-bottom: 0.15rem;">Terakreditasi A</h4>
+                                <h4 class="font-bold text-gray-900 leading-tight" style="font-size: 1rem; margin-bottom: 0.15rem;">Terakreditasi B</h4>
                                 <p class="text-gray-500 leading-snug" style="font-size: 0.85rem;">Lembaga pendidikan unggulan</p>
                             </div>
                         </div>

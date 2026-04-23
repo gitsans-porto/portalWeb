@@ -43,7 +43,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     
     // Profile Management CRUD
-    Route::get('/profiles', [AdminProfileController::class, 'index'])->name('profiles.index');
     Route::get('/profiles/{section}/edit', [AdminProfileController::class, 'edit'])->name('profiles.edit');
     Route::put('/profiles/{section}', [AdminProfileController::class, 'update'])->name('profiles.update');
 
@@ -51,5 +50,13 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('news', AdminNewsController::class);
 
     // Services Management (ONLY edit SOP)
-    Route::resource('services', AdminServiceController::class)->only(['index', 'edit', 'update']);
+    Route::resource('services', AdminServiceController::class)->only(['edit', 'update']);
+
+    // Issue Reports Management
+    Route::get('/reports', [App\Http\Controllers\Admin\IssueReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/{report}', [App\Http\Controllers\Admin\IssueReportController::class, 'show'])->name('reports.show');
+    Route::patch('/reports/{report}/status', [App\Http\Controllers\Admin\IssueReportController::class, 'updateStatus'])->name('reports.updateStatus');
 });
+
+// Issue Report Submission
+Route::post('/report-issue', [App\Http\Controllers\IssueReportController::class, 'store'])->name('report.store');

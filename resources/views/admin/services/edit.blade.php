@@ -5,12 +5,6 @@
 @section('content')
 <div class="p-6">
     <div class="mb-8">
-        <a href="{{ route('admin.services.index') }}" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-red-600 transition-colors mb-4 group">
-            <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Kembali ke Daftar
-        </a>
         <h1 class="text-2xl font-bold text-gray-900 mb-1">Edit Tata Cara Penggunaan</h1>
         <p class="text-gray-500 text-sm">Sesuaikan langkah-langkah prosedur untuk layanan <span class="font-bold text-red-600">{{ $service->name }}</span>.</p>
     </div>

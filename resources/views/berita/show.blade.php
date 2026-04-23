@@ -45,10 +45,10 @@
                 
                 {{-- Article Content --}}
                 <div class="lg:col-span-2">
-                    <div class="bg-white rounded-[3rem] shadow-2xl shadow-gray-200/50 p-8 md:p-12 lg:p-16 relative z-10 reveal overflow-hidden border border-gray-100/50">
+                    <div class="bg-white rounded-[2.5rem] shadow-sm shadow-gray-200/50 p-8 md:p-10 lg:p-12 relative z-10 reveal overflow-hidden border border-gray-100">
                         
                         @if($article->image)
-                            <div class="rounded-[2rem] overflow-hidden mb-12 shadow-xl border border-gray-100">
+                            <div class="rounded-3xl overflow-hidden mb-12 shadow-sm border border-gray-100">
                                 <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="w-full h-auto">
                             </div>
                         @endif
@@ -81,7 +81,7 @@
                 {{-- Sidebar --}}
                 <div class="space-y-10">
                     {{-- Search Placeholder --}}
-                    <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
                         <h3 class="font-bold text-gray-900 mb-6">Cari Berita</h3>
                         <div class="relative">
                             <input type="text" class="w-full pl-5 pr-12 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 transition-all text-sm" placeholder="Ketik kata kunci...">
@@ -94,7 +94,7 @@
                     </div>
 
                     {{-- Latest News --}}
-                    <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
                         <h3 class="font-bold text-gray-900 mb-8 border-l-4 border-red-600 pl-4">Berita Terkini</h3>
                         <div class="space-y-8">
                             @foreach($latestNews as $latest)

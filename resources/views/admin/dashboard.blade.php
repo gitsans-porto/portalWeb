@@ -20,14 +20,6 @@
                 <p class="text-gray-500 text-lg leading-relaxed mb-10">
                     Kelola seluruh konten profil sekolah, visi misi, dan informasi pimpinan melalui panel kontrol ini dengan mudah, cepat, dan terorganisir.
                 </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="{{ route('admin.profiles.index') }}" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-red-600 text-white font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-200 hover:-translate-y-1">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                        </svg>
-                        Mulai Edit Profil
-                    </a>
-                </div>
             </div>
             
             {{-- Decorative Elements --}}
@@ -139,12 +131,6 @@
                         <span class="font-bold text-gray-700">Lihat Situs Utama</span>
                     </a>
                     
-                    <a href="{{ route('admin.profiles.index') }}" class="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 hover:bg-emerald-50 hover:border-emerald-200 transition-all group">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        </div>
-                        <span class="font-bold text-gray-700">Update Foto Profil</span>
-                    </a>
 
                     <div class="pt-6 mt-6 border-t border-gray-100">
                         <div class="bg-gray-50 rounded-2xl p-6 text-center">

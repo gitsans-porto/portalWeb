@@ -60,22 +60,10 @@
                             </svg>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="{{ route('layanan.detail', 'e-raport') }}" class="dropdown-link">
-                                <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
-                                E-Raport
-                            </a>
-                            <a href="{{ route('layanan.detail', 'lms') }}" class="dropdown-link">
-                                <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
-                                LMS
-                            </a>
-                            <a href="{{ route('layanan.detail', 'dapodik') }}" class="dropdown-link">
-                                <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
-                                Dapodik
-                            </a>
-                            <a href="{{ route('layanan.detail', 'pekael') }}" class="dropdown-link">
-                                <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
-                                PeKaeL
-                            </a>
+                            <a href="{{ route('layanan.detail', 'e-raport') }}" class="dropdown-link">E-Raport</a>
+                            <a href="{{ route('layanan.detail', 'lms') }}" class="dropdown-link">LMS</a>
+                            <a href="{{ route('layanan.detail', 'dapodik') }}" class="dropdown-link">Dapodik</a>
+                            <a href="{{ route('layanan.detail', 'pekael') }}" class="dropdown-link">PeKaeL</a>
                         </div>
                     </div>
                     <div class="nav-item-dropdown">
@@ -86,18 +74,9 @@
                             </svg>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="{{ route('profil.tentang') }}" class="dropdown-link">
-                                <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
-                                Tentang Sekolah
-                            </a>
-                            <a href="{{ route('profil.visi-misi') }}" class="dropdown-link">
-                                <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
-                                Visi & Misi
-                            </a>
-                            <a href="{{ route('profil.kepala-sekolah') }}" class="dropdown-link">
-                                <div class="w-2 h-2 rounded-full bg-primary/40 shrink-0"></div>
-                                Kepala Sekolah
-                            </a>
+                            <a href="{{ route('profil.tentang') }}" class="dropdown-link">Tentang Sekolah</a>
+                            <a href="{{ route('profil.visi-misi') }}" class="dropdown-link">Visi & Misi</a>
+                            <a href="{{ route('profil.kepala-sekolah') }}" class="dropdown-link">Kepala Sekolah</a>
                         </div>
                     </div>
                     <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
@@ -371,6 +350,9 @@
     </script>
     @endif
     @endguest
+
+    {{-- Issue Report Button & Modal --}}
+    <x-issue-report />
 
 </body>
 

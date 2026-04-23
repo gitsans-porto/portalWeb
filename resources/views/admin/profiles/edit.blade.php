@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('title', 'Edit ' . $profile->title)
 
@@ -7,12 +7,6 @@
         {{-- Header Area --}}
         <div class="mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             <div>
-                <a href="{{ route('admin.profiles.index') }}" class="inline-flex items-center text-sm font-bold text-gray-400 hover:text-red-600 transition-colors mb-2">
-                    <svg class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Kembali
-                </a>
                 <h1 class="text-3xl font-black text-gray-900 tracking-tight">Edit Konten: {{ $profile->title }}</h1>
             </div>
             
