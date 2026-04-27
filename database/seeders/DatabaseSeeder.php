@@ -20,5 +20,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@portal.test',
             'password' => bcrypt('admin123'),
         ]);
+
+        $this->call([
+            ServiceSeeder::class,
+            ProfileSeeder::class,
+        ]);
     }
 }
