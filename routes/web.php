@@ -56,7 +56,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/reports', [App\Http\Controllers\Admin\IssueReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/{report}', [App\Http\Controllers\Admin\IssueReportController::class, 'show'])->name('reports.show');
     Route::patch('/reports/{report}/status', [App\Http\Controllers\Admin\IssueReportController::class, 'updateStatus'])->name('reports.updateStatus');
+    Route::patch('/reports/{report}/feedback', [App\Http\Controllers\Admin\IssueReportController::class, 'updateFeedback'])->name('reports.updateFeedback');
 });
 
 // Issue Report Submission
 Route::post('/report-issue', [App\Http\Controllers\IssueReportController::class, 'store'])->name('report.store');
+
+// Pusat Pengaduan Routes
+Route::get('/pengaduan', [App\Http\Controllers\IssueReportController::class, 'index'])->name('pengaduan.index');
+Route::post('/pengaduan/track', [App\Http\Controllers\IssueReportController::class, 'track'])->name('pengaduan.track');

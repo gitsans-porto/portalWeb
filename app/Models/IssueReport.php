@@ -7,13 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class IssueReport extends Model
 {
     protected $fillable = [
+        'tracking_code',
+        'type',
         'full_name',
         'role',
-        'class_nip',
         'service_id',
         'category',
         'description',
-        'status'
+        'admin_feedback',
+        'status',
+        'handled_at'
+    ];
+
+    protected $casts = [
+        'handled_at' => 'datetime',
     ];
 
     public function service()

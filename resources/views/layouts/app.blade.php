@@ -81,6 +81,7 @@
                     </div>
                     <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
                     <a href="{{ route('beranda') }}#kontak" class="nav-link">Kontak</a>
+                    <a href="{{ route('pengaduan.index') }}" class="nav-link {{ request()->routeIs('pengaduan.index') ? 'active' : '' }}">Pengaduan</a>
 
                     @auth
                         <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
@@ -354,6 +355,7 @@
     {{-- Issue Report Button & Modal --}}
     <x-issue-report />
 
+    @stack('scripts')
 </body>
 
 </html>

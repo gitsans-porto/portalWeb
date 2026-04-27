@@ -27,6 +27,29 @@ class IssueReportController extends Controller
 
         $report->update($validated);
 
-        return redirect()->route('admin.reports.index')->with('success', 'Status laporan berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Status laporan berhasil diperbarui.');
+    }
+
+    public function updateFeedback(Request $request, IssueReport $report)
+    {
+        $validated = $request->validate([
+            'admin_feedback' => 'required|string',
+            'status' => 'nullable|string|in:pending,in_progress,resolved',
+        ]);
+
+        $updateData = [
+            'admin_feedback' => $validated['admin_feedback'],
+            'handled_at' => now(),
+        ];
+
+        if (isset($validated['status'])) {
+            $updateData['status'] = $validated['status'];
+        } else {
+            $updateData['status'] = 'resolved'; // Default to resolved when feedback is given
+        }
+
+        $report->update($updateData);
+
+        return redirect()->back()->with('success', 'Feedback berhasil dikirim.');
     }
 }

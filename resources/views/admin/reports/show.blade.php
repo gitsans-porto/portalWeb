@@ -25,11 +25,14 @@
                 {{-- Detail Card --}}
                 <div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 p-8 sm:p-10">
                     <div class="flex flex-wrap items-center gap-3 mb-8">
+                        <span class="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-indigo-50 text-indigo-600">
+                            {{ $report->type }}
+                        </span>
                         <span class="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-red-50 text-red-600">
                             {{ $report->category }}
                         </span>
                         <span class="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-gray-100 text-gray-600">
-                            ID Laporan: #{{ str_pad($report->id, 5, '0', STR_PAD_LEFT) }}
+                            Tracking ID: {{ $report->tracking_code }}
                         </span>
                     </div>
 
@@ -58,56 +61,78 @@
                             <div class="font-bold text-gray-900 text-lg">{{ $report->role }}</div>
                         </div>
                         <div>
-                            <div class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Kelas / NIP</div>
-                            <div class="font-bold text-gray-900 text-lg">{{ $report->class_nip ?? '-' }}</div>
-                        </div>
-                        <div>
                             <div class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Waktu Laporan</div>
                             <div class="font-bold text-gray-900 text-lg">{{ $report->created_at->format('d F Y, H:i') }}</div>
                         </div>
                     </div>
+                </div>
+
+                {{-- Feedback Section --}}
+                <div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 p-8 sm:p-10">
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-6">Feedback & Penyelesaian</h4>
+                    
+                    <form action="{{ route('admin.reports.updateFeedback', $report->id) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        
+                        <div class="mb-6">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Pesan Tanggapan (Terlihat oleh Pelapor)</label>
+                            <textarea name="admin_feedback" rows="4" class="w-full px-5 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none text-gray-700 transition-all" placeholder="Tuliskan solusi atau progres pengerjaan..." required>{{ $report->admin_feedback }}</textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center gap-4">
+                            <div class="w-full sm:w-auto">
+                                <select name="status" class="w-full px-5 py-4 rounded-2xl bg-gray-50 border-none font-bold text-gray-700 outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <option value="pending" {{ $report->status == 'pending' ? 'selected' : '' }}>Masih Pending</option>
+                                    <option value="in_progress" {{ $report->status == 'in_progress' ? 'selected' : '' }}>Sedang Diproses</option>
+                                    <option value="resolved" {{ $report->status == 'resolved' ? 'selected' : '' }}>Selesaikan Laporan</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full sm:flex-1 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                                Kirim Feedback
+                            </button>
+                        </div>
+                    </form>
+                    
+                    @if($report->handled_at)
+                    <div class="mt-6 flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Terakhir diupdate: {{ $report->handled_at->format('d M Y, H:i') }}
+                    </div>
+                    @endif
                 </div>
             </div>
 
             {{-- Sidebar Status --}}
             <div class="space-y-8">
                 <div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 p-8">
-                    <h4 class="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-6 text-center">Status Laporan</h4>
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-6 text-center">Status Saat Ini</h4>
                     
-                    <form action="{{ route('admin.reports.updateStatus', $report->id) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        
-                        <div class="space-y-3 mb-8">
-                            <label class="block relative cursor-pointer">
-                                <input type="radio" name="status" value="pending" class="sr-only peer" {{ $report->status == 'pending' ? 'checked' : '' }}>
-                                <div class="flex items-center gap-3 px-5 py-4 rounded-2xl border-2 border-gray-50 bg-gray-50 peer-checked:border-amber-500 peer-checked:bg-amber-50 transition-all">
-                                    <div class="w-2 h-2 rounded-full bg-amber-500"></div>
-                                    <span class="text-sm font-bold text-gray-600 peer-checked:text-amber-700">Tertunda</span>
-                                </div>
-                            </label>
-
-                            <label class="block relative cursor-pointer">
-                                <input type="radio" name="status" value="in_progress" class="sr-only peer" {{ $report->status == 'in_progress' ? 'checked' : '' }}>
-                                <div class="flex items-center gap-3 px-5 py-4 rounded-2xl border-2 border-gray-50 bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50 transition-all">
-                                    <div class="w-2 h-2 rounded-full bg-blue-500"></div>
-                                    <span class="text-sm font-bold text-gray-600 peer-checked:text-blue-700">Sedang Diproses</span>
-                                </div>
-                            </label>
-
-                            <label class="block relative cursor-pointer">
-                                <input type="radio" name="status" value="resolved" class="sr-only peer" {{ $report->status == 'resolved' ? 'checked' : '' }}>
-                                <div class="flex items-center gap-3 px-5 py-4 rounded-2xl border-2 border-gray-50 bg-gray-50 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition-all">
-                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-                                    <span class="text-sm font-bold text-gray-600 peer-checked:text-emerald-700">Selesai</span>
-                                </div>
-                            </label>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 px-5 py-4 rounded-2xl border-2 {{ $report->status == 'pending' ? 'border-amber-500 bg-amber-50' : 'border-gray-50 bg-gray-50 opacity-50' }} transition-all">
+                            <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+                            <span class="text-sm font-bold {{ $report->status == 'pending' ? 'text-amber-700' : 'text-gray-400' }}">Tertunda</span>
                         </div>
 
-                        <button type="submit" class="w-full py-4 bg-gray-900 text-white font-bold rounded-2xl hover:bg-gray-800 transition-all shadow-lg">
-                            Perbarui Status
-                        </button>
-                    </form>
+                        <div class="flex items-center gap-3 px-5 py-4 rounded-2xl border-2 {{ $report->status == 'in_progress' ? 'border-blue-500 bg-blue-50' : 'border-gray-50 bg-gray-50 opacity-50' }} transition-all">
+                            <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                            <span class="text-sm font-bold {{ $report->status == 'in_progress' ? 'text-blue-700' : 'text-gray-400' }}">Sedang Diproses</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 px-5 py-4 rounded-2xl border-2 {{ $report->status == 'resolved' ? 'border-emerald-500 bg-emerald-50' : 'border-gray-50 bg-gray-50 opacity-50' }} transition-all">
+                            <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                            <span class="text-sm font-bold {{ $report->status == 'resolved' ? 'text-emerald-700' : 'text-gray-400' }}">Selesai</span>
+                        </div>
+                    </div>
+
+                    <p class="mt-6 text-[10px] text-center text-gray-400 font-medium leading-relaxed italic">
+                        Ubah status melalui panel <br> <strong>Feedback & Penyelesaian</strong>
+                    </p>
                 </div>
 
                 {{-- Action Card --}}
