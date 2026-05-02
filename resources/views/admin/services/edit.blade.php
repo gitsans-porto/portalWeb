@@ -5,8 +5,8 @@
 @section('content')
 <div class="p-6">
     <div class="mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 mb-1">Edit Tata Cara Penggunaan</h1>
-        <p class="text-gray-500 text-sm">Sesuaikan langkah-langkah prosedur untuk layanan <span class="font-bold text-red-600">{{ $service->name }}</span>.</p>
+        <h1 class="text-2xl font-bold text-gray-900 mb-1">Edit Layanan & Tata Cara</h1>
+        <p class="text-gray-500 text-sm">Sesuaikan detail dan langkah-langkah prosedur untuk layanan <span class="font-bold text-red-600">{{ $service->name }}</span>.</p>
     </div>
 
     @if($errors->any())
@@ -23,7 +23,7 @@
         @method('PUT')
 
         <div class="space-y-6">
-            {{-- Service Info (Read-only) --}}
+            {{-- Service Info --}}
             <div class="bg-gray-50 border border-gray-100 rounded-3xl p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -31,9 +31,14 @@
                         <input type="text" value="{{ $service->name }}" disabled class="w-full px-4 py-3 bg-white border border-gray-100 rounded-xl text-gray-400 font-medium">
                     </div>
                     <div>
-                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Slug (URL)</label>
+                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Slug (Internal URL)</label>
                         <input type="text" value="{{ $service->slug }}" disabled class="w-full px-4 py-3 bg-white border border-gray-100 rounded-xl text-gray-400 font-medium font-mono">
                     </div>
+                </div>
+                <div class="mt-6">
+                    <label class="block text-xs font-black text-gray-900 uppercase tracking-widest mb-2">Link Akses Layanan</label>
+                    <input type="url" name="url" value="{{ old('url', $service->url) }}" placeholder="https://..." class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 font-medium focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" required>
+                    <p class="text-xs text-gray-500 mt-2">URL tujuan saat tombol "Akses Layanan" ditekan.</p>
                 </div>
             </div>
 
@@ -89,7 +94,7 @@
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
-                    Simpan Tata Cara
+                    Simpan Perubahan
                 </button>
             </div>
         </div>

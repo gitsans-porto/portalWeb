@@ -32,15 +32,17 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $validated = $request->validate([
-            'sop' => 'required|array',
-            'sop.*.title' => 'required|string|max:255',
-            'sop.*.desc' => 'required|string',
+            'url' => 'required|url',
+            'sop' => 'nullable|array',
+            'sop.*.title' => 'required_with:sop|string|max:255',
+            'sop.*.desc' => 'required_with:sop|string',
         ]);
 
         $service->update([
-            'sop' => array_values($validated['sop']), // ensure numeric keys
+            'url' => $validated['url'],
+            'sop' => isset($validated['sop']) ? array_values($validated['sop']) : [], // ensure numeric keys
         ]);
 
-        return back()->with('success', 'Tata cara penggunaan ' . $service->name . ' berhasil diperbarui!');
+        return back()->with('success', 'Data layanan ' . $service->name . ' berhasil diperbarui!');
     }
 }

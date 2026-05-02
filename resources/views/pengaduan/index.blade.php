@@ -21,13 +21,12 @@
             </nav>
 
             <div class="flex flex-col items-center text-center">
-                <p class="text-white/40 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4">Suara Anda Adalah Perubahan</p>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
                     Pusat Pengaduan & Aspirasi
                 </h1>
                 <p class="text-lg text-white/70 max-w-2xl leading-relaxed">
-                    Sampaikan keluhan, saran, atau aspirasi Anda demi kemajuan layanan SMKN 1 Limboto. 
-                    Kami menjamin setiap laporan akan ditindaklanjuti secara profesional.
+                    Sampaikan keluhan, saran, maupun aspirasi Anda demi kemajuan dan kebaikan bersama. 
+                    Kami menjamin setiap laporan yang masuk akan ditindaklanjuti secara objektif dan profesional.
                 </p>
             </div>
         </div>
@@ -58,6 +57,44 @@
 
                 <form id="complaint-form" class="space-y-8">
                     @csrf
+                    <div>
+                        <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Pilih Klasifikasi Laporan</label>
+                        <div class="flex flex-col sm:flex-row rounded-xl overflow-hidden border border-indigo-600 bg-white">
+                            <!-- Pengaduan -->
+                            <label class="flex-1 cursor-pointer relative group">
+                                <input type="radio" name="type" value="Pengaduan" class="btn-radio-input peer sr-only" required>
+                                <div class="btn-radio-content px-5 py-4 font-black text-indigo-600 bg-white peer-checked:bg-indigo-600 peer-checked:text-white transition-colors border-b sm:border-b-0 sm:border-r border-indigo-600 flex items-center justify-center sm:justify-start gap-3">
+                                    <svg class="radio-checked w-5 h-5 text-indigo-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
+                                    <svg class="radio-unchecked w-5 h-5 text-indigo-600 group-hover:text-indigo-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+                                    PENGADUAN
+                                </div>
+                            </label>
+                            <!-- Aspirasi -->
+                            <label class="flex-1 cursor-pointer relative group">
+                                <input type="radio" name="type" value="Aspirasi" class="btn-radio-input peer sr-only">
+                                <div class="btn-radio-content px-5 py-4 font-black text-indigo-600 bg-white peer-checked:bg-indigo-600 peer-checked:text-white transition-colors border-b sm:border-b-0 sm:border-r border-indigo-600 flex items-center justify-center sm:justify-start gap-3">
+                                    <svg class="radio-checked w-5 h-5 text-indigo-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
+                                    <svg class="radio-unchecked w-5 h-5 text-indigo-600 group-hover:text-indigo-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+                                    ASPIRASI
+                                </div>
+                            </label>
+                            <!-- Lainnya -->
+                            <label class="flex-1 cursor-pointer relative group">
+                                <input type="radio" name="type" value="Lainnya" class="btn-radio-input peer sr-only">
+                                <div class="btn-radio-content px-5 py-4 font-black text-indigo-600 bg-white peer-checked:bg-indigo-600 peer-checked:text-white transition-colors flex items-center justify-center sm:justify-start gap-3">
+                                    <svg class="radio-checked w-5 h-5 text-indigo-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
+                                    <svg class="radio-unchecked w-5 h-5 text-indigo-600 group-hover:text-indigo-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+                                    LAINNYA
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <style>
+                        .btn-radio-input:checked + .btn-radio-content .radio-checked { display: block !important; }
+                        .btn-radio-input:checked + .btn-radio-content .radio-unchecked { display: none !important; }
+                    </style>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Nama Lengkap</label>
@@ -77,28 +114,18 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Kategori Pengaduan</label>
-                            <select name="type" id="type-select" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium" required>
-                                <option value="general">Aspirasi Umum / Saran</option>
-                                <option value="service">Layanan Sekolah (E-Raport, LMS, dll)</option>
-                                <option value="facility">Fasilitas & Infrastruktur</option>
-                                <option value="academic">Kegiatan Akademik</option>
-                            </select>
+                            <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Topik Singkat</label>
+                            <input type="text" name="category" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium" placeholder="Contoh: AC Kelas Rusak, Masalah Login LMS" required>
                         </div>
-                        <div id="service-field" class="hidden">
-                            <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Layanan Terkait</label>
+                        <div>
+                            <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Layanan Terkait <span class="text-gray-300 font-normal">(Opsional)</span></label>
                             <select name="service_id" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium">
-                                <option value="">Pilih Layanan...</option>
+                                <option value="">Tidak ada / Lainnya</option>
                                 @foreach($services as $service)
                                     <option value="{{ $service->id }}">{{ $service->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Topik Singkat</label>
-                        <input type="text" name="category" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium" placeholder="Contoh: AC Kelas Rusak, Masalah Login LMS" required>
                     </div>
 
                     <div>
@@ -266,18 +293,7 @@
         });
     }
 
-    const typeSelect = document.getElementById('type-select');
-    const serviceField = document.getElementById('service-field');
 
-    if(typeSelect) {
-        typeSelect.addEventListener('change', function() {
-            if (this.value === 'service') {
-                serviceField.classList.remove('hidden');
-            } else {
-                serviceField.classList.add('hidden');
-            }
-        });
-    }
 
     // Handle Form Submit
     const complaintForm = document.getElementById('complaint-form');
@@ -312,7 +328,6 @@
                 
                 // Reset Form
                 complaintForm.reset();
-                serviceField.classList.add('hidden');
                 
                 // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
