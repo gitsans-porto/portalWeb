@@ -355,6 +355,7 @@
     {{-- Issue Report Button & Modal --}}
     <x-issue-report />
 
+    {{-- Page-specific scripts --}}
     @stack('scripts')
 </body>
 
