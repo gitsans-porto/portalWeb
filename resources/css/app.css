@@ -44,12 +44,14 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+
     body {
         font-family: var(--font-sans);
         color: var(--color-text-primary);
         background: var(--color-surface);
         overflow-x: hidden;
     }
+
     ::selection {
         background: var(--color-primary-100);
         color: var(--color-primary-800);
@@ -70,18 +72,22 @@
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     background: transparent;
 }
+
 .navbar.scrolled {
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(20px) saturate(1.8);
     -webkit-backdrop-filter: blur(20px) saturate(1.8);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
 }
+
 .navbar.scrolled .nav-link {
     color: var(--color-text-primary);
 }
+
 .navbar.scrolled .nav-logo-text {
     color: var(--color-text-primary);
 }
+
 .nav-link {
     position: relative;
     color: rgba(255, 255, 255, 0.9);
@@ -91,6 +97,7 @@
     transition: color 0.25s ease;
     padding: 0.5rem 0;
 }
+
 .nav-link::after {
     content: '';
     position: absolute;
@@ -103,10 +110,12 @@
     transform: translateX(-50%);
     border-radius: 1px;
 }
+
 .nav-link:hover::after,
 .nav-link.active::after {
     width: 100%;
 }
+
 .nav-link:hover {
     color: var(--color-primary);
 }
@@ -117,6 +126,7 @@
     display: flex;
     align-items: center;
 }
+
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -135,16 +145,19 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 110;
 }
+
 .navbar:not(.scrolled) .dropdown-menu {
     background: rgba(17, 24, 39, 0.9);
     border-color: rgba(255, 255, 255, 0.1);
     color: white;
 }
+
 .nav-item-dropdown:hover .dropdown-menu {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
 }
+
 .dropdown-link {
     display: flex;
     align-items: center;
@@ -157,18 +170,22 @@
     transition: all 0.2s ease;
     text-decoration: none;
 }
+
 .navbar:not(.scrolled) .dropdown-link {
     color: rgba(255, 255, 255, 0.8);
 }
+
 .dropdown-link:hover {
     background: var(--color-primary-50);
     color: var(--color-primary);
     transform: translateX(4px);
 }
+
 .navbar:not(.scrolled) .dropdown-link:hover {
     background: rgba(255, 255, 255, 0.1);
     color: white;
 }
+
 .nav-arrow {
     width: 12px;
     height: 12px;
@@ -176,6 +193,7 @@
     transition: transform 0.3s ease;
     opacity: 0.7;
 }
+
 .nav-item-dropdown:hover .nav-arrow {
     transform: rotate(180deg);
     opacity: 1;
@@ -188,9 +206,11 @@
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--color-surface-alt);
 }
+
 .mobile-submenu.active {
     max-height: 400px;
 }
+
 .mobile-dropdown-btn {
     width: 100%;
     display: flex;
@@ -207,9 +227,11 @@
     border-right: none;
     cursor: pointer;
 }
+
 .mobile-dropdown-btn .nav-arrow {
     color: var(--color-text-muted);
 }
+
 .mobile-dropdown-btn.active .nav-arrow {
     transform: rotate(180deg);
     color: var(--color-primary);
@@ -223,6 +245,7 @@
     align-items: center;
     overflow: hidden;
 }
+
 .hero-section::before {
     content: '';
     position: absolute;
@@ -230,6 +253,7 @@
     background: rgba(0, 0, 0, 0.65);
     pointer-events: none;
 }
+
 .hero-section::after {
     content: '';
     position: absolute;
@@ -238,7 +262,7 @@
     pointer-events: none;
 }
 
-/* — Service Cards — */
+/* — Service Cards (Hero / Glassmorphism variant) — */
 .service-card {
     position: relative;
     background: rgba(255, 255, 255, 0.07);
@@ -247,12 +271,20 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 1.25rem;
     padding: 2rem 1.5rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Targeted transitions only — avoids painting all properties */
+    transition:
+        transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        border-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        background-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
     cursor: pointer;
     text-decoration: none;
     display: block;
+    /* Promote to compositing layer for smooth GPU animation */
+    will-change: transform, box-shadow;
 }
+
 .service-card::before {
     content: '';
     position: absolute;
@@ -260,19 +292,23 @@
     border-radius: inherit;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
 .service-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.12);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.3),
-        0 0 80px rgba(254, 0, 2, 0.08);
+        0 12px 32px rgba(0, 0, 0, 0.22),
+        0 4px 12px rgba(0, 0, 0, 0.12),
+        0 0 60px rgba(254, 0, 2, 0.06);
 }
+
 .service-card:hover::before {
     opacity: 1;
 }
+
 .service-card-icon {
     width: 3.5rem;
     height: 3.5rem;
@@ -281,10 +317,52 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1.25rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
 .service-card:hover .service-card-icon {
     transform: scale(1.08);
+}
+
+/* — Layanan Cards (Beranda white-bg outline variant) — */
+.layanan-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    /* Only animate the properties that actually change on hover */
+    transition:
+        transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        border-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* GPU compositing hint — no layout recalculation during animation */
+    will-change: transform, box-shadow;
+}
+
+.layanan-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.08),
+        0 4px 10px rgba(0, 0, 0, 0.05);
+    border-color: #D1D5DB;
+}
+
+/* Icon tidak diberi animasi transform tersendiri agar tidak timbul
+   lebih dulu dari card — cukup card lift (translateY) yang bergerak */
+
+.layanan-card-arrow {
+    transition:
+        gap 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.layanan-card:hover .layanan-card-arrow-icon {
+    transform: translateX(3px);
 }
 
 /* — Section Styles — */
@@ -295,12 +373,14 @@
     line-height: 1.2;
     color: var(--color-text-primary);
 }
+
 .section-subtitle {
     font-size: 1.05rem;
     color: var(--color-text-secondary);
     max-width: 36rem;
     line-height: 1.7;
 }
+
 .section-badge {
     display: inline-flex;
     align-items: center;
@@ -324,6 +404,7 @@
     padding: 2.5rem;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .profile-card:hover {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
     border-color: var(--color-primary-100);
@@ -338,25 +419,29 @@
     overflow: hidden;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .news-card:hover {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
     transform: translateY(-4px);
 }
+
 .news-card-image {
     width: 100%;
     position: relative;
     background: #f3f4f6;
 }
+
 .news-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .news-card-image::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.05));
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.05));
 }
 
 /* — Stat Counter — */
@@ -368,10 +453,12 @@
     border: 1px solid var(--color-border);
     transition: all 0.35s ease;
 }
+
 .stat-card:hover {
     border-color: var(--color-primary-100);
     box-shadow: 0 4px 20px rgba(254, 0, 2, 0.06);
 }
+
 .stat-number {
     font-size: 2.75rem;
     font-weight: 800;
@@ -399,11 +486,13 @@
     text-decoration: none;
     letter-spacing: 0.01em;
 }
+
 .btn-primary:hover {
     background: var(--color-primary-dark);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(254, 0, 2, 0.3);
 }
+
 .btn-outline {
     display: inline-flex;
     align-items: center;
@@ -419,6 +508,7 @@
     cursor: pointer;
     text-decoration: none;
 }
+
 .btn-outline:hover {
     background: var(--color-primary);
     color: white;
@@ -443,6 +533,7 @@
     text-decoration: none;
     backdrop-filter: blur(8px);
 }
+
 .btn-white:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.35);
@@ -454,10 +545,12 @@
     background: var(--color-surface-dark);
     color: rgba(255, 255, 255, 0.7);
 }
+
 .footer a {
     color: rgba(255, 255, 255, 0.7);
     transition: color 0.25s ease;
 }
+
 .footer a:hover {
     color: white;
 }
@@ -469,6 +562,7 @@
     padding-bottom: 4rem;
     overflow: hidden;
 }
+
 /* Photo layer — background-image injected via inline style from blade */
 .detail-hero-bg {
     position: absolute;
@@ -478,6 +572,7 @@
     background-repeat: no-repeat;
     z-index: 0;
 }
+
 /* Semi-transparent black overlay for text legibility */
 .detail-hero-overlay {
     position: absolute;
@@ -485,11 +580,13 @@
     background: rgba(0, 0, 0, 0.65);
     z-index: 1;
 }
+
 .sop-step {
     position: relative;
     padding-left: 3.5rem;
     padding-bottom: 2rem;
 }
+
 .sop-step::before {
     content: '';
     position: absolute;
@@ -499,9 +596,11 @@
     width: 2px;
     background: var(--color-border);
 }
+
 .sop-step:last-child::before {
     display: none;
 }
+
 .sop-step-number {
     position: absolute;
     left: 0;
@@ -518,6 +617,7 @@
     font-size: 0.875rem;
     border: 2px solid var(--color-primary-100);
 }
+
 .access-badge {
     display: inline-flex;
     align-items: center;
@@ -539,24 +639,55 @@
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
 }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+
+.reveal-delay-1 {
+    transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+    transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+    transition-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+    transition-delay: 0.4s;
+}
 
 /* Floating animation for decorative elements */
 @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-10px) rotate(1deg); }
-    75% { transform: translateY(5px) rotate(-1deg); }
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+
+    75% {
+        transform: translateY(5px) rotate(-1deg);
+    }
 }
+
 @keyframes pulse-glow {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.7; }
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
 }
 
 /* — Mobile Overlay — */
@@ -570,10 +701,12 @@
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
+
 .mobile-menu-overlay.active {
     opacity: 1;
     pointer-events: auto;
 }
+
 .mobile-menu {
     position: fixed;
     top: 0;
@@ -587,9 +720,11 @@
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
 }
+
 .mobile-menu.active {
     transform: translateX(0);
 }
+
 .mobile-menu .nav-link {
     display: block;
     color: var(--color-text-primary);
@@ -597,6 +732,7 @@
     font-size: 1rem;
     border-bottom: 1px solid var(--color-border-light);
 }
+
 .mobile-menu .nav-link:hover {
     background: var(--color-primary-50);
     color: var(--color-primary);
@@ -609,12 +745,15 @@
         padding-top: 6rem;
         padding-bottom: 3rem;
     }
+
     .service-card {
         padding: 1.5rem 1.25rem;
     }
+
     .stat-number {
         font-size: 2rem;
     }
+
     .detail-hero {
         padding-top: 5.5rem;
         padding-bottom: 2.5rem;
@@ -637,10 +776,12 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 1.5rem;
 }
+
 .modal-overlay.active {
     opacity: 1;
     pointer-events: auto;
 }
+
 .login-modal {
     background: white;
     width: 100%;
@@ -651,9 +792,11 @@
     transform: scale(0.9) translateY(20px);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
 .modal-overlay.active .login-modal {
     transform: scale(1) translateY(0);
 }
+
 .login-header {
     background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
     padding: 2.25rem 2rem;
@@ -661,6 +804,7 @@
     text-align: center;
     color: white;
 }
+
 .login-header::after {
     content: '';
     position: absolute;
@@ -668,13 +812,16 @@
     background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3C/g%3E%3C/svg%3E");
     pointer-events: none;
 }
+
 .login-body {
     padding: 2rem;
 }
+
 .input-group {
     position: relative;
     margin-bottom: 1.25rem;
 }
+
 .input-field {
     width: 100%;
     padding: 0.875rem 1.125rem;
@@ -685,12 +832,14 @@
     background: var(--color-surface-alt);
     display: block;
 }
+
 .input-field:focus {
     outline: none;
     border-color: var(--color-primary);
     background: white;
     box-shadow: 0 0 0 4px var(--color-primary-50);
 }
+
 .input-label {
     display: block;
     font-size: 0.875rem;
@@ -812,11 +961,11 @@ input[type="file"].form-control {
     background: white;
     border-radius: 2.5rem;
     padding: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
     border: 1px solid #F1F5F9;
     transition: all 0.3s ease;
 }
 
 .admin-card:hover {
-    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
 }

@@ -33,27 +33,29 @@
     {{-- ======== NAVBAR ======== --}}
     <nav class="navbar" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-18 lg:h-20">
+            <div class="flex items-center h-18 lg:h-20">
 
-                {{-- Logo --}}
-                <a href="{{ route('beranda') }}" class="flex items-center gap-3 no-underline shrink-0">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo SMKN 1 Limboto" class="w-auto h-12 object-contain drop-shadow-md">
-                    <div>
-                        <span
-                            class="nav-logo-text text-white font-bold text-base leading-tight block transition-colors duration-300">SMKN
-                            1 Limboto</span>
-                        <span
-                            class="text-white/50 text-[0.65rem] font-medium tracking-wider uppercase hidden sm:block">Portal
-                            Layanan</span>
-                    </div>
-                </a>
+                {{-- Logo (flex-1 left) --}}
+                <div class="flex-1">
+                    <a href="{{ route('beranda') }}" class="flex items-center gap-3 no-underline w-fit">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo SMKN 1 Limboto" class="w-auto h-12 object-contain drop-shadow-md">
+                        <div>
+                            <span
+                                class="nav-logo-text text-white font-bold text-base leading-tight block transition-colors duration-300">SMKN
+                                1 Limboto</span>
+                            <span
+                                class="text-white/50 text-[0.65rem] font-medium tracking-wider uppercase hidden sm:block">Portal
+                                Layanan</span>
+                        </div>
+                    </a>
+                </div>
 
-                {{-- Desktop Nav --}}
-                <div class="hidden lg:flex items-center gap-8">
+                {{-- Desktop Nav — 3-column layout --}}
+                <div class="hidden lg:flex flex-1 items-center justify-center gap-4">
                     <a href="{{ route('beranda') }}"
                         class="nav-link {{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
                     <div class="nav-item-dropdown">
-                        <a href="{{ route('beranda') }}#layanan" class="nav-link">
+                        <a href="{{ route('beranda') }}#layanan" class="nav-link whitespace-nowrap">
                             Layanan
                             <svg class="nav-arrow inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
@@ -67,7 +69,7 @@
                         </div>
                     </div>
                     <div class="nav-item-dropdown">
-                        <a href="{{ route('beranda') }}#profil" class="nav-link">
+                        <a href="{{ route('beranda') }}#profil" class="nav-link whitespace-nowrap">
                             Profil
                             <svg class="nav-arrow inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
@@ -82,15 +84,18 @@
                     <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
                     <a href="{{ route('beranda') }}#kontak" class="nav-link">Kontak</a>
                     <a href="{{ route('pengaduan.index') }}" class="nav-link {{ request()->routeIs('pengaduan.index') ? 'active' : '' }}">Pengaduan</a>
+                </div>
 
+                {{-- Desktop Login / Auth (flex-1 right) --}}
+                <div class="hidden lg:flex flex-1 items-center justify-end">
                     @auth
                         <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
-                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                        <form action="{{ route('logout') }}" method="POST" class="inline ml-3">
                             @csrf
-                            <button type="submit" class="nav-link bg-transparent border-none cursor-pointer">Keluar</button>
+                            <button type="submit" class="px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-colors duration-200 cursor-pointer border-none">Keluar</button>
                         </form>
                     @else
-                        <button id="login-modal-btn" class="nav-link bg-transparent border-none cursor-pointer">Login</button>
+                        <button id="login-modal-btn" class="px-5 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-colors duration-200 cursor-pointer border-none">Login</button>
                     @endauth
                 </div>
 
