@@ -36,11 +36,15 @@ class ServiceController extends Controller
             'sop' => 'nullable|array',
             'sop.*.title' => 'required_with:sop|string|max:255',
             'sop.*.desc' => 'required_with:sop|string',
+            'faq' => 'nullable|array',
+            'faq.*.q' => 'required_with:faq|string|max:255',
+            'faq.*.a' => 'required_with:faq|string',
         ]);
 
         $service->update([
             'url' => $validated['url'],
             'sop' => isset($validated['sop']) ? array_values($validated['sop']) : [], // ensure numeric keys
+            'faq' => isset($validated['faq']) ? array_values($validated['faq']) : [], // ensure numeric keys
         ]);
 
         return back()->with('success', 'Data layanan ' . $service->name . ' berhasil diperbarui!');

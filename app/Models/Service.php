@@ -17,10 +17,12 @@ class Service extends Model
         'url',
         'audiences',
         'sop',
+        'faq',
     ];
 
     protected $casts = [
         'audiences' => 'json',
         'sop' => 'json',
+        'faq' => 'json',
     ];
 }

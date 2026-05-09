@@ -108,7 +108,7 @@
                 {{-- FAQ Accordion --}}
                 <div class="divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden reveal">
                     @php
-                        $faqList = [
+                        $defaultFaqList = [
                             [
                                 'q' => 'Siapa saja yang bisa mengakses layanan ' . $layanan->name . '?',
                                 'a' => 'Layanan ini dapat diakses oleh ' . implode(', ', $layanan->audiences ?? ['pengguna terdaftar']) . '. Pastikan Anda sudah memiliki akun yang aktif dan telah terdaftar oleh administrator sekolah.',
@@ -130,6 +130,8 @@
                                 'a' => 'Anda dapat menghubungi operator sekolah di ruang Tata Usaha pada jam kerja (Senin–Jumat, 08.00–16.00 WITA). Alternatifnya, gunakan fitur "Laporkan Kendala" yang tersedia di halaman ini.',
                             ],
                         ];
+                        
+                        $faqList = !empty($layanan->faq) ? $layanan->faq : $defaultFaqList;
                     @endphp
 
                     @foreach($faqList as $faqIndex => $faq)

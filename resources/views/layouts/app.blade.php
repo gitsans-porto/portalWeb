@@ -301,13 +301,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/15">
-                    <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 00-2.25 2.25z" />
-                    </svg>
+                <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg p-2">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo SMKN 1 Limboto" class="w-full h-full object-contain">
                 </div>
                 <h3 class="text-xl font-bold text-white mb-1">Login Administrator</h3>
-                <p class="text-white/60 text-sm italic">"Akses panel pengelolaan portal"</p>
             </div>
             <div class="login-body">
                 @if ($errors->any())
