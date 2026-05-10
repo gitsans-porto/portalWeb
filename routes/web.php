@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 Route::get('/', [PortalController::class, 'index'])->name('beranda');
 Route::get('/layanan/{slug}', [PortalController::class, 'layanan'])->name('layanan.detail');
+Route::get('/layanan/{slug}/download-panduan', [PortalController::class, 'downloadPanduan'])->name('layanan.download-panduan');
 
 // News Routes
 Route::get('/berita', [NewsController::class, 'index'])->name('berita.index');
@@ -41,6 +42,9 @@ use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    
+    // TinyMCE Image Upload
+    Route::post('/tinymce/upload', [AdminController::class, 'uploadImage'])->name('tinymce.upload');
     
     // Profile Management CRUD
     Route::get('/profiles/{section}/edit', [AdminProfileController::class, 'edit'])->name('profiles.edit');

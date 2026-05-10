@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.services.update', $service->id) }}" method="POST">
+    <form id="edit-service-form" action="{{ route('admin.services.update', $service->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -42,8 +42,18 @@
                 </div>
             </div>
 
+            {{-- Tabs Navigation --}}
+            <div class="flex gap-2 mb-2 border-b border-gray-200">
+                <button type="button" onclick="switchAdminTab('sop')" id="btn-tab-sop" class="px-6 py-3 font-bold text-sm rounded-t-xl border-b-2 border-red-600 text-red-600 bg-white shadow-sm transition-all focus:outline-none">
+                    Tata Cara Prosedur (SOP)
+                </button>
+                <button type="button" onclick="switchAdminTab('faq')" id="btn-tab-faq" class="px-6 py-3 font-bold text-sm rounded-t-xl border-b-2 border-transparent text-gray-500 hover:text-gray-900 transition-all focus:outline-none">
+                    FAQ (Pertanyaan Umum)
+                </button>
+            </div>
+
             {{-- SOP Editor --}}
-            <div class="bg-white border border-gray-200 rounded-3xl p-8">
+            <div id="content-tab-sop" class="bg-white border border-gray-200 rounded-3xl p-8">
                 <div class="flex items-center justify-between mb-8">
                     <h3 class="text-lg font-bold text-gray-900 border-l-4 border-red-600 pl-4">Langkah-langkah Prosedur</h3>
                     <button type="button" id="add-step" class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition-all flex items-center gap-2">
@@ -76,7 +86,7 @@
                             </div>
                             <div class="grid grid-cols-1 gap-4">
                                 <input type="text" name="sop[{{ $index }}][title]" value="{{ $step['title'] ?? '' }}" placeholder="Judul Langkah (Contoh: Login ke Sistem)" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
-                                <textarea name="sop[{{ $index }}][desc]" rows="3" placeholder="Deskripsi detail apa yang harus dilakukan..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed" required>{{ $step['desc'] ?? '' }}</textarea>
+                                <textarea name="sop[{{ $index }}][desc]" rows="3" placeholder="Deskripsi detail apa yang harus dilakukan..." class="tinymce-editor w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed">{{ $step['desc'] ?? '' }}</textarea>
                             </div>
                         </div>
                     @endforeach
@@ -90,7 +100,7 @@
             </div>
 
             {{-- FAQ Editor --}}
-            <div class="bg-white border border-gray-200 rounded-3xl p-8">
+            <div id="content-tab-faq" class="bg-white border border-gray-200 rounded-3xl p-8" style="display: none;">
                 <div class="flex items-center justify-between mb-8">
                     <h3 class="text-lg font-bold text-gray-900 border-l-4 border-red-600 pl-4">FAQ (Pertanyaan Umum)</h3>
                     <button type="button" id="add-faq" class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition-all flex items-center gap-2">
@@ -188,7 +198,7 @@
         </div>
         <div class="grid grid-cols-1 gap-4">
             <input type="text" name="sop[__INDEX__][title]" placeholder="Judul Langkah" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
-            <textarea name="sop[__INDEX__][desc]" rows="3" placeholder="Deskripsi detail..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed" required></textarea>
+            <textarea name="sop[__INDEX__][desc]" rows="3" placeholder="Deskripsi detail..." class="tinymce-editor w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed"></textarea>
         </div>
     </div>
 </template>
@@ -215,8 +225,113 @@
     </div>
 </template>
 
+<script src="https://cdn.jsdelivr.net/npm/tinymce@7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    
+    window.switchAdminTab = function(tabName) {
+        const tabSop = document.getElementById('content-tab-sop');
+        const tabFaq = document.getElementById('content-tab-faq');
+        const btnSop = document.getElementById('btn-tab-sop');
+        const btnFaq = document.getElementById('btn-tab-faq');
+
+        if (tabName === 'sop') {
+            tabSop.style.display = 'block';
+            tabFaq.style.display = 'none';
+            btnSop.classList.add('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
+            btnSop.classList.remove('border-transparent', 'text-gray-500');
+            btnFaq.classList.remove('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
+            btnFaq.classList.add('border-transparent', 'text-gray-500');
+        } else {
+            tabFaq.style.display = 'block';
+            tabSop.style.display = 'none';
+            btnFaq.classList.add('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
+            btnFaq.classList.remove('border-transparent', 'text-gray-500');
+            btnSop.classList.remove('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
+            btnSop.classList.add('border-transparent', 'text-gray-500');
+        }
+    };
+    
+    const tinymceConfig = {
+        target: null, // akan di-set secara dinamis
+        height: 400,
+        menubar: false,
+        plugins: [
+            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+            'insertdatetime', 'media', 'table', 'help', 'wordcount'
+        ],
+        toolbar: 'fullscreen | undo redo | blocks | ' +
+        'bold italic underline | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'link image media table | removeformat | help',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; color:#4a5568 }',
+        images_upload_handler: function (blobInfo, progress) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', '{{ route("admin.tinymce.upload") }}');
+                
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                if (csrfToken) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+                }
+
+                xhr.upload.onprogress = (e) => {
+                    progress(e.loaded / e.total * 100);
+                };
+
+                xhr.onload = () => {
+                    if (xhr.status === 403) {
+                        reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
+                        return;
+                    }
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        reject('HTTP Error: ' + xhr.status);
+                        return;
+                    }
+
+                    const json = JSON.parse(xhr.responseText);
+
+                    if (!json || typeof json.location != 'string') {
+                        reject('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+                    resolve(json.location);
+                };
+
+                xhr.onerror = () => {
+                    reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+                };
+
+                const formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                xhr.send(formData);
+            });
+        },
+        setup: function (editor) {
+            editor.on('change', function () {
+                editor.save();
+            });
+        }
+    };
+
+    // Inisialisasi awal pada elemen yang sudah ada
+    tinymce.init({
+        ...tinymceConfig,
+        selector: '.tinymce-editor'
+    });
+
+    // Form submit trigger save
+    const form = document.getElementById('edit-service-form');
+    if (form) {
+        form.addEventListener('submit', function() {
+            tinymce.triggerSave();
+        });
+    }
+
+    // SOP logic
     // SOP logic
     const container = document.getElementById('sop-container');
     const addButton = document.getElementById('add-step');
@@ -257,11 +372,25 @@ document.addEventListener('DOMContentLoaded', function() {
         div.innerHTML = html;
         container.appendChild(div.firstElementChild);
         updateNumbers();
+        
+        // Inisialisasi TinyMCE untuk textarea yang baru ditambahkan
+        const newTextarea = container.lastElementChild.querySelector('.tinymce-editor');
+        if (newTextarea) {
+            tinymce.init({
+                ...tinymceConfig,
+                target: newTextarea
+            });
+        }
     });
 
     container.addEventListener('click', function(e) {
         if (e.target.closest('.remove-step')) {
-            e.target.closest('.sop-step').remove();
+            const stepEl = e.target.closest('.sop-step');
+            const textarea = stepEl.querySelector('.tinymce-editor');
+            if (textarea && tinymce.get(textarea.id)) {
+                tinymce.get(textarea.id).remove();
+            }
+            stepEl.remove();
             updateNumbers();
         }
     });

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\News;
-
 use App\Models\Service;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PortalController extends Controller
 {
@@ -67,5 +67,17 @@ class PortalController extends Controller
     {
         $profile = Profile::where('section', 'kepala_sekolah')->firstOrFail();
         return view('profil.kepala-sekolah', compact('profile'));
+    }
+
+    /**
+     * Download Panduan PDF Layanan
+     */
+    public function downloadPanduan(string $slug)
+    {
+        $layanan = Service::where('slug', $slug)->firstOrFail();
+        
+        $pdf = Pdf::loadView('layanan.panduan-pdf', compact('layanan'));
+        
+        return $pdf->download('panduan-' . $layanan->slug . '.pdf');
     }
 }

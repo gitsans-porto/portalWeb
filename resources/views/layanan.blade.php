@@ -64,6 +64,12 @@
                             FAQ
                         </button>
                     </div>
+                    <a href="{{ route('layanan.download-panduan', $layanan->slug) }}" class="mt-4 text-sm font-semibold text-white/80 hover:text-white flex items-center justify-center gap-2 transition-colors w-full sm:w-auto">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                        Unduh Panduan (PDF)
+                    </a>
                 </div>
             </div>
         </div>
@@ -88,8 +94,10 @@
                         <li class="flex gap-4 py-5 {{ !$loop->last ? 'border-b border-gray-100' : '' }} reveal reveal-delay-{{ ($index % 4) + 1 }}">
                             <span class="flex-shrink-0 w-7 h-7 rounded-full bg-white border border-gray-400 text-gray-900 text-sm font-bold flex items-center justify-center mt-0.5">{{ $index + 1 }}</span>
                             <div>
-                                <h3 class="font-semibold text-gray-900 text-base mb-1">{{ $step['title'] }}</h3>
-                                <p class="text-gray-500 text-sm leading-relaxed">{{ $step['desc'] }}</p>
+                                <h3 class="font-semibold text-gray-900 text-base mb-2">{{ $step['title'] }}</h3>
+                                <div class="text-gray-600 text-sm leading-relaxed tinymce-content">
+                                    {!! $step['desc'] !!}
+                                </div>
                             </div>
                         </li>
                     @endforeach
@@ -244,6 +252,33 @@
         color: #111827 !important;
         border-color: white !important;
         opacity: 1 !important;
+    }
+    
+    /* Styling khusus untuk konten TinyMCE (SOP) */
+    .tinymce-content ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .tinymce-content ol {
+        list-style-type: decimal;
+        padding-left: 1.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .tinymce-content p {
+        margin-bottom: 0.5rem;
+    }
+    .tinymce-content a {
+        color: #e53e3e;
+        text-decoration: underline;
+    }
+    .tinymce-content img {
+        border-radius: 0.5rem;
+        max-width: 100%;
+        height: auto;
+        margin: 0.5rem 0;
     }
 </style>
 @endpush

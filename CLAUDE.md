@@ -1,4 +1,4 @@
-Saya menggunakan Laravel 12 dengan Custom Blade (Native Laravel, tanpa Filament). Saya memiliki fitur "Kelola Layanan" di mana admin dapat mengelola langkah-langkah prosedur (tata cara penggunaan) dari sebuah layanan. Saat ini, input deskripsi setiap langkah masih menggunakan textarea biasa.
+Pada halaman Admin Saya memiliki fitur "Kelola Layanan" di mana admin dapat mengelola langkah-langkah prosedur (tata cara penggunaan) dari sebuah layanan. Saat ini, input deskripsi setiap langkah masih menggunakan textarea biasa.
 
 Saya ingin kamu melakukan dua hal berikut:
 
@@ -47,5 +47,7 @@ Ketentuan generate PDF:
 - Sesuaikan nama model, controller, route, dan view dengan struktur yang sudah ada di project ini
 - Jika ada lebih dari satu tempat textarea langkah (misal halaman create dan edit), terapkan TinyMCE di keduanya
 - Pastikan tidak ada konflik dengan asset atau script yang sudah ada
+- Pastikan untuk mengedepankan keamanan dan jangan membuat celah keamanan baru pada fitur maupun pada website ini
+- Pastikan juga tidak ada eror pada website ini saat fitur baru diimplementasikan, jika ada eror, perbaiki eror tersebut terlebih dahulu sebelum melanjutkan
 
-Tolong analisis struktur project saya terlebih dahulu sebelum mulai mengerjakan, lalu kerjakan kedua task di atas secara berurutan.
+kerjakan kedua task di atas secara berurutan.
