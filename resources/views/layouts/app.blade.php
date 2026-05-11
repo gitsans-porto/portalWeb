@@ -82,6 +82,7 @@
                         </div>
                     </div>
                     <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
+                    <a href="{{ route('mading.index') }}" class="nav-link {{ request()->routeIs('mading.*') ? 'active' : '' }}">Mading</a>
                     <a href="{{ route('beranda') }}#kontak" class="nav-link">Kontak</a>
                     <a href="{{ route('pengaduan.index') }}" class="nav-link {{ request()->routeIs('pengaduan.index') ? 'active' : '' }}">Pengaduan</a>
                 </div>
@@ -157,6 +158,7 @@
                 </div>
             </div>
             <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
+            <a href="{{ route('mading.index') }}" class="nav-link {{ request()->routeIs('mading.*') ? 'active' : '' }}">Mading</a>
             <a href="{{ route('beranda') }}#kontak" class="nav-link">Kontak</a>
             
             <div class="py-2 border-t border-gray-100 mt-2">
@@ -343,12 +345,21 @@
         </div>
     </div>
 
-    {{-- Handle Auto-Open on Validation Error --}}
-    @if ($errors->any())
+    {{-- Handle Auto-Open on Validation Error or Query Param --}}
+    @if ($errors->any() || request()->query('login') === 'show')
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('login-modal-overlay')?.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            const modal = document.getElementById('login-modal-overlay');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Clean up the URL if it was opened via query param
+            if (window.location.search.includes('login=show')) {
+                const newUrl = window.location.pathname + window.location.search.replace(/[?&]login=show/, '').replace(/^&/, '?');
+                window.history.replaceState({}, document.title, newUrl);
+            }
         });
     </script>
     @endif

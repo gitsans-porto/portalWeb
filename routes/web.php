@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
+use App\Http\Controllers\MadingController;
+use App\Http\Controllers\Admin\MadingController as AdminMadingController;
+
 Route::get('/', [PortalController::class, 'index'])->name('beranda');
 Route::get('/layanan/{slug}', [PortalController::class, 'layanan'])->name('layanan.detail');
 Route::get('/layanan/{slug}/download-panduan', [PortalController::class, 'downloadPanduan'])->name('layanan.download-panduan');
@@ -17,6 +20,12 @@ Route::get('/layanan/{slug}/download-panduan', [PortalController::class, 'downlo
 // News Routes
 Route::get('/berita', [NewsController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('berita.show');
+
+// Mading Routes
+Route::get('/mading', [MadingController::class, 'index'])->name('mading.index');
+Route::get('/mading/tulis', [MadingController::class, 'create'])->name('mading.create');
+Route::post('/mading/tulis', [MadingController::class, 'store'])->name('mading.store');
+Route::get('/mading/{slug}', [MadingController::class, 'show'])->name('mading.show');
 
 // Redirect /admin to /admin/dashboard
 Route::get('/admin', function () {
@@ -34,7 +43,11 @@ Route::prefix('profil')->group(function () {
 });
 
 // Authentication Routes
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+// GET /login redirects to beranda with a query param (login is a modal, not a separate page)
+Route::get('/login', function () {
+    return redirect()->route('beranda', ['login' => 'show']);
+})->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Routes (Protected)
@@ -52,6 +65,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // News Management CRUD
     Route::resource('news', AdminNewsController::class);
+
+    // Mading Management CRUD
+    Route::patch('mading/{mading}/approve', [AdminMadingController::class, 'approve'])->name('mading.approve');
+    Route::resource('mading', AdminMadingController::class);
 
     // Services Management (ONLY edit SOP)
     Route::resource('services', AdminServiceController::class)->only(['edit', 'update']);
