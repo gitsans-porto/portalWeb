@@ -42,10 +42,10 @@ use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    
+
     // TinyMCE Image Upload
     Route::post('/tinymce/upload', [AdminController::class, 'uploadImage'])->name('tinymce.upload');
-    
+
     // Profile Management CRUD
     Route::get('/profiles/{section}/edit', [AdminProfileController::class, 'edit'])->name('profiles.edit');
     Route::put('/profiles/{section}', [AdminProfileController::class, 'update'])->name('profiles.update');

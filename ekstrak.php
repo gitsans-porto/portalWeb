@@ -1,0 +1,11 @@
+<?php
+$zip = new ZipArchive;
+$res = $zip->open('web.zip');
+if ($res === TRUE) {
+    $zip->extractTo('./');
+    $zip->close();
+    echo 'Berhasil Ekstrak File.';
+} else {
+    echo 'Gagal mengekstrak file.';
+}
+?>
