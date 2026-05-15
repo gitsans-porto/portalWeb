@@ -86,7 +86,7 @@
                         <div class="space-y-6">
                             @if($article->image)
                                 <div class="w-full aspect-video rounded-2xl overflow-hidden border border-gray-100 mb-4">
-                                    <img src="{{ asset('storage/' . $article->image) }}" class="w-full h-full object-cover">
+                                    <img src="{{ $article->image_url }}" class="w-full h-full object-cover">
                                 </div>
                             @endif
 
