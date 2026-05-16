@@ -16,7 +16,25 @@ class MadingController extends Controller
             ->orderByDesc('published_at')
             ->paginate(12);
 
-        return view('mading.index', compact('mading'));
+        $recentNews = \App\Models\News::whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->take(3)
+            ->get();
+
+        $popularMading = Mading::whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('views')
+            ->take(3)
+            ->get();
+
+        $recentMading = Mading::whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->take(3)
+            ->get();
+
+        return view('mading.index', compact('mading', 'recentNews', 'popularMading', 'recentMading'));
     }
 
     public function show(string $slug)
@@ -25,6 +43,8 @@ class MadingController extends Controller
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->firstOrFail();
+
+        $post->increment('views');
 
         return view('mading.show', compact('post'));
     }

@@ -20,6 +20,7 @@ class Mading extends Model
         'color_accent',
         'is_pinned',
         'published_at',
+        'views',
     ];
 
     protected $casts = [
