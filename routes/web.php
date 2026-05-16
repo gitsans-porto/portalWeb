@@ -64,6 +64,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Bahan Ajar Management
     Route::resource('subjects', App\Http\Controllers\Admin\SubjectController::class)->except(['create', 'edit', 'show']);
+    Route::resource('materials', App\Http\Controllers\Admin\MaterialController::class)->only(['index', 'store', 'destroy']);
 });
 
 // Issue Report Submission
@@ -76,3 +77,4 @@ Route::post('/pengaduan/track', [App\Http\Controllers\IssueReportController::cla
 // Bahan Ajar Routes
 use App\Http\Controllers\MaterialController;
 Route::get('/bahan-ajar', [MaterialController::class, 'index'])->name('materials.index');
+Route::get('/bahan-ajar/{subject:slug}', [MaterialController::class, 'show'])->name('materials.show');

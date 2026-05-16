@@ -11,4 +11,8 @@ class Subject extends Model
 
     protected $fillable = ['name', 'slug', 'category', 'icon', 'color', 'image'];
 
+    public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
 }
