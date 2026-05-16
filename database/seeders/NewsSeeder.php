@@ -47,15 +47,17 @@ class NewsSeeder extends Seeder
             ]
         ];
 
+        $index = 1;
         foreach ($news as $item) {
             News::create([
                 'title' => $item['title'],
                 'slug' => Str::slug($item['title']),
                 'content' => $item['content'],
-                'image' => $item['image'],
+                'image' => 'https://picsum.photos/seed/' . $index . '/800/600',
                 'category' => $item['category'],
                 'published_at' => Carbon::now()->subDays(rand(1, 30)),
             ]);
+            $index++;
         }
     }
 }

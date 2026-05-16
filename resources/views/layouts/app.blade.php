@@ -83,6 +83,7 @@
                     </div>
                     <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
                     <a href="{{ route('beranda') }}#kontak" class="nav-link">Kontak</a>
+                    <a href="{{ route('materials.index') }}" class="nav-link whitespace-nowrap {{ request()->routeIs('materials.*') ? 'active' : '' }}">Bahan Ajar</a>
                     <a href="{{ route('pengaduan.index') }}" class="nav-link {{ request()->routeIs('pengaduan.index') ? 'active' : '' }}">Pengaduan</a>
                 </div>
 
@@ -158,6 +159,8 @@
             </div>
             <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
             <a href="{{ route('beranda') }}#kontak" class="nav-link">Kontak</a>
+            <a href="{{ route('materials.index') }}" class="nav-link">Bahan Ajar</a>
+            <a href="{{ route('pengaduan.index') }}" class="nav-link">Pengaduan</a>
             
             <div class="py-2 border-t border-gray-100 mt-2">
                 @auth

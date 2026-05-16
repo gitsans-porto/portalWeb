@@ -49,7 +49,7 @@
                         
                         @if($article->image)
                             <div class="rounded-3xl overflow-hidden mb-12 shadow-sm border border-gray-100">
-                                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="w-full h-auto">
+                                <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="w-full h-auto">
                             </div>
                         @endif
 
@@ -102,7 +102,7 @@
                                     <div class="flex items-start gap-4">
                                         <div class="w-20 h-20 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0 border border-gray-50">
                                             @if($latest->image)
-                                                <img src="{{ asset('storage/' . $latest->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                                <img src="{{ $latest->image_url }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                             @else
                                                 <div class="w-full h-full bg-red-600 flex items-center justify-center text-white/30 text-xs">SMKN 1</div>
                                             @endif

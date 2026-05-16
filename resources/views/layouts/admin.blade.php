@@ -222,6 +222,20 @@
                 </svg>
                 <span>Laporan Masalah</span>
             </a>
+            
+            <a href="{{ route('admin.subjects.index') }}" class="sidebar-link {{ request()->is('admin/subjects*') ? 'active' : '' }}">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                <span>Mata Pelajaran</span>
+            </a>
+
+            <a href="{{ route('admin.materials.index') }}" class="sidebar-link {{ request()->is('admin/materials*') ? 'active' : '' }}">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <span>Kelola Materi</span>
+            </a>
 
             {{-- Logout --}}
             <div class="absolute bottom-6 left-0 right-0 px-4">
@@ -308,6 +322,7 @@
             });
         }
     </script>
+    @stack('scripts')
 </body>
 
 </html>
