@@ -85,8 +85,12 @@
                                     <h3 style="font-size:1.25rem; font-weight:800; color:#1e293b; margin:0 0 8px; line-height:1.3;">
                                         <a href="{{ route('mading.show', $post->slug) }}" style="text-decoration:none; color:inherit;">{{ $post->title }}</a>
                                     </h3>
-                                    <div style="font-size:0.8rem; color:#64748b; margin-bottom:12px;">
-                                        Oleh <span style="font-weight:700; color:#334155;">{{ $post->author_name }}</span> &bull; {{ $post->published_at?->format('d M Y') }}
+                                    <div style="font-size:0.8rem; color:#64748b; margin-bottom:12px; display:flex; align-items:center; flex-wrap:wrap; gap:8px;">
+                                        <span>Oleh <span style="font-weight:700; color:#334155;">{{ $post->author_name }}</span> &bull; {{ $post->published_at?->format('d M Y') }}</span>
+                                        <span style="display:inline-flex; align-items:center; gap:4px; background:#f1f5f9; padding:2px 8px; border-radius:99px; font-weight:700; font-size:0.75rem; color:#475569;">
+                                            <svg style="width:12px; height:12px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                            {{ $post->views ?? 0 }}
+                                        </span>
                                     </div>
                                     <p style="font-size:0.9rem; color:#64748b; line-height:1.5; margin:0 0 16px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
                                         {{ $post->short_excerpt }}

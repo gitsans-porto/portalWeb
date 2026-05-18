@@ -131,6 +131,7 @@
             }
         }
     </style>
+    @stack('styles')
 </head>
 
 <body class="antialiased font-sans bg-gray-50">

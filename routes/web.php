@@ -26,6 +26,7 @@ Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('berita.show
 Route::get('/mading', [MadingController::class, 'index'])->name('mading.index');
 Route::get('/mading/tulis', [MadingController::class, 'create'])->name('mading.create');
 Route::post('/mading/tulis', [MadingController::class, 'store'])->name('mading.store');
+Route::post('/mading/upload-image', [MadingController::class, 'uploadImage'])->name('mading.upload-image');
 Route::get('/mading/{slug}', [MadingController::class, 'show'])->name('mading.show');
 
 // Redirect /admin to /admin/dashboard
