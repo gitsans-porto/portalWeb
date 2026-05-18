@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Subject extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['name', 'code', 'slug', 'category', 'icon', 'color', 'image', 'is_active'];
+
+    public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
+
+    public function curriculums()
+    {
+        return $this->hasMany(SubjectCurriculum::class);
+    }
+}

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 use App\Http\Controllers\MadingController;
 use App\Http\Controllers\Admin\MadingController as AdminMadingController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [PortalController::class, 'index'])->name('beranda');
 Route::get('/layanan/{slug}', [PortalController::class, 'layanan'])->name('layanan.detail');
@@ -55,10 +56,10 @@ use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    
+
     // TinyMCE Image Upload
     Route::post('/tinymce/upload', [AdminController::class, 'uploadImage'])->name('tinymce.upload');
-    
+
     // Profile Management CRUD
     Route::get('/profiles/{section}/edit', [AdminProfileController::class, 'edit'])->name('profiles.edit');
     Route::put('/profiles/{section}', [AdminProfileController::class, 'update'])->name('profiles.update');
@@ -78,6 +79,19 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/reports/{report}', [App\Http\Controllers\Admin\IssueReportController::class, 'show'])->name('reports.show');
     Route::patch('/reports/{report}/status', [App\Http\Controllers\Admin\IssueReportController::class, 'updateStatus'])->name('reports.updateStatus');
     Route::patch('/reports/{report}/feedback', [App\Http\Controllers\Admin\IssueReportController::class, 'updateFeedback'])->name('reports.updateFeedback');
+
+    // Bahan Ajar Management
+    Route::resource('subjects', App\Http\Controllers\Admin\SubjectController::class)->except(['create', 'edit', 'show']);
+    Route::resource('materials', App\Http\Controllers\Admin\MaterialController::class)->only(['index', 'store', 'destroy']);
+
+    // Jurusan (Majors) Management
+    Route::post('/majors', [App\Http\Controllers\Admin\SubjectController::class, 'storeMajor'])->name('majors.store');
+    Route::put('/majors/{major}', [App\Http\Controllers\Admin\SubjectController::class, 'updateMajor'])->name('majors.update');
+    Route::delete('/majors/{major}', [App\Http\Controllers\Admin\SubjectController::class, 'destroyMajor'])->name('majors.destroy');
+
+    // Kurikulum Mapel Management
+    Route::post('/curriculums', [App\Http\Controllers\Admin\SubjectController::class, 'storeCurriculum'])->name('curriculums.store');
+    Route::delete('/curriculums/{curriculum}', [App\Http\Controllers\Admin\SubjectController::class, 'destroyCurriculum'])->name('curriculums.destroy');
 });
 
 // Issue Report Submission
@@ -86,3 +100,18 @@ Route::post('/report-issue', [App\Http\Controllers\IssueReportController::class,
 // Pusat Pengaduan Routes
 Route::get('/pengaduan', [App\Http\Controllers\IssueReportController::class, 'index'])->name('pengaduan.index');
 Route::post('/pengaduan/track', [App\Http\Controllers\IssueReportController::class, 'track'])->name('pengaduan.track');
+
+// Bahan Ajar Routes
+use App\Http\Controllers\MaterialController;
+Route::get('/bahan-ajar', [MaterialController::class, 'index'])->name('materials.index');
+Route::get('/bahan-ajar/{subject:slug}', [MaterialController::class, 'show'])->name('materials.show');
+
+Route::get('/migrate-sekarang/{token}', function ($token) {
+    // Cek apakah token cocok dengan password rahasia Anda
+    if ($token !== 'rahasia-aman-123') {
+        abort(403, 'Akses Ditolak! Anda bukan admin.');
+    }
+
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Database berhasil di-update di server!';
+});
