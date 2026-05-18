@@ -1,6 +1,6 @@
 <?php
 $zip = new ZipArchive;
-$res = $zip->open('web.zip');
+$res = $zip->open('update.zip');
 if ($res === TRUE) {
     $zip->extractTo('./');
     $zip->close();

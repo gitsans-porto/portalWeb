@@ -9,10 +9,15 @@ class Subject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'category', 'icon', 'color', 'image'];
+    protected $fillable = ['name', 'code', 'slug', 'category', 'icon', 'color', 'image', 'is_active'];
 
     public function materials()
     {
         return $this->hasMany(Material::class);
+    }
+
+    public function curriculums()
+    {
+        return $this->hasMany(SubjectCurriculum::class);
     }
 }
