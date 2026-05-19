@@ -49,7 +49,7 @@
                         </div>
                         <div class="p-8">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="px-3 py-1 rounded-full bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-widest">
+                                <span class="px-3 py-1 rounded-full bg-red-600 text-white text-[10px] font-black uppercase tracking-widest">
                                     {{ $article->category ?? 'Umum' }}
                                 </span>
                                 <span class="text-xs text-gray-400 font-medium">

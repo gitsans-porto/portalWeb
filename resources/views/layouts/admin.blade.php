@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
 
     {{-- Vite Assets --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -128,7 +129,21 @@
             .main-content {
                 margin-left: 0;
                 padding: 24px 20px;
+        }
+
+        /* Alert Circular Progress Animation */
+        @keyframes alertCountdown {
+            from {
+                stroke-dashoffset: 0;
             }
+            to {
+                stroke-dashoffset: 82;
+            }
+        }
+        .animate-alert-countdown {
+            stroke-dasharray: 82;
+            stroke-dashoffset: 0;
+            animation: alertCountdown 3s linear forwards;
         }
     </style>
 </head>
@@ -139,7 +154,7 @@
     <aside class="admin-sidebar" id="adminSidebar">
         {{-- Logo Area --}}
         <div class="px-8 py-10 flex items-center gap-3">
-            <div class="w-12 h-12 bg-red-50 border border-red-100 rounded-xl flex items-center justify-center p-1.5 overflow-hidden shadow-sm">
+            <div class="w-12 h-12 bg-white border border-gray-200 rounded-xl flex items-center justify-center p-1.5 overflow-hidden shadow-sm">
                 <img src="{{ asset('images/LogoSMKN1LimbotoNoBG.png') }}" alt="Logo SMKN 1 Limboto" class="w-full h-full object-contain">
             </div>
             <div>
@@ -309,16 +324,22 @@
 
         {{-- Alerts --}}
         @if(session('success'))
-            <div id="successAlert" class="mb-8 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-between gap-3">
+            <div id="successAlert" class="mb-8 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-between gap-3 transition-all duration-500 ease-in-out opacity-100 transform translate-y-0">
                 <div class="flex items-center gap-3">
                     <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                     </svg>
                     <span class="text-sm font-medium">{{ session('success') }}</span>
                 </div>
-                <button type="button" onclick="document.getElementById('successAlert').remove()" class="text-emerald-500 hover:text-emerald-700 transition-colors">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <button type="button" onclick="dismissAlert('successAlert')" class="relative flex items-center justify-center w-8 h-8 rounded-full text-emerald-500 hover:text-emerald-700 transition-colors focus:outline-none">
+                    <!-- Circular Countdown SVG -->
+                    <svg class="absolute inset-0 w-full h-full -rotate-90">
+                        <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2" fill="transparent" class="opacity-20" />
+                        <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2" fill="transparent" class="animate-alert-countdown" />
+                    </svg>
+                    <!-- Close (X) Icon -->
+                    <svg class="w-4 h-4 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -329,6 +350,26 @@
     </main>
 
     <script>
+        function dismissAlert(id) {
+            const alert = document.getElementById(id);
+            if (alert) {
+                alert.classList.add('opacity-0', '-translate-y-4');
+                setTimeout(() => {
+                    alert.remove();
+                }, 500); // Wait for CSS transition to complete
+            }
+        }
+
+        // Auto-dismiss after 3 seconds (matching SVG countdown)
+        document.addEventListener('DOMContentLoaded', () => {
+            const alert = document.getElementById('successAlert');
+            if (alert) {
+                setTimeout(() => {
+                    dismissAlert('successAlert');
+                }, 3000);
+            }
+        });
+
         // Simple sidebar toggle for mobile
         const menuBtn = document.getElementById('adminMenuBtn');
         const sidebar = document.getElementById('adminSidebar');

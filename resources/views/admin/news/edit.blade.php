@@ -25,7 +25,7 @@
                 
                 {{-- Left Column: Main Info --}}
                 <div class="lg:col-span-2 space-y-8">
-                    <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm border border-gray-100">
                         <div class="flex items-center gap-3 mb-10 pb-6 border-b border-gray-50">
                             <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                             <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Konten Berita</h3>
@@ -35,14 +35,14 @@
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="title">Judul Berita</label>
                                 <input type="text" id="title" name="title" value="{{ old('title', $article->title) }}" 
-                                    class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium text-lg" 
+                                    class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium text-lg" 
                                     placeholder="Masukkan judul berita..." required>
                             </div>
 
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="content">Isi Berita</label>
                                 <textarea id="content" name="content" rows="15" 
-                                    class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" 
+                                    class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" 
                                     placeholder="Tuliskan isi berita lengkap di sini..." required>{{ old('content', $article->content) }}</textarea>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                 {{-- Right Column: Meta & Image --}}
                 <div class="space-y-8">
                     {{-- Category & Date --}}
-                    <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-lg p-8 shadow-sm border border-gray-100">
                         <div class="flex items-center gap-3 mb-8 pb-4 border-b border-gray-50">
                             <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                             <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Informasi Tambahan</h3>
@@ -61,7 +61,7 @@
                         <div class="space-y-6">
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="category">Kategori</label>
-                                <select id="category" name="category" class="w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-bold text-sm">
+                                <select id="category" name="category" class="w-full px-5 py-3 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-bold text-sm">
                                     @foreach(['Akademik', 'Pengumuman', 'Kegiatan', 'Prestasi', 'PKL', 'Umum'] as $cat)
                                         <option value="{{ $cat }}" {{ (old('category', $article->category) == $cat) ? 'selected' : '' }}>{{ $cat }}</option>
                                     @endforeach
@@ -71,13 +71,13 @@
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="published_at">Tanggal Terbit</label>
                                 <input type="datetime-local" id="published_at" name="published_at" value="{{ old('published_at', $article->published_at ? $article->published_at->format('Y-m-d\TH:i') : '') }}"
-                                    class="w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-bold text-sm">
+                                    class="w-full px-5 py-3 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-bold text-sm">
                             </div>
                         </div>
                     </div>
 
                     {{-- Featured Image --}}
-                    <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-lg p-8 shadow-sm border border-gray-100">
                         <div class="flex items-center gap-3 mb-8 pb-4 border-b border-gray-50">
                             <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                             <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Gambar Utama</h3>
@@ -85,14 +85,14 @@
 
                         <div class="space-y-6">
                             @if($article->image)
-                                <div class="w-full aspect-video rounded-2xl overflow-hidden border border-gray-100 mb-4">
+                                <div class="w-full aspect-video rounded-lg overflow-hidden border border-gray-100 mb-4">
                                     <img src="{{ $article->image_url }}" class="w-full h-full object-cover">
                                 </div>
                             @endif
 
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="image">Ganti Thumbnail</label>
-                                <div class="w-full aspect-video rounded-2xl bg-gray-50 border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400 group hover:border-red-400 transition-colors p-4 text-center">
+                                <div class="w-full aspect-video rounded-lg bg-gray-50 border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400 group hover:border-red-400 transition-colors p-4 text-center">
                                     <svg class="w-8 h-8 mb-2 group-hover:text-red-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
@@ -104,10 +104,10 @@
                     </div>
 
                     {{-- Actions --}}
-                    <button type="submit" class="w-full py-5 rounded-[1.5rem] bg-red-600 text-white font-black uppercase tracking-[0.2em] text-sm shadow-xl shadow-red-200 hover:bg-red-700 hover:-translate-y-1 transition-all">
+                    <button type="submit" class="w-full py-5 rounded-md bg-red-600 text-white font-black uppercase tracking-[0.2em] text-sm shadow-xl shadow-red-200 hover:bg-red-700 hover:-translate-y-1 transition-all">
                         Simpan Perubahan
                     </button>
-                    <a href="{{ route('admin.news.index') }}" class="block w-full py-5 rounded-[1.5rem] bg-gray-100 text-gray-400 text-center font-black uppercase tracking-[0.2em] text-sm hover:bg-gray-200 transition-all">
+                    <a href="{{ route('admin.news.index') }}" class="block w-full py-5 rounded-md bg-gray-100 text-gray-400 text-center font-black uppercase tracking-[0.2em] text-sm hover:bg-gray-200 transition-all">
                         Batalkan
                     </a>
                 </div>
