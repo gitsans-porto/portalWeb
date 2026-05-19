@@ -8,6 +8,7 @@ use App\Models\Subject;
 use App\Models\SubjectCurriculum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class SubjectController extends Controller
 {
@@ -156,11 +157,18 @@ class SubjectController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'nullable|string|max:20',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('majors', 'public');
+        }
 
         Major::create([
             'name' => $request->name,
             'code' => $request->code,
+            'image_path' => $imagePath,
         ]);
 
         return redirect()->route('admin.subjects.index', ['tab' => 'jurusan'])
@@ -172,11 +180,21 @@ class SubjectController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'nullable|string|max:20',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        $imagePath = $major->image_path;
+        if ($request->hasFile('image')) {
+            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
+            }
+            $imagePath = $request->file('image')->store('majors', 'public');
+        }
 
         $major->update([
             'name' => $request->name,
             'code' => $request->code,
+            'image_path' => $imagePath,
         ]);
 
         return redirect()->route('admin.subjects.index', ['tab' => 'jurusan'])
@@ -185,6 +203,10 @@ class SubjectController extends Controller
 
     public function destroyMajor(Major $major)
     {
+        if ($major->image_path && Storage::disk('public')->exists($major->image_path)) {
+            Storage::disk('public')->delete($major->image_path);
+        }
+        
         $major->delete();
 
         return redirect()->route('admin.subjects.index', ['tab' => 'jurusan'])

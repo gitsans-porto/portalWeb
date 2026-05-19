@@ -103,7 +103,7 @@ Route::get('/pengaduan/status/{code}', [App\Http\Controllers\IssueReportControll
 // Bahan Ajar Routes
 use App\Http\Controllers\MaterialController;
 Route::get('/bahan-ajar', [MaterialController::class, 'index'])->name('materials.index');
-Route::get('/bahan-ajar/{subject:slug}', [MaterialController::class, 'show'])->name('materials.show');
+Route::get('/bahan-ajar/{major}', [MaterialController::class, 'show'])->name('materials.show');
 
 Route::get('/migrate-sekarang/{token}', function ($token) {
     // Cek apakah token cocok dengan password rahasia Anda
