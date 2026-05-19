@@ -63,7 +63,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <div class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Nama Lengkap</div>
-                            <div class="font-bold text-gray-900 text-lg">{{ $report->full_name }}</div>
+                            <div class="font-bold text-gray-900 text-lg">{{ $report->full_name ?: 'Anonymous' }}</div>
                         </div>
                         <div>
                             <div class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Peran</div>
@@ -72,7 +72,20 @@
                         <div>
                             <div class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Email Pelapor</div>
                             @if($report->email)
-                                <a href="mailto:{{ $report->email }}" class="font-bold text-blue-600 hover:underline">{{ $report->email }}</a>
+                                @php
+                                    $displayEmail = $report->email;
+                                    $isAnon = empty($report->full_name);
+                                    if ($isAnon) {
+                                        $parts = explode('@', $report->email);
+                                        $displayEmail = count($parts) == 2 ? '********@' . $parts[1] : '********';
+                                    }
+                                @endphp
+                                @if($isAnon)
+                                    <span class="font-bold text-gray-600">{{ $displayEmail }}</span>
+                                    <span class="ml-2 text-[10px] px-2 py-0.5 bg-gray-100 text-gray-500 rounded-full font-bold">Anonim</span>
+                                @else
+                                    <a href="mailto:{{ $report->email }}" class="font-bold text-blue-600 hover:underline">{{ $report->email }}</a>
+                                @endif
                                 <span class="ml-2 text-[10px] px-2 py-0.5 bg-green-100 text-green-600 rounded-full font-bold">✉ Notifikasi Aktif</span>
                             @else
                                 <span class="text-gray-400 italic text-sm">Tidak disertakan</span>

@@ -86,7 +86,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Nama Lengkap</label>
-                            <input type="text" name="full_name" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 outline-none transition-all text-gray-700 font-medium" placeholder="Masukkan nama lengkap Anda" required>
+                            <input type="text" name="full_name" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 outline-none transition-all text-gray-700 font-medium" placeholder="Masukkan nama lengkap Anda">
+                            <p class="text-xs text-gray-400 mt-2 pl-1">nama bisa dikosongkan dan laporan anda tetap dikirim secara anonim.</p>
                         </div>
                         <div>
                             <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Pilih Role</label>
@@ -115,7 +116,7 @@
                         </div>
                         <p class="text-xs text-gray-400 mt-2 pl-1">
                             Jika diisi: Anda akan mendapat email konfirmasi saat laporan diterima, dan notifikasi saat admin mengubah status atau memberikan tanggapan.<br>
-                            Jika dikosongkan: laporan tetap dikirim secara <strong>anonim</strong> tanpa notifikasi apapun.
+                            Jika dikosongkan: maka anda tidak akan dapat notifikasi feedback apapun dari admin
                         </p>
                     </div>
 

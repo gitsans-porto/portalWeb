@@ -18,7 +18,7 @@ class IssueReportController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'full_name'   => 'required|string|max:255',
+            'full_name'   => 'nullable|string|max:255',
             'email'       => 'nullable|email|max:255',   // opsional — untuk anonim
             'role'        => 'required|string',
             'type'        => 'required|string',
