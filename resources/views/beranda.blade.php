@@ -79,7 +79,7 @@
     </section>
 
 
-    <section class="py-20 lg:py-28 bg-white relative overflow-hidden" id="profil">
+    <section class="pt-20 lg:pt-28 pb-10 lg:pb-14 bg-white relative overflow-hidden" id="profil">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-[#F8F9FA] rounded-[2rem] border border-gray-100 overflow-hidden shadow-sm reveal">
                 <div class="grid grid-cols-1 lg:grid-cols-2">
@@ -241,8 +241,40 @@
         </div>
     </section>
 
+    {{-- ======== STATISTIK ======== --}}
+    <section class="pb-16 pt-4 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-3 gap-6 lg:gap-10 reveal">
+
+                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-primary leading-none mb-2">{{ $settings['siswa_aktif'] ?? '1200+' }}</div>
+                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['siswa_aktif_label'] ?? 'Siswa Aktif' }}</div>
+                </div>
+
+                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    </div>
+                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-gray-900 leading-none mb-2">{{ $settings['tenaga_kependidikan'] ?? '85+' }}</div>
+                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['tenaga_kependidikan_label'] ?? 'Tenaga Kependidikan' }}</div>
+                </div>
+
+                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                    </div>
+                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-gray-900 leading-none mb-2">{{ $settings['total_jurusan'] ?? '9' }}</div>
+                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['total_jurusan_label'] ?? 'Total Jurusan' }}</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
     {{-- ======== BERITA & KEGIATAN ======== --}}
-    <section class="py-20 lg:py-28 bg-white" id="berita">
+    <section class="pt-10 lg:pt-14 pb-10 lg:pb-14 bg-white" id="berita">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 reveal">
@@ -309,7 +341,7 @@
     </section>
 
     {{-- ======== GALERI KEGIATAN ======== --}}
-    <section class="py-20 lg:py-28 bg-gray-50" id="galeri">
+    <section class="pt-10 lg:pt-14 pb-20 lg:pb-28 bg-gray-50" id="galeri">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 reveal">
                 <div>
@@ -342,38 +374,7 @@
         </div>
     </section>
 
-    {{-- ======== STATISTIK ======== --}}
-    <section class="py-16 bg-white">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-3 gap-6 lg:gap-10 reveal">
 
-                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-                    <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center mb-4">
-                        <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                    </div>
-                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-primary leading-none mb-2">{{ $settings['siswa_aktif'] ?? '1200+' }}</div>
-                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['siswa_aktif_label'] ?? 'Siswa Aktif' }}</div>
-                </div>
-
-                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-                    <div class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center mb-4">
-                        <svg class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                    </div>
-                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-gray-900 leading-none mb-2">{{ $settings['tenaga_kependidikan'] ?? '85+' }}</div>
-                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['tenaga_kependidikan_label'] ?? 'Tenaga Kependidikan' }}</div>
-                </div>
-
-                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-                    <div class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center mb-4">
-                        <svg class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                    </div>
-                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-gray-900 leading-none mb-2">{{ $settings['total_jurusan'] ?? '9' }}</div>
-                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['total_jurusan_label'] ?? 'Total Jurusan' }}</div>
-                </div>
-
-            </div>
-        </div>
-    </section>
 
     {{-- ======== CTA SECTION ======== --}}
     <section class="py-20 lg:py-24 relative overflow-hidden">
