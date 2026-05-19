@@ -1,7 +1,7 @@
 @component('mail::message')
 # Admin Telah Menanggapi Laporan Anda
 
-Halo, **{{ $report->full_name }}**!
+Halo, **{{ $report->full_name ?: 'Anonymous' }}**!
 
 Admin telah memberikan tanggapan atas laporan Anda mengenai **{{ $report->category }}**.
 

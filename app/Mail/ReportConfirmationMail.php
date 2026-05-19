@@ -18,7 +18,7 @@ class ReportConfirmationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '✅ Laporan Anda Telah Diterima — ' . $this->report->tracking_code,
+            subject: '✅ Laporan Anda Telah Diterima',
         );
     }
 

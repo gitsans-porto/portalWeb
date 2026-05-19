@@ -18,7 +18,7 @@ class ReportRepliedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '💬 Admin Telah Menanggapi Laporan Anda — ' . $this->report->tracking_code,
+            subject: '💬 Admin Telah Menanggapi Laporan Anda',
         );
     }
 

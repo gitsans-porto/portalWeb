@@ -24,7 +24,7 @@ class ReportStatusChangedMail extends Mailable
         };
 
         return new Envelope(
-            subject: $statusLabel . ' — ' . $this->report->tracking_code,
+            subject: $statusLabel,
         );
     }
 

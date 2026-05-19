@@ -29,7 +29,7 @@
                         @forelse($reports as $report)
                             <tr class="hover:bg-gray-50/50 transition-colors group">
                                 <td class="px-8 py-5">
-                                    <div class="font-bold text-gray-900 mb-0.5">{{ $report->full_name }}</div>
+                                    <div class="font-bold text-gray-900 mb-0.5">{{ $report->full_name ?: 'Anonymous' }}</div>
                                     <div class="text-[10px] font-black uppercase tracking-widest text-gray-400">
                                         {{ $report->role }} {{ $report->class_nip ? '— ' . $report->class_nip : '' }}
                                     </div>
