@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Tata Cara - ' . $service->name)
+@section('title', 'Edit Layanan & Prosedur - ' . $service->name)
 
 @section('content')
 <div class="p-6">
@@ -10,7 +10,7 @@
     </div>
 
     @if($errors->any())
-        <div class="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl flex items-center gap-3">
+        <div class="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-lg flex items-center gap-3">
             <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
             </svg>
@@ -24,39 +24,105 @@
 
         <div class="space-y-6">
             {{-- Service Info --}}
-            <div class="bg-gray-50 border border-gray-100 rounded-3xl p-6">
+            <div class="bg-gray-50 border border-gray-100 rounded-lg p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Nama Layanan</label>
-                        <input type="text" value="{{ $service->name }}" disabled class="w-full px-4 py-3 bg-white border border-gray-100 rounded-xl text-gray-400 font-medium">
+                        <input type="text" value="{{ $service->name }}" disabled class="w-full px-4 py-3 bg-white border border-gray-100 rounded-md text-gray-400 font-medium">
                     </div>
                     <div>
                         <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Slug (Internal URL)</label>
-                        <input type="text" value="{{ $service->slug }}" disabled class="w-full px-4 py-3 bg-white border border-gray-100 rounded-xl text-gray-400 font-medium font-mono">
+                        <input type="text" value="{{ $service->slug }}" disabled class="w-full px-4 py-3 bg-white border border-gray-100 rounded-md text-gray-400 font-medium font-mono">
                     </div>
                 </div>
                 <div class="mt-6">
                     <label class="block text-xs font-black text-gray-900 uppercase tracking-widest mb-2">Link Akses Layanan</label>
-                    <input type="url" name="url" value="{{ old('url', $service->url) }}" placeholder="https://..." class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 font-medium focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" required>
+                    <input type="url" name="url" value="{{ old('url', $service->url) }}" placeholder="https://..." class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md text-gray-900 font-medium focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" required>
                     <p class="text-xs text-gray-500 mt-2">URL tujuan saat tombol "Akses Layanan" ditekan.</p>
                 </div>
             </div>
 
             {{-- Tabs Navigation --}}
             <div class="flex gap-2 mb-2 border-b border-gray-200">
-                <button type="button" onclick="switchAdminTab('sop')" id="btn-tab-sop" class="px-6 py-3 font-bold text-sm rounded-t-xl border-b-2 border-red-600 text-red-600 bg-white shadow-sm transition-all focus:outline-none">
+                <button type="button" onclick="switchAdminTab('info')" id="btn-tab-info" class="px-6 py-3 font-bold text-sm rounded-t-md border-b-2 border-red-600 text-red-600 bg-white shadow-sm transition-all focus:outline-none">
+                    Tentang & Fitur Layanan
+                </button>
+                <button type="button" onclick="switchAdminTab('sop')" id="btn-tab-sop" class="px-6 py-3 font-bold text-sm rounded-t-md border-b-2 border-transparent text-gray-500 hover:text-gray-900 transition-all focus:outline-none">
                     Tata Cara Prosedur (SOP)
                 </button>
-                <button type="button" onclick="switchAdminTab('faq')" id="btn-tab-faq" class="px-6 py-3 font-bold text-sm rounded-t-xl border-b-2 border-transparent text-gray-500 hover:text-gray-900 transition-all focus:outline-none">
+                <button type="button" onclick="switchAdminTab('faq')" id="btn-tab-faq" class="px-6 py-3 font-bold text-sm rounded-t-md border-b-2 border-transparent text-gray-500 hover:text-gray-900 transition-all focus:outline-none">
                     FAQ (Pertanyaan Umum)
                 </button>
             </div>
 
+            {{-- Info Editor (Tentang & Fitur) --}}
+            <div id="content-tab-info" class="bg-white border border-gray-200 rounded-lg p-8 space-y-10">
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 border-l-4 border-red-600 pl-4 mb-6">Tentang Layanan (Deskripsi Panjang)</h3>
+                    <div class="flex flex-col gap-3">
+                        <textarea id="long_description" name="long_description" rows="6" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" placeholder="Tulis deskripsi lengkap layanan di sini..." required>{{ old('long_description', $service->long_description) }}</textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-8 border-b border-gray-50 pb-4">
+                        <h3 class="text-lg font-bold text-gray-900 border-l-4 border-red-600 pl-4">Fitur Layanan ("Apa saja yang bisa dilakukan?")</h3>
+                        <button type="button" id="add-feature" class="px-4 py-2 bg-red-600 text-white rounded-md text-xs font-bold hover:bg-red-700 transition-all flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            Tambah Fitur
+                        </button>
+                    </div>
+
+                    <div id="features-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        @php
+                            $featuresData = old('features', $service->features ?? []);
+                        @endphp
+                        @foreach($featuresData as $index => $feature)
+                            <div class="feature-item bg-gray-50 rounded-lg p-6 border border-gray-100 relative shadow-sm" data-index="{{ $index }}">
+                                <div class="flex items-start justify-between gap-4 mb-4">
+                                    <div class="flex items-center gap-3">
+                                        <span class="feature-number w-6 h-6 rounded-md bg-red-600 text-white flex items-center justify-center text-xs font-bold">{{ $index + 1 }}</span>
+                                        <h5 class="text-sm font-bold text-gray-900">Fitur #<span class="feature-index-num">{{ $index + 1 }}</span></h5>
+                                    </div>
+                                    <button type="button" class="remove-feature text-gray-400 hover:text-red-500 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Judul Fitur</label>
+                                            <input type="text" name="features[{{ $index }}][title]" value="{{ $feature['title'] ?? '' }}" placeholder="Contoh: Input Nilai Digital" class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900 text-sm" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Icon (Heroicon name)</label>
+                                            <input type="text" name="features[{{ $index }}][icon]" value="{{ $feature['icon'] ?? 'chart-bar' }}" placeholder="Contoh: chart-bar, book, users" class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-mono text-gray-900 text-sm" required>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Deskripsi Fitur</label>
+                                        <textarea name="features[{{ $index }}][desc]" rows="3" placeholder="Jelaskan secara singkat apa yang bisa dilakukan..." class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed" required>{{ $feature['desc'] ?? '' }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div id="empty-features" class="py-12 border-2 border-dashed border-gray-100 rounded-lg text-center col-span-2 {{ count($featuresData) > 0 ? 'hidden' : '' }}">
+                        <p class="text-gray-400 italic">Belum ada fitur yang ditambahkan.</p>
+                    </div>
+                </div>
+            </div>
+
             {{-- SOP Editor --}}
-            <div id="content-tab-sop" class="bg-white border border-gray-200 rounded-3xl p-8">
+            <div id="content-tab-sop" class="bg-white border border-gray-200 rounded-lg p-8" style="display: none;">
                 <div class="flex items-center justify-between mb-8">
                     <h3 class="text-lg font-bold text-gray-900 border-l-4 border-red-600 pl-4">Langkah-langkah Prosedur</h3>
-                    <button type="button" id="add-step" class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition-all flex items-center gap-2">
+                    <button type="button" id="add-step" class="px-4 py-2 bg-red-600 text-white rounded-md text-xs font-bold hover:bg-red-700 transition-all flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
@@ -70,10 +136,10 @@
                     @endphp
                     
                     @foreach($sopData as $index => $step)
-                        <div class="sop-step group bg-gray-50 rounded-2xl p-6 border border-gray-100 relative" data-index="{{ $index }}">
+                        <div class="sop-step group bg-gray-50 rounded-lg p-6 border border-gray-100 relative" data-index="{{ $index }}">
                             <div class="flex items-start justify-between gap-4 mb-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="step-number w-8 h-8 bg-red-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                                    <div class="step-number w-8 h-8 bg-red-600 text-white rounded-md flex items-center justify-center font-bold text-sm">
                                         {{ $index + 1 }}
                                     </div>
                                     <h4 class="font-bold text-gray-900">Langkah <span class="index-num">{{ $index + 1 }}</span></h4>
@@ -85,16 +151,16 @@
                                 </button>
                             </div>
                             <div class="grid grid-cols-1 gap-4">
-                                <input type="text" name="sop[{{ $index }}][title]" value="{{ $step['title'] ?? '' }}" placeholder="Judul Langkah (Contoh: Login ke Sistem)" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
+                                <input type="text" name="sop[{{ $index }}][title]" value="{{ $step['title'] ?? '' }}" placeholder="Judul Langkah (Contoh: Login ke Sistem)" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
                                 
                                 @php
                                     $hasSub = isset($step['sub_chapters']) && count($step['sub_chapters']) > 0;
                                 @endphp
-                                <div class="quill-container bg-white rounded-xl main-quill-container {{ $hasSub ? 'hidden' : '' }}">
+                                <div class="quill-container bg-white rounded-md main-quill-container {{ $hasSub ? 'hidden' : '' }}">
                                     <div class="quill-editor" style="height: 200px;">{!! $step['desc'] ?? '' !!}</div>
                                     <textarea name="sop[{{ $index }}][desc]" class="hidden-quill-input" style="display:none;"></textarea>
                                 </div>
-                                <div class="sub-chapter-notice text-sm text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-100 flex items-start gap-2 {{ $hasSub ? '' : 'hidden' }}">
+                                <div class="sub-chapter-notice text-sm text-amber-600 bg-amber-50 p-3 rounded-md border border-amber-100 flex items-start gap-2 {{ $hasSub ? '' : 'hidden' }}">
                                     <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                     <span>Pengeditan deskripsi utama dinonaktifkan karena bab ini memiliki sub-bab. Halaman publik hanya akan menampilkan sub-bab.</span>
                                 </div>
@@ -103,13 +169,13 @@
                                 <div class="mt-4 pl-4 md:pl-8 border-l-2 border-red-100">
                                     <div class="flex items-center justify-between mb-3">
                                         <h5 class="text-xs font-black uppercase text-gray-500 tracking-widest">Sub-Bab (Opsional)</h5>
-                                        <button type="button" class="add-sub-step text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                                        <button type="button" class="add-sub-step text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-md transition-colors flex items-center gap-1">
                                             + Tambah Sub-Bab
                                         </button>
                                     </div>
                                     <div class="sub-chapters-container space-y-4">
                                         @foreach($step['sub_chapters'] ?? [] as $subIndex => $subStep)
-                                            <div class="sub-step bg-white rounded-xl p-5 border border-gray-200 relative shadow-sm" data-subindex="{{ $subIndex }}">
+                                            <div class="sub-step bg-white rounded-md p-5 border border-gray-200 relative shadow-sm" data-subindex="{{ $subIndex }}">
                                                 <div class="flex justify-between items-center mb-4">
                                                     <div class="flex items-center gap-2">
                                                         <div class="w-6 h-6 bg-red-100 text-red-600 rounded-md flex items-center justify-center font-bold text-xs">{{ $index + 1 }}.<span class="sub-index-num">{{ $subIndex + 1 }}</span></div>
@@ -120,8 +186,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="grid grid-cols-1 gap-3">
-                                                    <input type="text" name="sop[{{ $index }}][sub_chapters][{{ $subIndex }}][title]" value="{{ $subStep['title'] ?? '' }}" placeholder="Judul Sub-Bab (Contoh: Tahap 1)" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 outline-none transition-all font-semibold text-gray-800 text-sm" required>
-                                                    <div class="quill-container bg-white rounded-lg">
+                                                    <input type="text" name="sop[{{ $index }}][sub_chapters][{{ $subIndex }}][title]" value="{{ $subStep['title'] ?? '' }}" placeholder="Judul Sub-Bab (Contoh: Tahap 1)" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-semibold text-gray-800 text-sm" required>
+                                                    <div class="quill-container bg-white rounded-md">
                                                         <div class="quill-editor" style="height: 150px;">{!! $subStep['desc'] ?? '' !!}</div>
                                                         <textarea name="sop[{{ $index }}][sub_chapters][{{ $subIndex }}][desc]" class="hidden-quill-input" style="display:none;"></textarea>
                                                     </div>
@@ -136,17 +202,17 @@
                 </div>
 
                 @if(empty($sopData) || count($sopData) == 0)
-                    <div id="empty-sop" class="py-12 border-2 border-dashed border-gray-100 rounded-[2rem] text-center">
+                    <div id="empty-sop" class="py-12 border-2 border-dashed border-gray-100 rounded-lg text-center">
                         <p class="text-gray-400 italic">Belum ada langkah yang ditambahkan.</p>
                     </div>
                 @endif
             </div>
 
             {{-- FAQ Editor --}}
-            <div id="content-tab-faq" class="bg-white border border-gray-200 rounded-3xl p-8" style="display: none;">
+            <div id="content-tab-faq" class="bg-white border border-gray-200 rounded-lg p-8" style="display: none;">
                 <div class="flex items-center justify-between mb-8">
                     <h3 class="text-lg font-bold text-gray-900 border-l-4 border-red-600 pl-4">FAQ (Pertanyaan Umum)</h3>
-                    <button type="button" id="add-faq" class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition-all flex items-center gap-2">
+                    <button type="button" id="add-faq" class="px-4 py-2 bg-red-600 text-white rounded-md text-xs font-bold hover:bg-red-700 transition-all flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
@@ -183,10 +249,10 @@
                     @endphp
                     
                     @foreach($faqData as $index => $item)
-                        <div class="faq-item-edit group bg-gray-50 rounded-2xl p-6 border border-gray-100 relative" data-index="{{ $index }}">
+                        <div class="faq-item-edit group bg-gray-50 rounded-lg p-6 border border-gray-100 relative" data-index="{{ $index }}">
                             <div class="flex items-start justify-between gap-4 mb-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="faq-number w-8 h-8 bg-red-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                                    <div class="faq-number w-8 h-8 bg-red-600 text-white rounded-md flex items-center justify-center font-bold text-sm">
                                         {{ $index + 1 }}
                                     </div>
                                     <h4 class="font-bold text-gray-900">Pertanyaan <span class="faq-index-num">{{ $index + 1 }}</span></h4>
@@ -198,22 +264,22 @@
                                 </button>
                             </div>
                             <div class="grid grid-cols-1 gap-4">
-                                <input type="text" name="faq[{{ $index }}][q]" value="{{ $item['q'] ?? '' }}" placeholder="Pertanyaan (Contoh: Siapa yang bisa akses layanan ini?)" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
-                                <textarea name="faq[{{ $index }}][a]" rows="3" placeholder="Jawaban..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed" required>{{ $item['a'] ?? '' }}</textarea>
+                                <input type="text" name="faq[{{ $index }}][q]" value="{{ $item['q'] ?? '' }}" placeholder="Pertanyaan (Contoh: Siapa yang bisa akses layanan ini?)" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
+                                <textarea name="faq[{{ $index }}][a]" rows="3" placeholder="Jawaban..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed" required>{{ $item['a'] ?? '' }}</textarea>
                             </div>
                         </div>
                     @endforeach
                 </div>
 
                 @if(count($faqData) == 0)
-                    <div id="empty-faq" class="py-12 border-2 border-dashed border-gray-100 rounded-[2rem] text-center">
+                    <div id="empty-faq" class="py-12 border-2 border-dashed border-gray-100 rounded-lg text-center">
                         <p class="text-gray-400 italic">Belum ada FAQ yang ditambahkan.</p>
                     </div>
                 @endif
             </div>
 
             <div class="flex justify-end pt-4">
-                <button type="submit" class="px-8 py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 shadow-lg shadow-red-600/20 transition-all flex items-center gap-3">
+                <button type="submit" class="px-8 py-4 bg-red-600 text-white rounded-md font-bold hover:bg-red-700 shadow-lg shadow-red-600/20 transition-all flex items-center gap-3">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
@@ -224,11 +290,43 @@
     </form>
 </div>
 
-<template id="sop-template">
-    <div class="sop-step group bg-gray-50 rounded-2xl p-6 border border-gray-100 relative" data-index="__INDEX__">
+<template id="feature-template">
+    <div class="feature-item bg-gray-50 rounded-lg p-6 border border-gray-100 relative shadow-sm" data-index="__INDEX__">
         <div class="flex items-start justify-between gap-4 mb-4">
             <div class="flex items-center gap-3">
-                <div class="step-number w-8 h-8 bg-red-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                <span class="feature-number w-6 h-6 rounded-md bg-red-600 text-white flex items-center justify-center text-xs font-bold">__NUM__</span>
+                <h5 class="text-sm font-bold text-gray-900">Fitur #<span class="feature-index-num">__NUM__</span></h5>
+            </div>
+            <button type="button" class="remove-feature text-gray-400 hover:text-red-500 transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </button>
+        </div>
+        <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Judul Fitur</label>
+                    <input type="text" name="features[__INDEX__][title]" placeholder="Contoh: Input Nilai Digital" class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900 text-sm" required>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Icon (Heroicon name)</label>
+                    <input type="text" name="features[__INDEX__][icon]" placeholder="Contoh: chart-bar, book, users" class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-mono text-gray-900 text-sm" required>
+                </div>
+            </div>
+            <div>
+                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Deskripsi Fitur</label>
+                <textarea name="features[__INDEX__][desc]" rows="3" placeholder="Jelaskan secara singkat apa yang bisa dilakukan..." class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed" required></textarea>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="sop-template">
+    <div class="sop-step group bg-gray-50 rounded-lg p-6 border border-gray-100 relative" data-index="__INDEX__">
+        <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="flex items-center gap-3">
+                <div class="step-number w-8 h-8 bg-red-600 text-white rounded-md flex items-center justify-center font-bold text-sm">
                     __NUM__
                 </div>
                 <h4 class="font-bold text-gray-900">Langkah <span class="index-num">__NUM__</span></h4>
@@ -240,13 +338,13 @@
             </button>
         </div>
         <div class="grid grid-cols-1 gap-4">
-            <input type="text" name="sop[__INDEX__][title]" placeholder="Judul Langkah" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
+            <input type="text" name="sop[__INDEX__][title]" placeholder="Judul Langkah" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
             
-            <div class="quill-container bg-white rounded-xl main-quill-container">
+            <div class="quill-container bg-white rounded-md main-quill-container">
                 <div class="quill-editor" style="height: 200px;"></div>
                 <textarea name="sop[__INDEX__][desc]" class="hidden-quill-input" style="display:none;"></textarea>
             </div>
-            <div class="sub-chapter-notice text-sm text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-100 flex items-start gap-2 hidden">
+            <div class="sub-chapter-notice text-sm text-amber-600 bg-amber-50 p-3 rounded-md border border-amber-100 flex items-start gap-2 hidden">
                 <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>Pengeditan deskripsi utama dinonaktifkan karena bab ini memiliki sub-bab. Halaman publik hanya akan menampilkan sub-bab.</span>
             </div>
@@ -255,7 +353,7 @@
             <div class="mt-4 pl-4 md:pl-8 border-l-2 border-red-100">
                 <div class="flex items-center justify-between mb-3">
                     <h5 class="text-xs font-black uppercase text-gray-500 tracking-widest">Sub-Bab (Opsional)</h5>
-                    <button type="button" class="add-sub-step text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                    <button type="button" class="add-sub-step text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-md transition-colors flex items-center gap-1">
                         + Tambah Sub-Bab
                     </button>
                 </div>
@@ -266,7 +364,7 @@
 </template>
 
 <template id="sub-sop-template">
-    <div class="sub-step bg-white rounded-xl p-5 border border-gray-200 relative shadow-sm" data-subindex="__SUBINDEX__">
+    <div class="sub-step bg-white rounded-md p-5 border border-gray-200 relative shadow-sm" data-subindex="__SUBINDEX__">
         <div class="flex justify-between items-center mb-4">
             <div class="flex items-center gap-2">
                 <div class="w-6 h-6 bg-red-100 text-red-600 rounded-md flex items-center justify-center font-bold text-xs">__PINDEX__.<span class="sub-index-num">__NUM__</span></div>
@@ -277,8 +375,8 @@
             </button>
         </div>
         <div class="grid grid-cols-1 gap-3">
-            <input type="text" name="sop[__INDEX__][sub_chapters][__SUBINDEX__][title]" placeholder="Judul Sub-Bab (Contoh: Tahap 1)" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 outline-none transition-all font-semibold text-gray-800 text-sm" required>
-            <div class="quill-container bg-white rounded-lg">
+            <input type="text" name="sop[__INDEX__][sub_chapters][__SUBINDEX__][title]" placeholder="Judul Sub-Bab (Contoh: Tahap 1)" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-semibold text-gray-800 text-sm" required>
+            <div class="quill-container bg-white rounded-md">
                 <div class="quill-editor" style="height: 150px;"></div>
                 <textarea name="sop[__INDEX__][sub_chapters][__SUBINDEX__][desc]" class="hidden-quill-input" style="display:none;"></textarea>
             </div>
@@ -287,10 +385,10 @@
 </template>
 
 <template id="faq-template">
-    <div class="faq-item-edit group bg-gray-50 rounded-2xl p-6 border border-gray-100 relative" data-index="__INDEX__">
+    <div class="faq-item-edit group bg-gray-50 rounded-lg p-6 border border-gray-100 relative" data-index="__INDEX__">
         <div class="flex items-start justify-between gap-4 mb-4">
             <div class="flex items-center gap-3">
-                <div class="faq-number w-8 h-8 bg-red-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                <div class="faq-number w-8 h-8 bg-red-600 text-white rounded-md flex items-center justify-center font-bold text-sm">
                     __NUM__
                 </div>
                 <h4 class="font-bold text-gray-900">Pertanyaan <span class="faq-index-num">__NUM__</span></h4>
@@ -302,8 +400,8 @@
             </button>
         </div>
         <div class="grid grid-cols-1 gap-4">
-            <input type="text" name="faq[__INDEX__][q]" placeholder="Pertanyaan" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
-            <textarea name="faq[__INDEX__][a]" rows="3" placeholder="Jawaban..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed" required></textarea>
+            <input type="text" name="faq[__INDEX__][q]" placeholder="Pertanyaan" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
+            <textarea name="faq[__INDEX__][a]" rows="3" placeholder="Jawaban..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed" required></textarea>
         </div>
     </div>
 </template>
@@ -313,14 +411,14 @@
 <script src="https://cdn.jsdelivr.net/npm/quill-image-resize-module@3.0.0/image-resize.min.js"></script>
 <style>
     .ql-toolbar.ql-snow {
-        border-top-left-radius: 0.75rem;
-        border-top-right-radius: 0.75rem;
+        border-top-left-radius: 0.375rem;
+        border-top-right-radius: 0.375rem;
         border-color: #e5e7eb;
         background-color: #f9fafb;
     }
     .ql-container.ql-snow {
-        border-bottom-left-radius: 0.75rem;
-        border-bottom-right-radius: 0.75rem;
+        border-bottom-left-radius: 0.375rem;
+        border-bottom-right-radius: 0.375rem;
         border-color: #e5e7eb;
     }
     .ql-editor {
@@ -333,25 +431,43 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     window.switchAdminTab = function(tabName) {
+        const tabInfo = document.getElementById('content-tab-info');
         const tabSop = document.getElementById('content-tab-sop');
         const tabFaq = document.getElementById('content-tab-faq');
+        
+        const btnInfo = document.getElementById('btn-tab-info');
         const btnSop = document.getElementById('btn-tab-sop');
         const btnFaq = document.getElementById('btn-tab-faq');
 
-        if (tabName === 'sop') {
-            tabSop.style.display = 'block';
-            tabFaq.style.display = 'none';
-            btnSop.classList.add('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
-            btnSop.classList.remove('border-transparent', 'text-gray-500');
-            btnFaq.classList.remove('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
-            btnFaq.classList.add('border-transparent', 'text-gray-500');
-        } else {
-            tabFaq.style.display = 'block';
-            tabSop.style.display = 'none';
-            btnFaq.classList.add('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
-            btnFaq.classList.remove('border-transparent', 'text-gray-500');
-            btnSop.classList.remove('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
-            btnSop.classList.add('border-transparent', 'text-gray-500');
+        if (tabInfo) tabInfo.style.display = 'none';
+        if (tabSop) tabSop.style.display = 'none';
+        if (tabFaq) tabFaq.style.display = 'none';
+
+        [btnInfo, btnSop, btnFaq].forEach(btn => {
+            if (btn) {
+                btn.classList.remove('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
+                btn.classList.add('border-transparent', 'text-gray-500');
+            }
+        });
+
+        if (tabName === 'info') {
+            if (tabInfo) tabInfo.style.display = 'block';
+            if (btnInfo) {
+                btnInfo.classList.add('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
+                btnInfo.classList.remove('border-transparent', 'text-gray-500');
+            }
+        } else if (tabName === 'sop') {
+            if (tabSop) tabSop.style.display = 'block';
+            if (btnSop) {
+                btnSop.classList.add('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
+                btnSop.classList.remove('border-transparent', 'text-gray-500');
+            }
+        } else if (tabName === 'faq') {
+            if (tabFaq) tabFaq.style.display = 'block';
+            if (btnFaq) {
+                btnFaq.classList.add('border-red-600', 'text-red-600', 'bg-white', 'shadow-sm');
+                btnFaq.classList.remove('border-transparent', 'text-gray-500');
+            }
         }
     };
     
@@ -498,6 +614,59 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Features logic
+    const featuresContainer = document.getElementById('features-container');
+    const addFeatureButton = document.getElementById('add-feature');
+    const featureTemplate = document.getElementById('feature-template').innerHTML;
+    const emptyFeatureMsg = document.getElementById('empty-features');
+
+    function updateFeatureNumbers() {
+        const items = featuresContainer.querySelectorAll('.feature-item');
+        items.forEach((item, index) => {
+            const num = index + 1;
+            item.querySelector('.feature-number').textContent = num;
+            item.querySelector('.feature-index-num').textContent = num;
+            
+            // Update input/textarea names
+            const inputs = item.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                const name = input.getAttribute('name');
+                if (name) {
+                    input.setAttribute('name', name.replace(/features\[\d+\]/, `features[${index}]`));
+                }
+            });
+        });
+
+        if (items.length > 0 && emptyFeatureMsg) {
+            emptyFeatureMsg.classList.add('hidden');
+        } else if (emptyFeatureMsg) {
+            emptyFeatureMsg.classList.remove('hidden');
+        }
+    }
+
+    if (addFeatureButton) {
+        addFeatureButton.addEventListener('click', function() {
+            const index = featuresContainer.querySelectorAll('.feature-item').length;
+            const html = featureTemplate
+                .replace(/__INDEX__/g, index)
+                .replace(/__NUM__/g, index + 1);
+            
+            const div = document.createElement('div');
+            div.innerHTML = html;
+            featuresContainer.appendChild(div.firstElementChild);
+            updateFeatureNumbers();
+        });
+    }
+
+    if (featuresContainer) {
+        featuresContainer.addEventListener('click', function(e) {
+            if (e.target.closest('.remove-feature')) {
+                e.target.closest('.feature-item').remove();
+                updateFeatureNumbers();
+            }
+        });
+    }
+
     // SOP logic
     const container = document.getElementById('sop-container');
     const addButton = document.getElementById('add-step');
@@ -551,64 +720,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    addButton.addEventListener('click', function() {
-        const index = container.querySelectorAll('.sop-step').length;
-        const html = template
-            .replace(/__INDEX__/g, index)
-            .replace(/__NUM__/g, index + 1);
-        
-        const div = document.createElement('div');
-        div.innerHTML = html;
-        container.appendChild(div.firstElementChild);
-        updateNumbers();
-        
-        // Inisialisasi Quill untuk elemen yang baru ditambahkan
-        const newEditor = container.lastElementChild.querySelector('.quill-editor');
-        if (newEditor) {
-            const quill = new Quill(newEditor, quillOptions);
-            quillInstances.push({
-                quill: quill,
-                container: newEditor.closest('.quill-container')
-            });
-        }
-    });
-
-    container.addEventListener('click', function(e) {
-        // Remove Main Chapter
-        if (e.target.closest('.remove-step')) {
-            const stepEl = e.target.closest('.sop-step');
-            // Remove all quills in this step from quillInstances array
-            const editorEls = stepEl.querySelectorAll('.quill-editor');
-            editorEls.forEach(editorEl => {
-                const qIndex = quillInstances.findIndex(i => i.container.contains(editorEl));
-                if(qIndex > -1) {
-                    quillInstances.splice(qIndex, 1);
-                }
-            });
-            stepEl.remove();
-            updateNumbers();
-        }
-
-        // Add Sub Chapter
-        if (e.target.closest('.add-sub-step')) {
-            const stepEl = e.target.closest('.sop-step');
-            const subContainer = stepEl.querySelector('.sub-chapters-container');
-            const index = stepEl.dataset.index;
-            const pIndex = parseInt(index) + 1;
-            const subIndex = subContainer.querySelectorAll('.sub-step').length;
-
-            const html = subTemplate
+    if (addButton) {
+        addButton.addEventListener('click', function() {
+            const index = container.querySelectorAll('.sop-step').length;
+            const html = template
                 .replace(/__INDEX__/g, index)
-                .replace(/__SUBINDEX__/g, subIndex)
-                .replace(/__PINDEX__/g, pIndex)
-                .replace(/__NUM__/g, subIndex + 1);
-
+                .replace(/__NUM__/g, index + 1);
+            
             const div = document.createElement('div');
             div.innerHTML = html;
-            subContainer.appendChild(div.firstElementChild);
+            container.appendChild(div.firstElementChild);
             updateNumbers();
-
-            const newEditor = subContainer.lastElementChild.querySelector('.quill-editor');
+            
+            // Inisialisasi Quill untuk elemen yang baru ditambahkan
+            const newEditor = container.lastElementChild.querySelector('.quill-editor');
             if (newEditor) {
                 const quill = new Quill(newEditor, quillOptions);
                 quillInstances.push({
@@ -616,22 +741,70 @@ document.addEventListener('DOMContentLoaded', function() {
                     container: newEditor.closest('.quill-container')
                 });
             }
-        }
+        });
+    }
 
-        // Remove Sub Chapter
-        if (e.target.closest('.remove-sub-step')) {
-            const subStepEl = e.target.closest('.sub-step');
-            const editorEl = subStepEl.querySelector('.quill-editor');
-            if(editorEl) {
-                const qIndex = quillInstances.findIndex(i => i.container.contains(editorEl));
-                if(qIndex > -1) {
-                    quillInstances.splice(qIndex, 1);
+    if (container) {
+        container.addEventListener('click', function(e) {
+            // Remove Main Chapter
+            if (e.target.closest('.remove-step')) {
+                const stepEl = e.target.closest('.sop-step');
+                // Remove all quills in this step from quillInstances array
+                const editorEls = stepEl.querySelectorAll('.quill-editor');
+                editorEls.forEach(editorEl => {
+                    const qIndex = quillInstances.findIndex(i => i.container.contains(editorEl));
+                    if(qIndex > -1) {
+                        quillInstances.splice(qIndex, 1);
+                    }
+                });
+                stepEl.remove();
+                updateNumbers();
+            }
+
+            // Add Sub Chapter
+            if (e.target.closest('.add-sub-step')) {
+                const stepEl = e.target.closest('.sop-step');
+                const subContainer = stepEl.querySelector('.sub-chapters-container');
+                const index = stepEl.dataset.index;
+                const pIndex = parseInt(index) + 1;
+                const subIndex = subContainer.querySelectorAll('.sub-step').length;
+
+                const html = subTemplate
+                    .replace(/__INDEX__/g, index)
+                    .replace(/__SUBINDEX__/g, subIndex)
+                    .replace(/__PINDEX__/g, pIndex)
+                    .replace(/__NUM__/g, subIndex + 1);
+
+                const div = document.createElement('div');
+                div.innerHTML = html;
+                subContainer.appendChild(div.firstElementChild);
+                updateNumbers();
+
+                const newEditor = subContainer.lastElementChild.querySelector('.quill-editor');
+                if (newEditor) {
+                    const quill = new Quill(newEditor, quillOptions);
+                    quillInstances.push({
+                        quill: quill,
+                        container: newEditor.closest('.quill-container')
+                    });
                 }
             }
-            subStepEl.remove();
-            updateNumbers();
-        }
-    });
+
+            // Remove Sub Chapter
+            if (e.target.closest('.remove-sub-step')) {
+                const subStepEl = e.target.closest('.sub-step');
+                const editorEl = subStepEl.querySelector('.quill-editor');
+                if(editorEl) {
+                    const qIndex = quillInstances.findIndex(i => i.container.contains(editorEl));
+                    if(qIndex > -1) {
+                        quillInstances.splice(qIndex, 1);
+                    }
+                }
+                subStepEl.remove();
+                updateNumbers();
+            }
+        });
+    }
 
     // FAQ logic
     const faqContainer = document.getElementById('faq-container');
@@ -663,24 +836,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    addFaqButton.addEventListener('click', function() {
-        const index = faqContainer.querySelectorAll('.faq-item-edit').length;
-        const html = faqTemplate
-            .replace(/__INDEX__/g, index)
-            .replace(/__NUM__/g, index + 1);
-        
-        const div = document.createElement('div');
-        div.innerHTML = html;
-        faqContainer.appendChild(div.firstElementChild);
-        updateFaqNumbers();
-    });
-
-    faqContainer.addEventListener('click', function(e) {
-        if (e.target.closest('.remove-faq')) {
-            e.target.closest('.faq-item-edit').remove();
+    if (addFaqButton) {
+        addFaqButton.addEventListener('click', function() {
+            const index = faqContainer.querySelectorAll('.faq-item-edit').length;
+            const html = faqTemplate
+                .replace(/__INDEX__/g, index)
+                .replace(/__NUM__/g, index + 1);
+            
+            const div = document.createElement('div');
+            div.innerHTML = html;
+            faqContainer.appendChild(div.firstElementChild);
             updateFaqNumbers();
-        }
-    });
+        });
+    }
+
+    if (faqContainer) {
+        faqContainer.addEventListener('click', function(e) {
+            if (e.target.closest('.remove-faq')) {
+                e.target.closest('.faq-item-edit').remove();
+                updateFaqNumbers();
+            }
+        });
+    }
 });
 </script>
 @endsection

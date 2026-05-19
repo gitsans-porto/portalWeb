@@ -40,14 +40,8 @@
 
             {{-- ===== TAB: PANDUAN ===== --}}
             <div id="content-panduan">
-                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-8">
+                <div class="mb-8">
                     <h2 class="text-2xl font-bold text-gray-900">Buku Panduan</h2>
-                    <a href="{{ route('layanan.download-panduan', $layanan->slug) }}" class="inline-flex justify-center items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold rounded-lg transition-colors border border-gray-200">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        Unduh PDF
-                    </a>
                 </div>
 
                 @php
@@ -351,10 +345,21 @@
 <style>
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* TinyMCE Content Styles */
     .tinymce-content ul { list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
     .tinymce-content ol { list-style-type: decimal; padding-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
     .tinymce-content p { margin-bottom: 0.5rem; }
-    .tinymce-content a { color: #2563eb; text-decoration: underline; }
+    .tinymce-content a { color: #2563eb; text-decoration: underline; font-weight: 600; transition: color 0.15s ease-in-out; }
+    .tinymce-content a:hover { color: #1d4ed8; text-decoration: none; }
     .tinymce-content img { border-radius: 0.5rem; max-width: 100%; height: auto; margin: 0.5rem 0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+
+    /* Quill Editor Content Styles */
+    .ql-editor ul { list-style-type: disc !important; padding-left: 1.5rem !important; margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
+    .ql-editor ol { list-style-type: decimal !important; padding-left: 1.5rem !important; margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
+    .ql-editor p { margin-bottom: 0.5rem !important; }
+    .ql-editor a { color: #2563eb !important; text-decoration: underline !important; font-weight: 600 !important; transition: color 0.15s ease-in-out !important; }
+    .ql-editor a:hover { color: #1d4ed8 !important; text-decoration: none !important; }
+    .ql-editor img { border-radius: 0.5rem !important; max-width: 100% !important; height: auto !important; margin: 0.5rem 0 !important; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important; }
 </style>
 @endpush

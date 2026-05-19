@@ -80,16 +80,4 @@ class PortalController extends Controller
         return view('profil.visi-misi', compact('profile'));
     }
 
-
-    /**
-     * Download Panduan PDF Layanan
-     */
-    public function downloadPanduan(string $slug)
-    {
-        $layanan = Service::where('slug', $slug)->firstOrFail();
-        
-        $pdf = Pdf::loadView('layanan.panduan-pdf', compact('layanan'));
-        
-        return $pdf->download('panduan-' . $layanan->slug . '.pdf');
-    }
 }

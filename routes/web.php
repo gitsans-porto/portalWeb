@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Artisan;
 Route::get('/', [PortalController::class, 'index'])->name('beranda');
 Route::get('/layanan/{slug}', [PortalController::class, 'layanan'])->name('layanan.detail');
 Route::get('/layanan/{slug}/dokumentasi', [PortalController::class, 'dokumentasi'])->name('layanan.dokumentasi');
-Route::get('/layanan/{slug}/download-panduan', [PortalController::class, 'downloadPanduan'])->name('layanan.download-panduan');
 
 // News Routes
 Route::get('/berita', [NewsController::class, 'index'])->name('berita.index');

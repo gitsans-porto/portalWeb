@@ -101,6 +101,7 @@
                     <option value="">Semua Status</option>
                     <option value="published">Dipublikasikan</option>
                     <option value="draft">Draf</option>
+                    <option value="private">Privat</option>
                 </select>
             </div>
         </div>

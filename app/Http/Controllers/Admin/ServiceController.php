@@ -26,13 +26,15 @@ class ServiceController extends Controller
         return view('admin.services.edit', compact('service'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Service $service)
     {
         $validated = $request->validate([
             'url' => 'required|url',
+            'long_description' => 'required|string',
+            'features' => 'nullable|array',
+            'features.*.title' => 'required_with:features|string|max:255',
+            'features.*.desc' => 'required_with:features|string',
+            'features.*.icon' => 'required_with:features|string|max:255',
             'sop' => 'nullable|array',
             'sop.*.title' => 'required_with:sop|string|max:255',
             'sop.*.desc' => 'nullable|string',
@@ -54,6 +56,8 @@ class ServiceController extends Controller
 
         $service->update([
             'url' => $validated['url'],
+            'long_description' => $validated['long_description'],
+            'features' => isset($validated['features']) ? array_values($validated['features']) : [],
             'sop' => $sopData,
             'faq' => isset($validated['faq']) ? array_values($validated['faq']) : [], // ensure numeric keys
         ]);

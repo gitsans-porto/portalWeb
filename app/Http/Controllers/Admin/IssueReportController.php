@@ -13,7 +13,7 @@ class IssueReportController extends Controller
 {
     public function index()
     {
-        $reports = IssueReport::with('service')->latest()->paginate(10);
+        $reports = IssueReport::with('service')->latest()->get();
         return view('admin.reports.index', compact('reports'));
     }
 
