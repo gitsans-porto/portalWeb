@@ -44,7 +44,7 @@
                                 class="nav-logo-text text-white font-bold text-base leading-tight block transition-colors duration-300">SMKN
                                 1 Limboto</span>
                             <span
-                                class="text-white/50 text-[0.65rem] font-medium tracking-wider uppercase hidden sm:block">Portal
+                                class="nav-logo-subtitle text-white/50 text-[0.65rem] font-medium tracking-wider uppercase hidden sm:block transition-colors duration-300">Portal
                                 Layanan</span>
                         </div>
                     </a>
@@ -68,6 +68,8 @@
                             <a href="{{ route('layanan.detail', 'pekael') }}" class="dropdown-link">PeKaeL</a>
                         </div>
                     </div>
+                    <a href="{{ route('materials.index') }}" class="nav-link whitespace-nowrap {{ request()->routeIs('materials.*') ? 'active' : '' }}">Bahan Ajar</a>
+                    <a href="{{ route('pengaduan.index') }}" class="nav-link {{ request()->routeIs('pengaduan.index') ? 'active' : '' }}">Pengaduan</a>
                     <div class="nav-item-dropdown">
                         <a href="{{ route('beranda') }}#profil" class="nav-link whitespace-nowrap">
                             Profil
@@ -78,13 +80,10 @@
                         <div class="dropdown-menu">
                             <a href="{{ route('profil.tentang') }}" class="dropdown-link">Tentang Sekolah</a>
                             <a href="{{ route('profil.visi-misi') }}" class="dropdown-link">Visi & Misi</a>
-                            <a href="{{ route('profil.kepala-sekolah') }}" class="dropdown-link">Kepala Sekolah</a>
                         </div>
                     </div>
-                    <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
+                    <a href="{{ route('berita.index') }}" class="nav-link {{ request()->routeIs('berita.*') ? 'active' : '' }}">Berita</a>
                     <a href="{{ route('beranda') }}#kontak" class="nav-link">Kontak</a>
-                    <a href="{{ route('materials.index') }}" class="nav-link whitespace-nowrap {{ request()->routeIs('materials.*') ? 'active' : '' }}">Bahan Ajar</a>
-                    <a href="{{ route('pengaduan.index') }}" class="nav-link {{ request()->routeIs('pengaduan.index') ? 'active' : '' }}">Pengaduan</a>
                 </div>
 
                 {{-- Desktop Login / Auth (flex-1 right) --}}
@@ -144,6 +143,8 @@
                     <a href="{{ route('layanan.detail', 'pekael') }}" class="nav-link !pl-10 !border-none !text-sm">PeKaeL</a>
                 </div>
             </div>
+            <a href="{{ route('materials.index') }}" class="nav-link">Bahan Ajar</a>
+            <a href="{{ route('pengaduan.index') }}" class="nav-link">Pengaduan</a>
             <div class="mobile-nav-group">
                 <button class="mobile-dropdown-btn">
                     Profil
@@ -154,13 +155,10 @@
                 <div class="mobile-submenu">
                     <a href="{{ route('profil.tentang') }}" class="nav-link !pl-10 !border-none !text-sm">Tentang Sekolah</a>
                     <a href="{{ route('profil.visi-misi') }}" class="nav-link !pl-10 !border-none !text-sm">Visi & Misi</a>
-                    <a href="{{ route('profil.kepala-sekolah') }}" class="nav-link !pl-10 !border-none !text-sm">Kepala Sekolah</a>
                 </div>
             </div>
-            <a href="{{ route('beranda') }}#berita" class="nav-link">Berita</a>
+            <a href="{{ route('berita.index') }}" class="nav-link">Berita</a>
             <a href="{{ route('beranda') }}#kontak" class="nav-link">Kontak</a>
-            <a href="{{ route('materials.index') }}" class="nav-link">Bahan Ajar</a>
-            <a href="{{ route('pengaduan.index') }}" class="nav-link">Pengaduan</a>
             
             <div class="py-2 border-t border-gray-100 mt-2">
                 @auth

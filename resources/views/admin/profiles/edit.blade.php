@@ -15,7 +15,6 @@
                     $publicRoute = '';
                     if($profile->section === 'tentang_sekolah') $publicRoute = route('profil.tentang');
                     elseif($profile->section === 'visi_misi') $publicRoute = route('profil.visi-misi');
-                    elseif($profile->section === 'kepala_sekolah') $publicRoute = route('profil.kepala-sekolah');
                 @endphp
                 @if($publicRoute)
                 <a href="{{ $publicRoute }}" target="_blank" class="flex items-center gap-2 bg-white text-gray-700 px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 hover:text-red-600 transition-colors font-bold text-sm shadow-sm">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\News;
 use App\Models\Service;
+use App\Models\Setting;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class PortalController extends Controller
@@ -24,7 +25,18 @@ class PortalController extends Controller
                           ->take(3)
                           ->get();
 
-        return view('beranda', compact('layananList', 'latestNews'));
+        $kepalaSekolah = Profile::where('section', 'kepala_sekolah')->first();
+        $sejarahSekolah = Profile::where('section', 'sejarah')->first();
+        $galleries = \App\Models\Gallery::latest()->take(6)->get();
+
+        $rawSettings = Setting::all();
+        $settings = [];
+        foreach ($rawSettings as $s) {
+            $settings[$s->key] = $s->value;
+            $settings[$s->key . '_label'] = $s->label;
+        }
+
+        return view('beranda', compact('layananList', 'latestNews', 'kepalaSekolah', 'sejarahSekolah', 'galleries', 'settings'));
     }
 
     /**
@@ -60,14 +72,6 @@ class PortalController extends Controller
         return view('profil.visi-misi', compact('profile'));
     }
 
-    /**
-     * Halaman Kepala Sekolah
-     */
-    public function kepalaSekolah()
-    {
-        $profile = Profile::where('section', 'kepala_sekolah')->firstOrFail();
-        return view('profil.kepala-sekolah', compact('profile'));
-    }
 
     /**
      * Download Panduan PDF Layanan

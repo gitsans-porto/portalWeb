@@ -32,7 +32,6 @@ Route::prefix('profil')->group(function () {
     });
     Route::get('/tentang-sekolah', [PortalController::class, 'tentangSekolah'])->name('profil.tentang');
     Route::get('/visi-misi', [PortalController::class, 'visiMisi'])->name('profil.visi-misi');
-    Route::get('/kepala-sekolah', [PortalController::class, 'kepalaSekolah'])->name('profil.kepala-sekolah');
 });
 
 // Authentication Routes
@@ -41,6 +40,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Routes (Protected)
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
@@ -57,6 +57,20 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Services Management (ONLY edit SOP)
     Route::resource('services', AdminServiceController::class)->only(['edit', 'update']);
+
+    // Gallery Management
+    Route::resource('galleries', AdminGalleryController::class)->only(['index', 'store', 'destroy']);
+
+    // Settings (Statistik Beranda)
+    Route::post('/settings', function (\Illuminate\Http\Request $request) {
+        $keys = ['siswa_aktif', 'tenaga_kependidikan', 'total_jurusan'];
+        foreach ($keys as $key) {
+            if ($request->has($key)) {
+                \App\Models\Setting::updateOrCreate(['key' => $key], ['value' => $request->input($key)]);
+            }
+        }
+        return redirect()->route('admin.dashboard')->with('success', 'Statistik berhasil diperbarui!');
+    })->name('settings.update');
 
     // Issue Reports Management
     Route::get('/reports', [App\Http\Controllers\Admin\IssueReportController::class, 'index'])->name('reports.index');

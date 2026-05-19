@@ -37,7 +37,7 @@
             {{-- Layanan Cards --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                 @foreach($layananList as $index => $item)
-                    @php $ic = 'text-red-500'; @endphp
+                    @php $ic = 'text-red-400'; @endphp
                     <a href="{{ route('layanan.detail', $item->slug) }}"
                         class="layanan-card group reveal reveal-delay-{{ $index + 1 }} text-left">
 
@@ -81,167 +81,194 @@
 
     <section class="py-20 lg:py-28 bg-white relative overflow-hidden" id="profil">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                
-                {{-- Left Image Column --}}
-                <style>
-                    .profil-gambar-wrapper {
-                        width: 100%;
-                        position: relative;
-                        z-index: 20;
-                    }
-                    /* Trik membesarkan gambar menembus batas grid untuk Desktop tanpa peduli kompilasi Tailwind */
-                    @media (min-width: 1024px) {
-                        .profil-gambar-wrapper {
-                            width: 160%;
-                            margin-right: -4rem;
-                        }
-                    }
-                    .profil-badge {
-                        position: absolute;
-                        bottom: 0;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        background-color: white;
-                        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-                        border-radius: 1rem;
-                        padding: 1rem 1.5rem;
-                        display: flex;
-                        align-items: center;
-                        gap: 1rem;
-                        border: 1px solid #f3f4f6;
-                        width: max-content;
-                        z-index: 30;
-                        transition: transform 0.3s ease;
-                    }
-                    .profil-badge:hover {
-                        transform: translate(-50%, -5px);
-                    }
-                </style>
-                <div class="reveal relative flex justify-center lg:justify-end">
-                    <div class="profil-gambar-wrapper">
-                        <img src="{{ asset('images/foto_siswa.png') }}" alt="Siswa SMKN 1 Limboto" class="w-full h-auto relative pointer-events-none" style="filter: drop-shadow(0 20px 25px rgba(0,0,0,0.15));">
-                        
-                        {{-- Floating Badge --}}
-                        <div class="profil-badge">
-                            <div class="flex items-center justify-center flex-shrink-0" style="width: 2.75rem; height: 2.75rem; border-radius: 9999px; background-color: #fef2f2;">
-                                <svg class="text-primary" style="width: 1.5rem; height: 1.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                                </svg>
-                            </div>
-                            <div class="text-left">
-                                <h4 class="font-bold text-gray-900 leading-tight" style="font-size: 1rem; margin-bottom: 0.15rem;">Terakreditasi B</h4>
-                                <p class="text-gray-500 leading-snug" style="font-size: 0.85rem;">Lembaga pendidikan unggulan</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Right Content Column --}}
-                <div class="reveal reveal-delay-2 lg:pl-6">
-                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 text-primary text-sm font-bold tracking-wide mb-6">
-                        <svg class="w-[1.15rem] h-[1.15rem]" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
-                        </svg>
-                        Profil Sekolah
-                    </span>
+            <div class="bg-[#F8F9FA] rounded-[2rem] border border-gray-100 overflow-hidden shadow-sm reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
                     
-                    <h2 class="text-[2.5rem] sm:text-5xl lg:text-[3.25rem] font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight">
-                        Mencetak Lulusan <br class="hidden sm:block">
-                        <span class="text-primary">Berkarakter</span> & Siap Kerja.
-                    </h2>
+                    {{-- Left Content: Accordion --}}
+                    <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                        <div class="space-y-6 w-full" id="profilAccordion">
+                            
+                            {{-- Accordion Item 1: Sambutan --}}
+                            <div class="accordion-item border-b border-gray-200 pb-5">
+                                <button class="w-full flex items-center justify-between text-left py-2" onclick="toggleProfilAccordion('sambutan')">
+                                    <span class="text-2xl font-bold text-gray-900">Sambutan Kepala Sekolah</span>
+                                    <span id="icon-sambutan" class="w-8 h-8 rounded-full border border-gray-900 flex items-center justify-center text-gray-900 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+                                    </span>
+                                </button>
+                                <div id="content-sambutan" class="overflow-hidden transition-all duration-500 max-h-[1000px] opacity-100 mt-4">
+                                    <div class="text-gray-600 text-[0.95rem] leading-relaxed text-justify mb-2 space-y-3 max-h-[300px] overflow-y-auto pr-3 custom-scrollbar">
+                                        @if(isset($kepalaSekolah))
+                                            {!! nl2br(e($kepalaSekolah->content)) !!}
+                                        @else
+                                            <p>Selamat datang di portal resmi SMKN 1 Limboto.</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="pl-5 border-l-[3px] border-primary mb-10 py-1">
-                        <p class="text-[1.05rem] sm:text-[1.15rem] text-gray-500 italic leading-relaxed">
-                            "Menjadi lembaga pendidikan kejuruan unggulan yang menghasilkan lulusan berkarakter, berkompeten, dan berdaya saing di era digital dan global."
-                        </p>
+                            {{-- Accordion Item 2: Sejarah --}}
+                            <div class="accordion-item border-b border-gray-200 pb-5">
+                                <button class="w-full flex items-center justify-between text-left py-2" onclick="toggleProfilAccordion('sejarah')">
+                                    <span class="text-2xl font-bold text-gray-900">Sejarah</span>
+                                    <span id="icon-sejarah" class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-400 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                                    </span>
+                                </button>
+                                <div id="content-sejarah" class="overflow-hidden transition-all duration-500 max-h-0 opacity-0 mt-0">
+                                    <div class="text-gray-600 text-[0.95rem] leading-relaxed text-justify mb-5 space-y-3 max-h-[300px] overflow-y-auto pr-3 custom-scrollbar">
+                                        @if(isset($sejarahSekolah))
+                                            {!! nl2br(e($sejarahSekolah->content)) !!}
+                                        @else
+                                            <p>Sejarah singkat berdirinya SMKN 1 Limboto...</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
-                        {{-- Misi List --}}
-                        <div>
-                            <div class="flex items-center gap-2.5 mb-4">
-                                <svg class="w-[1.15rem] h-[1.15rem] text-primary" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                                </svg>
-                                <h3 class="font-bold text-gray-900 text-lg">Fokus Misi Kami</h3>
+                    {{-- Right Image Column --}}
+                    <div class="relative bg-gray-200 min-h-[400px] lg:min-h-full overflow-hidden">
+                        {{-- Image Sambutan --}}
+                        <div id="img-sambutan" class="absolute inset-0 transition-opacity duration-700 opacity-100 z-10 group">
+                            <img src="{{ isset($kepalaSekolah) && $kepalaSekolah->image ? (Storage::disk('public')->exists($kepalaSekolah->image) ? asset('storage/' . $kepalaSekolah->image) : asset($kepalaSekolah->image)) : asset('images/kepala-sekolah.png') }}" alt="Kepala Sekolah" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
+                            {{-- Title Overlay --}}
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24 translate-y-0">
+                                <h3 class="text-white text-2xl font-bold">{{ $kepalaSekolah->title ?? 'Kepala Sekolah' }}</h3>
+                                @if(!empty($kepalaSekolah->short_description))
+                                    <p class="text-gray-200 text-sm mt-1">{{ $kepalaSekolah->short_description }}</p>
+                                @endif
                             </div>
-                            <ul class="space-y-3.5">
-                                <li class="flex items-start gap-2.5">
-                                    <svg class="w-[1.2rem] h-[1.2rem] text-emerald-500 flex-shrink-0 mt-[0.1rem]" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-[0.95rem] text-gray-500 leading-snug">Pendidikan berbasis teknologi informasi.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <svg class="w-[1.2rem] h-[1.2rem] text-emerald-500 flex-shrink-0 mt-[0.1rem]" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-[0.95rem] text-gray-500 leading-snug">Kemitraan kuat dengan Dunia Industri.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <svg class="w-[1.2rem] h-[1.2rem] text-emerald-500 flex-shrink-0 mt-[0.1rem]" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-[0.95rem] text-gray-500 leading-snug">Pembentukan karakter berintegritas.</span>
-                                </li>
-                            </ul>
                         </div>
-
-                        {{-- Keunggulan List --}}
-                        <div>
-                            <div class="flex items-center gap-2.5 mb-4">
-                                <svg class="w-[1.15rem] h-[1.15rem] text-amber-500" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                                </svg>
-                                <h3 class="font-bold text-gray-900 text-lg">Keunggulan</h3>
+                        
+                        {{-- Image Sejarah --}}
+                        <div id="img-sejarah" class="absolute inset-0 transition-opacity duration-700 opacity-0 z-0 bg-white group">
+                            <img src="{{ isset($sejarahSekolah) && $sejarahSekolah->image ? (Storage::disk('public')->exists($sejarahSekolah->image) ? asset('storage/' . $sejarahSekolah->image) : asset($sejarahSekolah->image)) : asset('images/gambarSekolah.jpeg') }}" alt="Sejarah Sekolah" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                             {{-- Title Overlay (Opsional untuk sejarah) --}}
+                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24 translate-y-0">
+                                <h3 class="text-white text-2xl font-bold">{{ $sejarahSekolah->title ?? 'Sejarah SMKN 1 Limboto' }}</h3>
                             </div>
-                            <ul class="space-y-3.5">
-                                <li class="flex items-start gap-2.5">
-                                    <svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M13 2.05v7.45h6l-9 12v-7.5H4l9-11.95z"/>
-                                    </svg>
-                                    <span class="text-[0.95rem] text-gray-500 leading-snug">Fasilitas lab lengkap & modern.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M13 2.05v7.45h6l-9 12v-7.5H4l9-11.95z"/>
-                                    </svg>
-                                    <span class="text-[0.95rem] text-gray-500 leading-snug">Teaching Factory mitra industri ternama.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M13 2.05v7.45h6l-9 12v-7.5H4l9-11.95z"/>
-                                    </svg>
-                                    <span class="text-[0.95rem] text-gray-500 leading-snug">Sistem informasi digital terintegrasi.</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <style>
+            /* Custom scrollbar for accordion content */
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 5px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: #d1d5db;
+                border-radius: 10px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                background: #9ca3af;
+            }
+        </style>
+
+        <script>
+            function toggleProfilAccordion(section) {
+                const isSambutan = section === 'sambutan';
+                
+                // Contents
+                const contentSambutan = document.getElementById('content-sambutan');
+                const contentSejarah = document.getElementById('content-sejarah');
+                
+                if(isSambutan) {
+                    contentSambutan.style.maxHeight = '1000px';
+                    contentSambutan.style.opacity = '1';
+                    contentSambutan.style.marginTop = '1rem';
+                    
+                    contentSejarah.style.maxHeight = '0px';
+                    contentSejarah.style.opacity = '0';
+                    contentSejarah.style.marginTop = '0px';
+                } else {
+                    contentSejarah.style.maxHeight = '1000px';
+                    contentSejarah.style.opacity = '1';
+                    contentSejarah.style.marginTop = '1rem';
+                    
+                    contentSambutan.style.maxHeight = '0px';
+                    contentSambutan.style.opacity = '0';
+                    contentSambutan.style.marginTop = '0px';
+                }
+
+                // Icons
+                const iconSambutan = document.getElementById('icon-sambutan');
+                const iconSejarah = document.getElementById('icon-sejarah');
+                
+                if(isSambutan) {
+                    iconSambutan.innerHTML = '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>';
+                    iconSambutan.className = 'w-8 h-8 rounded-full border border-gray-900 flex items-center justify-center text-gray-900 transition-transform duration-300';
+                    
+                    iconSejarah.innerHTML = '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>';
+                    iconSejarah.className = 'w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-400 transition-transform duration-300';
+                } else {
+                    iconSejarah.innerHTML = '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>';
+                    iconSejarah.className = 'w-8 h-8 rounded-full border border-gray-900 flex items-center justify-center text-gray-900 transition-transform duration-300';
+                    
+                    iconSambutan.innerHTML = '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>';
+                    iconSambutan.className = 'w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-400 transition-transform duration-300';
+                }
+
+                // Images
+                const imgSambutan = document.getElementById('img-sambutan');
+                const imgSejarah = document.getElementById('img-sejarah');
+
+                if(isSambutan) {
+                    imgSambutan.style.opacity = '1';
+                    imgSambutan.style.zIndex = '10';
+                    imgSejarah.style.opacity = '0';
+                    imgSejarah.style.zIndex = '0';
+                } else {
+                    imgSejarah.style.opacity = '1';
+                    imgSejarah.style.zIndex = '10';
+                    imgSambutan.style.opacity = '0';
+                    imgSambutan.style.zIndex = '0';
+                }
+            }
+        </script>
 
             {{-- Divider --}}
             <div class="w-full h-px bg-gray-200 mt-24 mb-16 max-w-6xl mx-auto"></div>
 
             {{-- Statistik (Inline with design) --}}
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-6 lg:gap-10 text-center reveal reveal-delay-3 max-w-6xl mx-auto">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="text-[2.75rem] lg:text-[3.25rem] font-black text-primary leading-none mb-3">1200+</div>
-                    <div class="text-[0.7rem] sm:text-xs font-bold text-gray-500 tracking-[0.1em] uppercase">Siswa Aktif</div>
+            <div class="grid grid-cols-3 gap-6 lg:gap-10 reveal reveal-delay-3 max-w-3xl mx-auto">
+
+                {{-- Siswa Aktif --}}
+                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-white/60 backdrop-blur border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-primary leading-none mb-2">{{ $settings['siswa_aktif'] ?? '1200+' }}</div>
+                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['siswa_aktif_label'] ?? 'Siswa Aktif' }}</div>
                 </div>
-                <div class="flex flex-col items-center justify-center">
-                    <div class="text-[2.75rem] lg:text-[3.25rem] font-black text-gray-900 leading-none mb-3">85+</div>
-                    <div class="text-[0.7rem] sm:text-xs font-bold text-gray-500 tracking-[0.1em] uppercase">Tenaga Pendidik</div>
+
+                {{-- Tenaga Kependidikan --}}
+                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-white/60 backdrop-blur border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    </div>
+                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-gray-900 leading-none mb-2">{{ $settings['tenaga_kependidikan'] ?? '85+' }}</div>
+                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['tenaga_kependidikan_label'] ?? 'Tenaga Kependidikan' }}</div>
                 </div>
-                <div class="flex flex-col items-center justify-center">
-                    <div class="text-[2.75rem] lg:text-[3.25rem] font-black text-gray-900 leading-none mb-3">9</div>
-                    <div class="text-[0.7rem] sm:text-xs font-bold text-gray-500 tracking-[0.1em] uppercase">Kompetensi Keahlian</div>
+
+                {{-- Total Jurusan --}}
+                <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-white/60 backdrop-blur border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                    </div>
+                    <div class="text-[2.5rem] lg:text-[3rem] font-black text-gray-900 leading-none mb-2">{{ $settings['total_jurusan'] ?? '9' }}</div>
+                    <div class="text-[0.7rem] font-black text-gray-500 tracking-[0.12em] uppercase">{{ $settings['total_jurusan_label'] ?? 'Total Jurusan' }}</div>
                 </div>
-                <div class="flex flex-col items-center justify-center">
-                    <div class="text-[2.75rem] lg:text-[3.25rem] font-black text-gray-900 leading-none mb-3">50+</div>
-                    <div class="text-[0.7rem] sm:text-xs font-bold text-gray-500 tracking-[0.1em] uppercase">Mitra Industri</div>
-                </div>
+
             </div>
 
         </div>
@@ -310,6 +337,40 @@
 
             </div>
 
+            </div>
+        </div>
+    </section>
+
+    {{-- ======== GALERI KEGIATAN ======== --}}
+    <section class="py-20 lg:py-28 bg-gray-50" id="galeri">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 reveal">
+                <div>
+                    <span class="section-badge mb-4">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Galeri Kegiatan
+                    </span>
+                    <h2 class="section-title">Dokumentasi Sekolah</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6 reveal reveal-delay-2">
+                @forelse($galleries ?? [] as $index => $gallery)
+                    <div class="aspect-square relative overflow-hidden rounded-2xl group cursor-pointer shadow-sm">
+                        <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->caption ?? 'Galeri Kegiatan' }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            @if($gallery->caption)
+                                <p class="text-white font-bold text-sm lg:text-base translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{{ $gallery->caption }}</p>
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-full py-12 text-center">
+                        <p class="text-gray-400 italic">Belum ada foto kegiatan.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>

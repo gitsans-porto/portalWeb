@@ -88,6 +88,10 @@
     color: var(--color-text-primary);
 }
 
+.navbar.scrolled .nav-logo-subtitle {
+    color: var(--color-text-muted, #9ca3af);
+}
+
 .nav-link {
     position: relative;
     color: rgba(255, 255, 255, 0.9);
