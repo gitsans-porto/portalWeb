@@ -17,7 +17,7 @@
                     elseif($profile->section === 'visi_misi') $publicRoute = route('profil.visi-misi');
                 @endphp
                 @if($publicRoute)
-                <a href="{{ $publicRoute }}" target="_blank" class="flex items-center gap-2 bg-white text-gray-700 px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 hover:text-red-600 transition-colors font-bold text-sm shadow-sm">
+                <a href="{{ $publicRoute }}" target="_blank" class="flex items-center gap-2 bg-white text-gray-700 px-4 py-2 rounded-md border border-gray-200 hover:bg-gray-50 hover:text-red-600 transition-colors font-bold text-sm shadow-sm">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -25,7 +25,7 @@
                     Lihat Halaman
                 </a>
                 @endif
-                <span class="admin-badge bg-red-50 text-red-600 px-4 py-2 rounded-xl font-bold text-sm border border-red-100 uppercase tracking-wider">{{ str_replace('_', ' ', $profile->section) }}</span>
+                <span class="admin-badge bg-red-50 text-red-600 px-4 py-2 rounded-md font-bold text-sm border border-red-100 uppercase tracking-wider">{{ str_replace('_', ' ', $profile->section) }}</span>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
             <div class="space-y-10">
                 
                 {{-- 1. Main Information Card --}}
-                <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+                <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm border border-gray-100">
                     <div class="flex items-center gap-3 mb-10 pb-6 border-b border-gray-50">
                         <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                         <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Informasi Utama</h3>
@@ -45,31 +45,31 @@
                     <div class="space-y-8">
                         <div class="flex flex-col gap-3">
                             <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="title">Judul Halaman</label>
-                            <input type="text" id="title" name="title" value="{{ old('title', $profile->title) }}" class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium" placeholder="Masukkan judul..." required>
+                            <input type="text" id="title" name="title" value="{{ old('title', $profile->title) }}" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium" placeholder="Masukkan judul..." required>
                         </div>
 
                         <div class="flex flex-col gap-3">
                             <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="short_description">Deskripsi Singkat (Hero)</label>
-                            <textarea id="short_description" name="short_description" rows="3" class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed">{{ old('short_description', $profile->short_description) }}</textarea>
+                            <textarea id="short_description" name="short_description" rows="3" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed">{{ old('short_description', $profile->short_description) }}</textarea>
                         </div>
 
                         <div class="flex flex-col gap-3">
                             <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="content">Konten Utama / Sambutan</label>
-                            <textarea id="content" name="content" rows="12" class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" placeholder="Tulis konten lengkap di sini..." required>{{ old('content', $profile->content) }}</textarea>
+                            <textarea id="content" name="content" rows="12" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" placeholder="Tulis konten lengkap di sini..." required>{{ old('content', $profile->content) }}</textarea>
                         </div>
                     </div>
                 </div>
 
                 {{-- 2. Media / Image Card (If applicable) --}}
                 @if($profile->section !== 'visi_misi')
-                <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+                <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm border border-gray-100">
                     <div class="flex items-center gap-3 mb-10 pb-6 border-b border-gray-50">
                         <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                         <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Media / Gambar</h3>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                        <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50 relative group">
+                        <div class="aspect-video w-full rounded-lg overflow-hidden shadow-md border border-gray-100 bg-gray-50 relative group">
                             @if($profile->image)
                                 <img src="{{ Storage::disk('public')->exists($profile->image) ? asset('storage/' . $profile->image) : asset($profile->image) }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                             @else
@@ -82,9 +82,9 @@
                         </div>
 
                         <div class="space-y-6">
-                            <div class="flex flex-col gap-3">
+                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="image">Ganti Gambar</label>
-                                <input type="file" id="image" name="image" class="w-full text-xs text-gray-500 file:mr-4 file:py-2.5 file:px-6 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer">
+                                <input type="file" id="image" name="image" class="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-6 file:rounded-md file:border-2 file:border-dashed file:border-red-600 file:text-xs file:font-bold file:bg-transparent file:text-red-600 hover:file:bg-red-50 hover:file:border-red-700 hover:file:text-red-700 cursor-pointer transition-all">
                                 <p class="text-[10px] text-gray-400 italic">Format JPG/PNG. Maksimal ukuran 2MB.</p>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
 
                 {{-- 3. Specific Sections (Tentang Sekolah / Visi Misi) --}}
                 @if($profile->section === 'tentang_sekolah')
-                    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm border border-gray-100">
                         <div class="flex items-center gap-3 mb-10 pb-6 border-b border-gray-50">
                             <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                             <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Akses & Lokasi</h3>
@@ -103,13 +103,13 @@
                         <div class="space-y-8">
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="address">Alamat Lengkap</label>
-                                <input type="text" id="address" name="additional_data[address]" value="{{ old('additional_data.address', $profile->additional_data['address'] ?? '') }}" class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium" placeholder="Alamat sekolah...">
+                                <input type="text" id="address" name="additional_data[address]" value="{{ old('additional_data.address', $profile->additional_data['address'] ?? '') }}" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium" placeholder="Alamat sekolah...">
                             </div>
 
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="map_iframe">Google Maps Iframe URL</label>
-                                <textarea id="map_iframe" name="additional_data[map_iframe]" rows="3" class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" placeholder="https://www.google.com/maps/embed?...">{{ old('additional_data.map_iframe', $profile->additional_data['map_iframe'] ?? '') }}</textarea>
-                                <div class="bg-red-50 rounded-2xl p-4 mt-2 border border-red-100">
+                                <textarea id="map_iframe" name="additional_data[map_iframe]" rows="3" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" placeholder="https://www.google.com/maps/embed?...">{{ old('additional_data.map_iframe', $profile->additional_data['map_iframe'] ?? '') }}</textarea>
+                                <div class="bg-red-50 rounded-lg p-4 mt-2 border border-red-100">
                                     <p class="text-[10px] text-red-700 font-bold flex items-center gap-2 mb-1">
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                         CARA MENDAPATKAN LINK EMBED:
@@ -125,39 +125,39 @@
 
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="opening_hours">Jam Operasional</label>
-                                <input type="text" id="opening_hours" name="additional_data[opening_hours]" value="{{ old('additional_data.opening_hours', $profile->additional_data['opening_hours'] ?? '') }}" class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium" placeholder="Contoh: Senin - Jumat (07:00 - 15:30)">
+                                <input type="text" id="opening_hours" name="additional_data[opening_hours]" value="{{ old('additional_data.opening_hours', $profile->additional_data['opening_hours'] ?? '') }}" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium" placeholder="Contoh: Senin - Jumat (07:00 - 15:30)">
                             </div>
                         </div>
                     </div>
                 @endif
 
                 @if($profile->section === 'visi_misi')
-                    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm border border-gray-100">
                         <div class="flex items-center gap-3 mb-10 pb-6 border-b border-gray-50">
                             <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                             <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Visi Sekolah</h3>
                         </div>
                         <div class="flex flex-col gap-3">
                             <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="vision">Kalimat Visi</label>
-                            <textarea id="vision" name="additional_data[vision]" rows="4" class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" placeholder="Visi sekolah...">{{ old('additional_data.vision', $profile->additional_data['vision'] ?? '') }}</textarea>
+                            <textarea id="vision" name="additional_data[vision]" rows="4" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium leading-relaxed" placeholder="Visi sekolah...">{{ old('additional_data.vision', $profile->additional_data['vision'] ?? '') }}</textarea>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm border border-gray-100">
                         <div class="flex items-center gap-3 mb-10 pb-6 border-b border-gray-50">
                             <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                             <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Daftar Misi</h3>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             @foreach($profile->additional_data['missions'] ?? [] as $index => $mission)
-                                <div class="p-6 bg-gray-50 rounded-3xl border border-gray-100 space-y-4 shadow-sm">
+                                <div class="p-6 bg-gray-50 rounded-lg border border-gray-100 space-y-4 shadow-sm">
                                     <div class="flex items-center gap-2">
-                                        <span class="w-6 h-6 rounded-lg bg-red-600 text-white flex items-center justify-center text-[10px] font-bold">{{ $index + 1 }}</span>
+                                        <span class="w-6 h-6 rounded-md bg-red-600 text-white flex items-center justify-center text-[10px] font-bold">{{ $index + 1 }}</span>
                                         <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Item Misi</span>
                                     </div>
                                     <div class="space-y-4">
-                                        <input type="text" name="additional_data[missions][{{ $index }}][title]" value="{{ $mission['title'] }}" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-100 outline-none font-bold text-sm" placeholder="Judul misi...">
-                                        <textarea name="additional_data[missions][{{ $index }}][description]" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-100 outline-none text-sm leading-relaxed" placeholder="Deskripsi misi...">{{ $mission['description'] }}</textarea>
+                                        <input type="text" name="additional_data[missions][{{ $index }}][title]" value="{{ $mission['title'] }}" class="w-full px-4 py-3 rounded-md border border-gray-200 focus:ring-2 focus:ring-red-100 outline-none font-bold text-sm" placeholder="Judul misi...">
+                                        <textarea name="additional_data[missions][{{ $index }}][description]" rows="3" class="w-full px-4 py-3 rounded-md border border-gray-200 focus:ring-2 focus:ring-red-100 outline-none text-sm leading-relaxed" placeholder="Deskripsi misi...">{{ $mission['description'] }}</textarea>
                                     </div>
                                 </div>
                             @endforeach
@@ -166,7 +166,7 @@
                 @endif
                 
                 @if($profile->section === 'kepala_sekolah')
-                    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm border border-gray-100">
                         <div class="flex items-center gap-3 mb-10 pb-6 border-b border-gray-50">
                             <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
                             <h3 class="font-black text-gray-900 uppercase tracking-widest text-xs">Kontak & Informasi Tambahan</h3>
@@ -175,7 +175,7 @@
                         <div class="space-y-8">
                             <div class="flex flex-col gap-3">
                                 <label class="text-xs font-black text-gray-400 uppercase tracking-wider block" for="phone">Nomor HP / Kontak (Opsional)</label>
-                                <input type="text" id="phone" name="additional_data[phone]" value="{{ old('additional_data.phone', $profile->additional_data['phone'] ?? '') }}" class="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium" placeholder="Contoh: 0812-xxxx-xxxx">
+                                <input type="text" id="phone" name="additional_data[phone]" value="{{ old('additional_data.phone', $profile->additional_data['phone'] ?? '') }}" class="w-full px-5 py-4 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-medium" placeholder="Contoh: 0812-xxxx-xxxx">
                                 <p class="text-[10px] text-gray-400 italic">Akan muncul di bagian bawah sambutan kepala sekolah.</p>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
 
                 {{-- 4. Final Action Button --}}
                 <div class="pt-10 flex flex-col items-center gap-6">
-                    <button type="submit" style="background-color: #FE0002; color: white; width: 100%; max-width: 400px; padding: 1.5rem; border-radius: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.25em; font-size: 0.875rem; border: none; cursor: pointer; box-shadow: 0 20px 40px -10px rgba(254, 0, 2, 0.4);">
+                    <button type="submit" style="background-color: #FE0002; color: white; width: 100%; max-width: 400px; padding: 1.5rem; border-radius: 0.375rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.25em; font-size: 0.875rem; border: none; cursor: pointer; box-shadow: 0 20px 40px -10px rgba(254, 0, 2, 0.4);">
                         Simpan Perubahan
                     </button>
                     

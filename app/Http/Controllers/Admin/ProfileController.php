@@ -23,7 +23,20 @@ class ProfileController extends Controller
      */
     public function edit($section)
     {
-        $profile = Profile::where('section', $section)->firstOrFail();
+        $validSections = ['sejarah', 'tentang_sekolah', 'visi_misi', 'kepala_sekolah'];
+        if (!in_array($section, $validSections)) {
+            abort(404);
+        }
+
+        $profile = Profile::firstOrCreate(
+            ['section' => $section],
+            [
+                'title' => ucwords(str_replace('_', ' ', $section)),
+                'short_description' => 'Deskripsi singkat untuk ' . str_replace('_', ' ', $section),
+                'content' => 'Konten untuk ' . str_replace('_', ' ', $section),
+            ]
+        );
+
         return view('admin.profiles.edit', compact('profile'));
     }
 
@@ -32,7 +45,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $section)
     {
-        $profile = Profile::where('section', $section)->firstOrFail();
+        $validSections = ['sejarah', 'tentang_sekolah', 'visi_misi', 'kepala_sekolah'];
+        if (!in_array($section, $validSections)) {
+            abort(404);
+        }
+
+        $profile = Profile::firstOrCreate(
+            ['section' => $section],
+            [
+                'title' => ucwords(str_replace('_', ' ', $section)),
+                'short_description' => '',
+                'content' => '',
+            ]
+        );
 
         $rules = [
             'title' => 'required|string|max:255',
