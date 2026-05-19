@@ -32,8 +32,8 @@
         </div>
 
         {{-- Decorative Circles --}}
-        <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-red-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/10 blur-[80px] rounded-full pointer-events-none"></div>
     </section>
 
     <div class="min-h-screen bg-gray-50 py-12">
@@ -44,7 +44,7 @@
             {{-- 1. FORMULIR LAPORAN (ATAS) --}}
             <div class="bg-white rounded-[3rem] shadow-xl shadow-gray-200/50 border border-gray-100 p-8 sm:p-12 mb-12 reveal">
                 <div class="flex items-center gap-5 mb-10">
-                    <span class="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-indigo-100">
+                    <span class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-red-100">
                         <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>
@@ -59,31 +59,31 @@
                     @csrf
                     <div>
                         <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Pilih Klasifikasi Laporan</label>
-                        <div class="flex flex-col sm:flex-row rounded-xl overflow-hidden border border-indigo-600 bg-white">
+                        <div class="flex flex-col sm:flex-row rounded-xl overflow-hidden border border-red-600 bg-white">
                             <!-- Pengaduan -->
                             <label class="flex-1 cursor-pointer relative group">
                                 <input type="radio" name="type" value="Pengaduan" class="btn-radio-input peer sr-only" required>
-                                <div class="btn-radio-content px-5 py-4 font-black text-indigo-600 bg-white peer-checked:bg-indigo-600 peer-checked:text-white transition-colors border-b sm:border-b-0 sm:border-r border-indigo-600 flex items-center justify-center sm:justify-start gap-3">
-                                    <svg class="radio-checked w-5 h-5 text-indigo-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
-                                    <svg class="radio-unchecked w-5 h-5 text-indigo-600 group-hover:text-indigo-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+                                <div class="btn-radio-content px-5 py-4 font-black text-red-600 bg-white peer-checked:bg-red-600 peer-checked:text-white transition-colors border-b sm:border-b-0 sm:border-r border-red-600 flex items-center justify-center sm:justify-start gap-3">
+                                    <svg class="radio-checked w-5 h-5 text-red-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
+                                    <svg class="radio-unchecked w-5 h-5 text-red-600 group-hover:text-red-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
                                     PENGADUAN
                                 </div>
                             </label>
                             <!-- Aspirasi -->
                             <label class="flex-1 cursor-pointer relative group">
                                 <input type="radio" name="type" value="Aspirasi" class="btn-radio-input peer sr-only">
-                                <div class="btn-radio-content px-5 py-4 font-black text-indigo-600 bg-white peer-checked:bg-indigo-600 peer-checked:text-white transition-colors border-b sm:border-b-0 sm:border-r border-indigo-600 flex items-center justify-center sm:justify-start gap-3">
-                                    <svg class="radio-checked w-5 h-5 text-indigo-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
-                                    <svg class="radio-unchecked w-5 h-5 text-indigo-600 group-hover:text-indigo-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+                                <div class="btn-radio-content px-5 py-4 font-black text-red-600 bg-white peer-checked:bg-red-600 peer-checked:text-white transition-colors border-b sm:border-b-0 sm:border-r border-red-600 flex items-center justify-center sm:justify-start gap-3">
+                                    <svg class="radio-checked w-5 h-5 text-red-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
+                                    <svg class="radio-unchecked w-5 h-5 text-red-600 group-hover:text-red-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
                                     ASPIRASI
                                 </div>
                             </label>
                             <!-- Lainnya -->
                             <label class="flex-1 cursor-pointer relative group">
                                 <input type="radio" name="type" value="Lainnya" class="btn-radio-input peer sr-only">
-                                <div class="btn-radio-content px-5 py-4 font-black text-indigo-600 bg-white peer-checked:bg-indigo-600 peer-checked:text-white transition-colors flex items-center justify-center sm:justify-start gap-3">
-                                    <svg class="radio-checked w-5 h-5 text-indigo-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
-                                    <svg class="radio-unchecked w-5 h-5 text-indigo-600 group-hover:text-indigo-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+                                <div class="btn-radio-content px-5 py-4 font-black text-red-600 bg-white peer-checked:bg-red-600 peer-checked:text-white transition-colors flex items-center justify-center sm:justify-start gap-3">
+                                    <svg class="radio-checked w-5 h-5 text-red-200" viewBox="0 0 24 24" fill="none" style="display:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>
+                                    <svg class="radio-unchecked w-5 h-5 text-red-600 group-hover:text-red-500" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
                                     LAINNYA
                                 </div>
                             </label>
@@ -98,11 +98,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Nama Lengkap</label>
-                            <input type="text" name="full_name" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium" placeholder="Masukkan nama lengkap Anda" required>
+                            <input type="text" name="full_name" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 outline-none transition-all text-gray-700 font-medium" placeholder="Masukkan nama lengkap Anda" required>
                         </div>
                         <div>
                             <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Pilih Role</label>
-                            <select name="role" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium" required>
+                            <select name="role" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 outline-none transition-all text-gray-700 font-medium" required>
                                 <option value="">Pilih Role...</option>
                                 <option value="Siswa">Siswa</option>
                                 <option value="Guru">Guru</option>
@@ -115,11 +115,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Topik Singkat</label>
-                            <input type="text" name="category" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium" placeholder="Contoh: AC Kelas Rusak, Masalah Login LMS" required>
+                            <input type="text" name="category" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 outline-none transition-all text-gray-700 font-medium" placeholder="Contoh: AC Kelas Rusak, Masalah Login LMS" required>
                         </div>
                         <div>
                             <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Layanan Terkait <span class="text-gray-300 font-normal">(Opsional)</span></label>
-                            <select name="service_id" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium">
+                            <select name="service_id" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 outline-none transition-all text-gray-700 font-medium">
                                 <option value="">Tidak ada / Lainnya</option>
                                 @foreach($services as $service)
                                     <option value="{{ $service->id }}">{{ $service->name }}</option>
@@ -130,10 +130,10 @@
 
                     <div>
                         <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Detail Laporan</label>
-                        <textarea name="description" rows="5" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-700 font-medium resize-none" placeholder="Jelaskan secara detail masalah atau aspirasi Anda..." required></textarea>
+                        <textarea name="description" rows="5" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 outline-none transition-all text-gray-700 font-medium resize-none" placeholder="Jelaskan secara detail masalah atau aspirasi Anda..." required></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-5 bg-indigo-600 text-white font-black rounded-2xl hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100 flex items-center justify-center gap-3 text-lg group">
+                    <button type="submit" class="w-full py-5 bg-red-600 text-white font-black rounded-2xl hover:bg-red-700 transition-all shadow-xl shadow-red-100 flex items-center justify-center gap-3 text-lg group">
                         Kirim Laporan Sekarang
                         <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
@@ -144,7 +144,7 @@
 
             {{-- 2. PENGECEKAN STATUS (BAWAH) --}}
             <div class="space-y-8 reveal">
-                <div class="bg-indigo-900 rounded-[3rem] p-10 sm:p-14 shadow-2xl shadow-indigo-200 text-white relative overflow-hidden">
+                <div class="bg-red-900 rounded-[3rem] p-10 sm:p-14 shadow-2xl shadow-red-200 text-white relative overflow-hidden">
                     {{-- Decorative Background --}}
                     <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
                     
@@ -157,14 +157,14 @@
                             </span>
                             <div>
                                 <h2 class="text-3xl font-black tracking-tight">Lacak Laporan Anda</h2>
-                                <p class="text-indigo-200 text-sm">Masukkan kode tiket untuk melihat progres pengerjaan.</p>
+                                <p class="text-red-200 text-sm">Masukkan kode tiket untuk melihat progres pengerjaan.</p>
                             </div>
                         </div>
 
                         <form id="track-form" class="flex flex-col sm:flex-row gap-4">
                             @csrf
                             <input type="text" name="tracking_code" class="flex-grow px-8 py-5 rounded-2xl bg-white/10 border-2 border-white/10 focus:border-white/30 outline-none text-xl font-black tracking-widest placeholder:text-white/30 placeholder:font-normal placeholder:tracking-normal transition-all" placeholder="Masukkan Kode Tiket (Contoh: TKT-XXXXXX)" required>
-                            <button type="submit" class="px-10 py-5 bg-white text-indigo-900 font-black rounded-2xl hover:bg-indigo-50 transition-all shadow-xl text-lg shrink-0">
+                            <button type="submit" class="px-10 py-5 bg-white text-red-900 font-black rounded-2xl hover:bg-red-50 transition-all shadow-xl text-lg shrink-0">
                                 Cek Status
                             </button>
                         </form>
@@ -201,7 +201,7 @@
 
     {{-- Success Modal --}}
     <div id="success-modal" class="hidden fixed inset-0 z-[999] items-center justify-center p-4">
-        <div class="absolute inset-0 bg-indigo-950/60 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 bg-red-950/60 backdrop-blur-sm"></div>
         <div class="relative bg-white rounded-[3rem] max-w-md w-full p-10 text-center shadow-2xl transition-all duration-300">
             <div class="w-20 h-20 bg-green-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
                 <svg class="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -212,8 +212,8 @@
             <p class="text-gray-500 mb-8 leading-relaxed">Harap simpan kode tiket berikut untuk melacak laporan Anda:</p>
             
             <div class="bg-gray-50 rounded-[2rem] p-8 mb-8 border-2 border-dashed border-gray-200 group relative">
-                <span id="display-tracking-code" class="text-4xl font-black text-indigo-700 tracking-widest font-mono"></span>
-                <button onclick="copyTrackingCode()" class="block mx-auto mt-4 text-sm text-indigo-600 font-black hover:text-indigo-800 transition-all flex items-center justify-center gap-2 w-full py-2 bg-indigo-50 rounded-xl">
+                <span id="display-tracking-code" class="text-4xl font-black text-red-700 tracking-widest font-mono"></span>
+                <button onclick="copyTrackingCode()" class="block mx-auto mt-4 text-sm text-red-600 font-black hover:text-red-800 transition-all flex items-center justify-center gap-2 w-full py-2 bg-red-50 rounded-xl">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
@@ -229,7 +229,7 @@
 
     {{-- Modal Konfirmasi Penutupan (Kustom) --}}
     <div id="confirm-modal" class="hidden fixed inset-0 z-[1000] items-center justify-center p-4">
-        <div class="absolute inset-0 bg-indigo-950/80 backdrop-blur-md"></div>
+        <div class="absolute inset-0 bg-red-950/80 backdrop-blur-md"></div>
         <div class="relative bg-white rounded-[2.5rem] max-w-sm w-full p-10 text-center shadow-2xl">
             <div class="w-20 h-20 bg-amber-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
                 <svg class="w-10 h-10 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -241,7 +241,7 @@
                 Tanpa kode ini, Anda tidak akan bisa melihat balasan dari Admin. Pastikan Anda sudah mencatat atau menyalinnya.
             </p>
             <div class="flex flex-col gap-3">
-                <button onclick="finalClose()" class="w-full bg-indigo-600 text-white font-black py-4 rounded-2xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200">
+                <button onclick="finalClose()" class="w-full bg-red-600 text-white font-black py-4 rounded-2xl hover:bg-red-700 transition-all shadow-lg shadow-red-200">
                     Ya, Sudah Simpan
                 </button>
                 <button onclick="cancelClose()" class="w-full bg-gray-100 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-200 transition-all">
@@ -353,7 +353,7 @@
         e.preventDefault();
         const formData = new FormData(trackForm);
         
-        resultContent.innerHTML = '<div class="flex justify-center py-12"><div class="animate-spin rounded-full h-12 w-12 border-t-4 border-indigo-600"></div></div>';
+        resultContent.innerHTML = '<div class="flex justify-center py-12"><div class="animate-spin rounded-full h-12 w-12 border-t-4 border-red-600"></div></div>';
         trackResult.classList.remove('hidden');
 
         try {
@@ -399,10 +399,10 @@
 
                         ${r.admin_feedback ? `
                         <div class="mt-10 pt-10 border-t border-gray-100">
-                            <span class="text-indigo-600 block text-[10px] uppercase font-black tracking-widest mb-4">Tanggapan Admin</span>
-                            <div class="bg-indigo-50 rounded-[2.5rem] p-8 sm:p-10 text-indigo-900 border border-indigo-100 shadow-inner">
+                            <span class="text-red-600 block text-[10px] uppercase font-black tracking-widest mb-4">Tanggapan Admin</span>
+                            <div class="bg-red-50 rounded-[2.5rem] p-8 sm:p-10 text-red-900 border border-red-100 shadow-inner">
                                 <p class="text-xl font-medium leading-relaxed mb-6">${r.admin_feedback}</p>
-                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full text-[10px] text-indigo-400 font-bold uppercase tracking-wider">
+                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full text-[10px] text-red-400 font-bold uppercase tracking-wider">
                                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                     Dibalas pada: ${r.handled_at}
                                 </div>

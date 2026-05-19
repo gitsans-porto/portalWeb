@@ -25,19 +25,19 @@ class MadingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'        => 'required|max:255',
-            'content'      => 'required',
-            'image'        => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'category'     => 'required|string',
-            'author_name'  => 'required|max:100',
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
+            'category' => 'required|string',
+            'author_name' => 'required|max:100',
             'author_class' => 'nullable|max:100',
             'published_at' => 'nullable|date',
         ]);
 
-        $data                 = $request->except('image');
-        $data['slug']         = Str::slug($request->title) . '-' . uniqid();
+        $data = $request->except('image');
+        $data['slug'] = Str::slug($request->title) . '-' . uniqid();
         $data['color_accent'] = 'red';   // hardcoded, not shown in UI
-        $data['is_pinned']    = false;   // hardcoded, not shown in UI
+        $data['is_pinned'] = false;   // hardcoded, not shown in UI
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('mading', 'public');
@@ -51,7 +51,7 @@ class MadingController extends Controller
 
     public function edit(string $id)
     {
-        $post       = Mading::findOrFail($id);
+        $post = Mading::findOrFail($id);
         $categories = Mading::categoryLabels();
         return view('admin.mading.edit', compact('post', 'categories'));
     }
@@ -61,11 +61,11 @@ class MadingController extends Controller
         $post = Mading::findOrFail($id);
 
         $request->validate([
-            'title'        => 'required|max:255',
-            'content'      => 'required',
-            'image'        => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'category'     => 'required|string',
-            'author_name'  => 'required|max:100',
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
+            'category' => 'required|string',
+            'author_name' => 'required|max:100',
             'author_class' => 'nullable|max:100',
             'published_at' => 'nullable|date',
         ]);

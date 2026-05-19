@@ -44,9 +44,21 @@ class MadingController extends Controller
             ->where('published_at', '<=', now())
             ->firstOrFail();
 
-        $post->increment('views');
+        // Prevent view count spam by using session
+        $sessionKey = 'viewed_mading_' . $post->id;
+        if (!session()->has($sessionKey)) {
+            $post->increment('views');
+            session()->put($sessionKey, true);
+        }
 
-        return view('mading.show', compact('post'));
+        $latestMading = Mading::whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->where('id', '!=', $post->id)
+            ->orderByDesc('published_at')
+            ->take(5)
+            ->get();
+
+        return view('mading.show', compact('post', 'latestMading'));
     }
 
     public function create()
@@ -58,19 +70,20 @@ class MadingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'        => 'required|max:255',
-            'content'      => 'required',
-            'image'        => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'category'     => 'required|string',
-            'author_name'  => 'required|max:100',
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
+            'category' => 'required|string',
+            'author_name' => 'required|max:100',
             'author_class' => 'nullable|max:100',
+            'references' => 'nullable|string|max:2000',
         ]);
 
-        $data                 = $request->except('image');
-        $data['slug']         = Str::slug($request->title) . '-' . uniqid();
-        $data['color_accent'] = 'red';   // hardcoded
-        $data['is_pinned']    = false;   // hardcoded
-        $data['published_at'] = null;    // null means draft/pending
+        $data = $request->except('image');
+        $data['slug'] = Str::slug($request->title) . '-' . uniqid();
+        $data['color_accent'] = 'red';
+        $data['is_pinned'] = false;
+        $data['published_at'] = null;
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('mading', 'public');
@@ -80,5 +93,22 @@ class MadingController extends Controller
 
         return redirect()->route('mading.index')
             ->with('success', 'Postinganmu berhasil ditempel dan sedang menunggu review admin!');
+    }
+
+    /**
+     * Handle image upload from TinyMCE (public, for mading create form)
+     */
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,webp|max:3072',
+        ]);
+
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->store('mading/inline', 'public');
+            return response()->json(['location' => asset('storage/' . $path)]);
+        }
+
+        return response()->json(['error' => 'Upload gagal'], 400);
     }
 }

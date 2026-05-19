@@ -5,6 +5,7 @@
 @section('content')
 
     {{-- ===== HEADER ===== --}}
+<<<<<<< HEAD
     <section class="detail-hero" style="min-height: 0; padding-top: 7rem; padding-bottom: 2rem;">
         <div class="detail-hero-bg" style="background-image: url('{{ asset('images/gambarSekolah.jpeg') }}')"></div>
         <div class="detail-hero-overlay"></div>
@@ -31,6 +32,35 @@
                     Bagikan tulisan, poster, atau momen serumu ke seluruh warga sekolah.
                 </p>
             </div>
+=======
+    <section
+        style="background: #f8f9fc; padding: 48px 0 60px; border-bottom: 1px solid #e2e8f0; position: relative; overflow: hidden;">
+        <div
+            style="position:absolute; top:-20px; right:-20px; width:150px; height:150px; background:rgba(220,38,38,0.03); border-radius:50%; blur:60px;">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a href="{{ route('mading.index') }}"
+                style="display:inline-flex;align-items:center;gap:8px;color:#64748b;
+                          font-size:0.85rem;font-weight:700;text-decoration:none;margin-bottom:28px;
+                          padding:8px 16px; background:white; border:1px solid #e2e8f0; border-radius:12px; transition:all 0.2s;"
+                onmouseenter="this.style.borderColor='#dc2626';this.style.color='#dc2626';this.style.transform='translateX(-4px)';"
+                onmouseleave="this.style.borderColor='#e2e8f0';this.style.color='#64748b';this.style.transform='translateX(0)';">
+                <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Kembali ke Mading
+            </a>
+
+            <h1 style="font-size:clamp(1.75rem,5vw,2.5rem);font-weight:900;color:#1e293b;
+                           line-height:1.2;margin:0 0 12px; letter-spacing:-0.02em;">
+                Buat <span style="color:#dc2626;">Karya</span> Baru
+            </h1>
+            <p style="color:#64748b; font-size:1rem; max-width:600px; line-height:1.6;">
+                Bagikan tulisan, poster, atau momen serumu ke seluruh warga sekolah.
+                Karyamu akan tayang setelah direview oleh tim redaksi.
+            </p>
+>>>>>>> e589073fd1916c50204875066b7b7c8cf7c27336
         </div>
     </section>
 
@@ -90,38 +120,12 @@
                                 </div>
                             </div>
 
-                            {{-- Title --}}
-                            <div class="input-group">
-                                <label
-                                    style="display:block; font-size:0.75rem; font-weight:800; color:#1e293b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
-                                    Judul / Topik <span style="color:#ef4444;">*</span>
-                                </label>
-                                <input type="text" name="title" id="title" value="{{ old('title') }}" required
-                                    style="width:100%; padding:16px 20px; border-radius:16px; border:1.5px solid #e2e8f0; font-size:1.25rem; font-weight:800; transition:all 0.2s;"
-                                    placeholder="Apa yang ingin kamu bagikan?" oninput="updatePreview()">
-                                @error('title') <p style="color:#ef4444; font-size:0.75rem; margin-top:8px;">{{ $message }}
-                                </p> @enderror
-                            </div>
 
-                            {{-- Content --}}
+                            {{-- Image Upload (PALING ATAS) --}}
                             <div class="input-group">
                                 <label
                                     style="display:block; font-size:0.75rem; font-weight:800; color:#1e293b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
-                                    Isi Cerita / Deskripsi <span style="color:#ef4444;">*</span>
-                                </label>
-                                <textarea name="content" id="content" rows="8" required
-                                    style="width:100%; padding:20px; border-radius:16px; border:1.5px solid #e2e8f0; font-size:1rem; line-height:1.6; transition:all 0.2s; resize:vertical;"
-                                    placeholder="Tuliskan detail karyamu di sini..."
-                                    oninput="updatePreview()">{{ old('content') }}</textarea>
-                                @error('content') <p style="color:#ef4444; font-size:0.75rem; margin-top:8px;">
-                                {{ $message }}</p> @enderror
-                            </div>
-
-                            {{-- Image Upload --}}
-                            <div class="input-group">
-                                <label
-                                    style="display:block; font-size:0.75rem; font-weight:800; color:#1e293b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
-                                    Lampiran Gambar <span
+                                    Gambar Utama <span
                                         style="color:#94a3b8; font-weight:600; text-transform:none;">(Opsional)</span>
                                 </label>
                                 <div id="dropzone"
@@ -147,6 +151,54 @@
                                             style="position:absolute; top:-10px; right:50%; transform:translateX(100px); background:#ef4444; color:white; border:none; width:24px; height:24px; border-radius:50%; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center;">&times;</button>
                                     </div>
                                 </div>
+                            </div>
+
+                            {{-- Title --}}
+                            <div class="input-group">
+                                <label
+                                    style="display:block; font-size:0.75rem; font-weight:800; color:#1e293b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
+                                    Judul / Topik <span style="color:#ef4444;">*</span>
+                                </label>
+                                <input type="text" name="title" id="title" value="{{ old('title') }}" required
+                                    style="width:100%; padding:16px 20px; border-radius:16px; border:1.5px solid #e2e8f0; font-size:1.25rem; font-weight:800; transition:all 0.2s;"
+                                    placeholder="Apa yang ingin kamu bagikan?" oninput="updatePreview()">
+                                @error('title') <p style="color:#ef4444; font-size:0.75rem; margin-top:8px;">{{ $message }}
+                                </p> @enderror
+                            </div>
+
+                            {{-- Content (Quill Rich Text Editor) --}}
+                            <div class="input-group">
+                                <label
+                                    style="display:block; font-size:0.75rem; font-weight:800; color:#1e293b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
+                                    Isi Cerita / Deskripsi <span style="color:#ef4444;">*</span>
+                                </label>
+                                <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:10px;">Gunakan toolbar untuk
+                                    menambahkan <strong>Sub Judul</strong>, huruf <strong>tebal</strong>, miring, ukuran
+                                    teks, dan lainnya.</p>
+                                <textarea name="content" id="content" style="display:none;">{{ old('content') }}</textarea>
+                                <div id="quill-editor"
+                                    style="min-height:320px; border-radius:16px; border:1.5px solid #e2e8f0; font-size:1rem; background:white;">
+                                </div>
+                                @error('content') <p style="color:#ef4444; font-size:0.75rem; margin-top:8px;">
+                                {{ $message }}</p> @enderror
+                            </div>
+
+                            {{-- References / Pustaka (Opsional) --}}
+                            <div class="input-group">
+                                <label
+                                    style="display:block; font-size:0.75rem; font-weight:800; color:#1e293b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+                                    Daftar Pustaka / Sumber
+                                    <span style="color:#94a3b8; font-weight:600; text-transform:none;">(Opsional)</span>
+                                </label>
+                                <div id="referencesContainer" style="display:flex; flex-direction:column; gap:12px;">
+                                    {{-- Hidden textarea to store the combined value for backend --}}
+                                    <textarea name="references" id="references"
+                                        style="display:none;">{{ old('references') }}</textarea>
+
+                                    {{-- JS will render inputs here --}}
+                                </div>
+                                @error('references') <p style="color:#ef4444; font-size:0.75rem; margin-top:8px;">
+                                {{ $message }}</p> @enderror
                             </div>
 
                             <button type="submit"
@@ -260,23 +312,194 @@
         }
     </style>
 
+    @push('styles')
+        {{-- Quill CSS --}}
+        <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+        <style>
+            #quill-editor .ql-editor {
+                min-height: 320px;
+                font-family: 'Inter', sans-serif;
+                font-size: 1rem;
+                line-height: 1.8;
+                color: #374151;
+                padding: 20px;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                white-space: pre-wrap;
+            }
+
+            #quill-editor .ql-editor h2 {
+                font-size: 1.5rem;
+                font-weight: 900;
+                color: #111827;
+                margin-top: 1.5rem;
+                margin-bottom: 0.5rem;
+                border-left: 4px solid #dc2626;
+                padding-left: 12px;
+            }
+
+            #quill-editor .ql-editor h3 {
+                font-size: 1.2rem;
+                font-weight: 800;
+                color: #dc2626;
+                margin-top: 1rem;
+                margin-bottom: 0.4rem;
+            }
+
+            #quill-editor .ql-editor blockquote {
+                border-left: 4px solid #fca5a5;
+                background: #fff1f2;
+                padding: 12px 20px;
+                border-radius: 8px;
+                color: #6b7280;
+            }
+
+            #quill-editor .ql-toolbar {
+                border-radius: 16px 16px 0 0;
+                border-color: #e2e8f0;
+                background: #f8fafc;
+            }
+
+            #quill-editor .ql-container {
+                border-radius: 0 0 16px 16px;
+                border-color: #e2e8f0;
+            }
+
+            /* Fix Quill SVG icon sizing */
+            #quill-editor .ql-toolbar svg,
+            #quill-editor .ql-snow svg {
+                width: 18px !important;
+                height: 18px !important;
+                display: inline-block !important;
+            }
+        </style>
+    @endpush
+
     @push('scripts')
+        {{-- Quill JS --}}
+        <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
         <script>
             const categories = @json($categories);
 
+            // Init Quill
+            const quill = new Quill('#quill-editor', {
+                theme: 'snow',
+                placeholder: 'Tuliskan isi cerita, puisi, atau karyamu di sini...',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'size': ['small', false, 'large', 'huge'] }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'align': [] }],
+                        ['blockquote'],
+                        ['clean']
+                    ]
+                }
+            });
+
+            // Isi nilai lama (jika ada error validasi)
+            const oldContent = document.getElementById('content').value;
+            if (oldContent) {
+                quill.root.innerHTML = oldContent;
+            }
+            // Sync real-time
+            quill.on('text-change', function() {
+                document.getElementById('content').value = quill.root.innerHTML;
+                updatePreviewFromQuill(); // if applicable
+            });
+
+            // Sebelum submit: copy isi Quill ke hidden textarea & combine references
+            document.getElementById('madingForm').addEventListener('submit', function () {
+                document.getElementById('content').value = quill.root.innerHTML;
+
+                // Combine references
+                const refInputs = document.querySelectorAll('.ref-input');
+                let refs = [];
+                refInputs.forEach(input => {
+                    if (input.value.trim() !== '') {
+                        refs.push(input.value.trim());
+                    }
+                });
+                document.getElementById('references').value = refs.join('\n');
+            });
+
+            // Dynamic References Logic
+            const refContainer = document.getElementById('referencesContainer');
+            const oldRefs = document.getElementById('references').value.split('\n').filter(r => r.trim() !== '');
+
+            function createRefInput(val = '', index = 0, isLast = false) {
+                const wrapper = document.createElement('div');
+                wrapper.style.display = 'flex';
+                wrapper.style.alignItems = 'center';
+                wrapper.style.gap = '10px';
+
+                const number = document.createElement('span');
+                number.innerText = (index + 1) + '.';
+                number.style.fontSize = '0.9rem';
+                number.style.fontWeight = '700';
+                number.style.color = '#94a3b8';
+                number.style.width = '24px';
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'ref-input';
+                input.value = val;
+                input.placeholder = (index === 0) ? 'Contoh: Kompas.com - Judul (Opsional)' : '(Opsional)';
+                input.style.flex = '1';
+                input.style.padding = '12px 16px';
+                input.style.borderRadius = '12px';
+                input.style.border = '1.5px solid #e2e8f0';
+                input.style.fontSize = '0.95rem';
+
+                input.addEventListener('input', () => {
+                    // Check if this is the last input and it's being typed in
+                    const allInputs = document.querySelectorAll('.ref-input');
+                    const lastInput = allInputs[allInputs.length - 1];
+
+                    if (input === lastInput && input.value.trim() !== '') {
+                        refContainer.appendChild(createRefInput('', allInputs.length, true));
+                    }
+                });
+
+                wrapper.appendChild(number);
+                wrapper.appendChild(input);
+                return wrapper;
+            }
+
+            // Init references
+            if (oldRefs.length > 0) {
+                oldRefs.forEach((ref, idx) => {
+                    refContainer.appendChild(createRefInput(ref, idx, false));
+                });
+                refContainer.appendChild(createRefInput('', oldRefs.length, true));
+            } else {
+                refContainer.appendChild(createRefInput('', 0, true));
+            }
+
+            // Update preview dari Quill
+            function updatePreviewFromQuill() {
+                const text = quill.getText().trim();
+                document.getElementById('previewContent').innerText =
+                    text.substring(0, 120) || 'Detail ceritamu akan terlihat di sini sebagai ringkasan...';
+            }
+
+            quill.on('text-change', function () {
+                updatePreviewFromQuill();
+            });
+
             function updatePreview() {
                 const title = document.getElementById('title').value;
-                const content = document.getElementById('content').value;
                 const author = document.getElementById('author_name').value;
                 const className = document.getElementById('author_class').value;
                 const categoryKey = document.querySelector('input[name="category"]:checked')?.value;
 
                 document.getElementById('previewTitle').innerText = title || 'Judul karyamu muncul di sini...';
-                document.getElementById('previewContent').innerText = content || 'Detail ceritamu akan terlihat di sini sebagai ringkasan...';
                 document.getElementById('previewAuthor').innerText = author || 'Nama Penulis';
                 document.getElementById('previewClass').innerText = className || 'Kelas / Instansi';
                 document.getElementById('previewAvatar').innerText = (author ? author.charAt(0).toUpperCase() : '?');
                 document.getElementById('previewCategory').innerText = categories[categoryKey] || 'Kategori';
+                updatePreviewFromQuill();
             }
 
             function handleImage(input) {

@@ -12,6 +12,7 @@ class Mading extends Model
         'title',
         'slug',
         'content',
+        'references',
         'excerpt',
         'image',
         'category',
