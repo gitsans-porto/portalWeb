@@ -59,9 +59,6 @@
                     <div class="nav-item-dropdown">
                         <a href="{{ route('beranda') }}#layanan" class="nav-link whitespace-nowrap">
                             Layanan
-                            <svg class="nav-arrow inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-                            </svg>
                         </a>
                         <div class="dropdown-menu">
                             <a href="{{ route('layanan.detail', 'e-raport') }}" class="dropdown-link">E-Raport</a>
@@ -75,9 +72,6 @@
                     <div class="nav-item-dropdown">
                         <a href="{{ route('beranda') }}#profil" class="nav-link whitespace-nowrap">
                             Profil
-                            <svg class="nav-arrow inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-                            </svg>
                         </a>
                         <div class="dropdown-menu">
                             <a href="{{ route('profil.tentang') }}" class="dropdown-link">Tentang Sekolah</a>
@@ -134,9 +128,6 @@
             <div class="mobile-nav-group">
                 <button class="mobile-dropdown-btn">
                     Layanan
-                    <svg class="nav-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
                 </button>
                 <div class="mobile-submenu">
                     <a href="{{ route('layanan.detail', 'e-raport') }}" class="nav-link !pl-10 !border-none !text-sm">E-Raport</a>
@@ -150,9 +141,6 @@
             <div class="mobile-nav-group">
                 <button class="mobile-dropdown-btn">
                     Profil
-                    <svg class="nav-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
                 </button>
                 <div class="mobile-submenu">
                     <a href="{{ route('profil.tentang') }}" class="nav-link !pl-10 !border-none !text-sm">Tentang Sekolah</a>
