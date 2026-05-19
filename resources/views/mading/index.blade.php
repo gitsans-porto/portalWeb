@@ -6,28 +6,27 @@
 @section('content')
 
 {{-- ===== PAGE HEADER ===== --}}
-<section style="background: linear-gradient(135deg, #f8f9fc 0%, #eff6ff 100%); padding: 60px 0 40px; position: relative; overflow: hidden; border-bottom: 1px solid #e2e8f0;">
-    <div style="position:absolute; top:-100px; right:-100px; width:400px; height:400px; background:rgba(220,38,38,0.03); border-radius:50%; blur:100px;"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="position:relative;z-index:1;">
-        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
-            <div>
-                <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
-                    <span style="background:#fee2e2; color:#dc2626; padding:4px 12px; border-radius:99px; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">Community</span>
-                    <h1 style="font-size:2.5rem;font-weight:900;color:#1e293b;line-height:1;margin:0;">Mading <span style="color:#dc2626;">Sekolah</span></h1>
-                </div>
-                <p style="color:#64748b;font-size:1rem;max-width:500px;line-height:1.6;margin:0;">
-                    Ruang kreasi dan berbagi untuk cerpen, cerita organisasi, dan pengumuman.
-                </p>
-            </div>
-            <a href="{{ route('mading.create') }}"
-               style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:16px;background:#dc2626;color:white;font-weight:800;font-size:0.95rem;text-decoration:none;box-shadow:0 10px 25px -5px rgba(220,38,38,0.4);transition:all 0.3s;"
-               onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 15px 30px -5px rgba(220,38,38,0.5)'"
-               onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 25px -5px rgba(220,38,38,0.4)'">
-                <svg style="width:20px;height:20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-                </svg>
-                Buat Postingan
-            </a>
+<section class="detail-hero" style="min-height: 0; padding-top: 7rem; padding-bottom: 2rem;">
+    <div class="detail-hero-bg" style="background-image: url('{{ asset('images/gambarSekolah.jpeg') }}')"></div>
+    <div class="detail-hero-overlay"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {{-- Breadcrumb --}}
+        <nav class="flex items-center justify-center gap-2 text-sm text-white/40 mb-4">
+            <a href="{{ route('beranda') }}" class="hover:text-white/70 transition-colors">Beranda</a>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+            <span class="text-white/70">Mading Digital</span>
+        </nav>
+
+        <div class="flex flex-col items-center text-center">
+            <h1 class="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight leading-tight">
+                Mading <span style="color:#fca5a5;">Sekolah</span>
+            </h1>
+            <p class="text-sm text-white/70 max-w-xl leading-relaxed">
+                Ruang kreasi dan berbagi untuk cerpen, cerita organisasi, dan pengumuman dari warga sekolah.
+            </p>
         </div>
     </div>
 </section>
