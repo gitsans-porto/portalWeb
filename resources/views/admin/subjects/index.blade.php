@@ -46,6 +46,7 @@
         <table class="w-full text-left border-collapse">
             <thead>
                 <tr class="border-b border-gray-100">
+                    <th class="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">Foto</th>
                     <th class="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">Nama Jurusan</th>
                     <th class="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">Kode</th>
                     <th class="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">Mapel Aktif</th>
@@ -55,11 +56,20 @@
             <tbody class="divide-y divide-gray-100">
                 @forelse($majors as $major)
                 <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="py-4 px-6">
+                        @if($major->image_path)
+                            <img src="{{ Storage::url($major->image_path) }}" alt="Foto Jurusan" class="w-16 h-12 object-cover rounded-lg border border-gray-200">
+                        @else
+                            <div class="w-16 h-12 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center text-[10px] text-gray-400 text-center leading-tight">
+                                No<br>Image
+                            </div>
+                        @endif
+                    </td>
                     <td class="py-4 px-6 font-bold text-gray-900">{{ $major->name }}</td>
                     <td class="py-4 px-6 font-medium text-gray-600">{{ $major->code ?? '-' }}</td>
                     <td class="py-4 px-6 text-gray-500">{{ $major->curriculums_count }} Mapel</td>
                     <td class="py-4 px-6 text-right">
-                        <button onclick="editMajor({{ $major->id }}, '{{ addslashes($major->name) }}', '{{ addslashes($major->code) }}')" class="text-blue-500 hover:text-blue-700 font-bold text-sm mr-3">Edit</button>
+                        <button onclick="editMajor({{ $major->toJson() }})" class="text-blue-500 hover:text-blue-700 font-bold text-sm mr-3">Edit</button>
                         <form action="{{ route('admin.majors.destroy', $major->id) }}" method="POST" class="inline-block" id="delete-major-{{ $major->id }}">
                             @csrf
                             @method('DELETE')
@@ -182,15 +192,20 @@
     <div class="absolute inset-0 bg-black/50" onclick="document.getElementById('addMajorModal').classList.add('hidden')"></div>
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl">
         <h3 class="text-xl font-black text-gray-900 mb-6">Tambah Jurusan</h3>
-        <form action="{{ route('admin.majors.store') }}" method="POST">
+        <form action="{{ route('admin.majors.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Nama Jurusan</label>
                 <input type="text" name="name" required placeholder="contoh: Teknik Komputer dan Jaringan" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all">
             </div>
-            <div class="mb-6">
+            <div class="mb-4">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Kode Jurusan</label>
                 <input type="text" name="code" placeholder="contoh: TKJ" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all">
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">Foto Jurusan (Opsional)</label>
+                <input type="file" name="image" accept="image/*" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all text-sm">
+                <p class="text-xs text-gray-500 mt-1">Maks. 2MB. Format: JPG, PNG.</p>
             </div>
             <div class="flex justify-end gap-3">
                 <button type="button" onclick="document.getElementById('addMajorModal').classList.add('hidden')" class="px-6 py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-colors">Batal</button>
@@ -205,16 +220,23 @@
     <div class="absolute inset-0 bg-black/50" onclick="document.getElementById('editMajorModal').classList.add('hidden')"></div>
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl">
         <h3 class="text-xl font-black text-gray-900 mb-6">Edit Jurusan</h3>
-        <form id="editMajorForm" method="POST">
+        <form id="editMajorForm" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-4">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Nama Jurusan</label>
                 <input type="text" name="name" id="edit_major_name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all">
             </div>
-            <div class="mb-6">
+            <div class="mb-4">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Kode Jurusan</label>
                 <input type="text" name="code" id="edit_major_code" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all">
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">Foto Jurusan (Biarkan kosong jika tidak diubah)</label>
+                <input type="file" name="image" accept="image/*" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all text-sm">
+                <div id="current_major_image_info" class="hidden text-xs text-blue-600 font-bold mt-2 bg-blue-50 p-2 rounded-lg border border-blue-100">
+                    Sistem: Jurusan ini sudah memiliki foto tersimpan.
+                </div>
             </div>
             <div class="flex justify-end gap-3">
                 <button type="button" onclick="document.getElementById('editMajorModal').classList.add('hidden')" class="px-6 py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-colors">Batal</button>
@@ -300,10 +322,18 @@
 
 @push('scripts')
 <script>
-    function editMajor(id, name, code) {
-        document.getElementById('edit_major_name').value = name;
-        document.getElementById('edit_major_code').value = code;
-        document.getElementById('editMajorForm').action = '/admin/majors/' + id;
+    function editMajor(major) {
+        document.getElementById('edit_major_name').value = major.name;
+        document.getElementById('edit_major_code').value = major.code || '';
+        document.getElementById('editMajorForm').action = '/admin/majors/' + major.id;
+        
+        const imageInfo = document.getElementById('current_major_image_info');
+        if (major.image_path) {
+            imageInfo.classList.remove('hidden');
+        } else {
+            imageInfo.classList.add('hidden');
+        }
+
         document.getElementById('editMajorModal').classList.remove('hidden');
     }
 
