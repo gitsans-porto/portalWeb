@@ -9,40 +9,33 @@
     <section class="detail-hero relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-gray-900">
         {{-- Photo background + dark overlay --}}
         <div class="absolute inset-0 z-0">
-            <img src="{{ asset('images/stock_service.png') }}" class="w-full h-full object-cover opacity-30" alt="Background">
-            <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent"></div>
+            <img src="{{ asset('images/stock_service.png') }}" class="w-full h-full object-cover opacity-20" alt="Background">
+            <div class="absolute inset-0 bg-gray-900/80"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Breadcrumb --}}
-            <nav class="flex items-center gap-2 text-sm text-white/60 mb-8">
-                <a href="{{ route('beranda') }}" class="hover:text-white transition-colors">Beranda</a>
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-                <a href="{{ route('beranda') }}#layanan" class="hover:text-white transition-colors">Layanan</a>
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-                <span class="text-white font-medium">{{ $layanan->name }}</span>
-            </nav>
-
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
-                <div class="max-w-2xl">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-{{ $layanan->color }}-500/20 text-{{ $layanan->color }}-300 text-xs font-bold uppercase tracking-widest mb-6 border border-{{ $layanan->color }}-500/30">
-                        <span class="w-2 h-2 rounded-full bg-{{ $layanan->color }}-400"></span>
-                        Layanan Digital
-                    </div>
+            <div class="flex flex-col items-center text-center justify-center">
+                <div class="max-w-3xl flex flex-col items-center">
                     
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
                         {{ $layanan->name }}
                     </h1>
                     
-                    <p class="text-xl text-white/80 leading-relaxed font-light mb-8">
-                        {{ $layanan->tagline }}
+                    <p class="text-xl text-white/80 leading-relaxed font-light mb-8 max-w-2xl">
+                        @if($layanan->slug === 'e-raport')
+                            Sistem berbasis web untuk pengelolaan nilai dan laporan capaian kompetensi peserta didik SMK
+                        @elseif($layanan->slug === 'lms')
+                            Sistem pembelajaran digital yang memudahkan akses materi, komunikasi guru–siswa, serta keterlibatan orang tua dalam mendukung proses pendidikan
+                        @elseif($layanan->slug === 'dapodik')
+                            Sistem pendataan skala nasional yang dikelola oleh Kementerian Pendidikan Dasar dan Menengah
+                        @elseif($layanan->slug === 'pekael')
+                            Aplikasi digital yang dirancang khusus untuk mempermudah ekosistem PKL
+                        @else
+                            {{ $layanan->tagline }}
+                        @endif
                     </p>
                     
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap justify-center gap-4">
                         <a href="{{ $layanan->url }}" target="_blank" rel="noopener noreferrer"
                             class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary-dark text-white font-bold transition-all transform hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/30">
                             <span>Kunjungi Layanan</span>
