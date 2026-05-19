@@ -36,6 +36,17 @@ Sebagai sekolah rujukan, kami terus berupaya meningkatkan standar pelayanan pend
             ]
         );
 
+        // Sejarah Sekolah
+        Profile::updateOrCreate(
+            ['section' => 'sejarah'],
+            [
+                'title' => 'Sejarah SMKN 1 Limboto',
+                'short_description' => 'Jejak langkah dan perjalanan berdirinya SMK Negeri 1 Limboto.',
+                'content' => 'SMKN 1 Limboto didirikan pada tahun 1968, bermula dari kebutuhan masyarakat akan pendidikan kejuruan yang berkualitas di Kabupaten Gorontalo. Pada awalnya, sekolah ini hanya memiliki beberapa jurusan dasar yang berfokus pada keterampilan lokal.\n\nSeiring berkembangnya zaman dan kebutuhan dunia industri yang semakin kompleks, SMKN 1 Limboto terus berinovasi dan menambah program keahlian baru yang selaras dengan perkembangan teknologi informasi dan komunikasi.\n\nDari tahun ke tahun, SMKN 1 Limboto telah mencetak ribuan lulusan yang kini sukses berkarier di berbagai instansi pemerintah, perusahaan swasta, hingga menjadi wirausahawan mandiri. Jejak sejarah ini menjadi motivasi bagi kami untuk terus menjaga kualitas dan integritas lembaga pendidikan.',
+                'image' => 'images/gambarSekolah.jpeg',
+            ]
+        );
+
         // Visi & Misi
         Profile::updateOrCreate(
             ['section' => 'visi_misi'],
