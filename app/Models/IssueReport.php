@@ -10,6 +10,7 @@ class IssueReport extends Model
         'tracking_code',
         'type',
         'full_name',
+        'email',
         'role',
         'service_id',
         'category',

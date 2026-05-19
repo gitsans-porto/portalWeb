@@ -84,6 +84,7 @@ Route::post('/report-issue', [App\Http\Controllers\IssueReportController::class,
 // Pusat Pengaduan Routes
 Route::get('/pengaduan', [App\Http\Controllers\IssueReportController::class, 'index'])->name('pengaduan.index');
 Route::post('/pengaduan/track', [App\Http\Controllers\IssueReportController::class, 'track'])->name('pengaduan.track');
+Route::get('/pengaduan/status/{code}', [App\Http\Controllers\IssueReportController::class, 'publicStatus'])->name('pengaduan.status');
 
 // Bahan Ajar Routes
 use App\Http\Controllers\MaterialController;
