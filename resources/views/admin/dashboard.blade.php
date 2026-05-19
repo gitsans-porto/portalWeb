@@ -14,7 +14,7 @@
             </div>
         @endif
         {{-- Welcome Card --}}
-        <div class="relative overflow-hidden mb-10 rounded-[3rem] bg-white p-10 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-gray-100">
+        <div class="relative overflow-hidden mb-10 rounded-2xl bg-white p-10 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-gray-100">
             <div class="relative z-10 max-w-2xl">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-black uppercase tracking-widest mb-6">
                     <span class="relative flex h-2 w-2">
@@ -91,56 +91,56 @@
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
 
-            <a href="{{ route('beranda') }}" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-100 hover:border-red-200 hover:shadow-md transition-all duration-300">
+            <a href="{{ route('beranda') }}" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-gray-100 hover:border-red-200 hover:shadow-md transition-all duration-300">
                 <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                 </div>
                 <span class="text-sm font-bold text-gray-700 group-hover:text-red-600 transition-colors">Beranda</span>
             </a>
 
-            <a href="{{ route('beranda') }}#layanan" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-300">
+            <a href="{{ route('beranda') }}#layanan" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-300">
                 <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-500 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                 </div>
                 <span class="text-sm font-bold text-gray-700 group-hover:text-orange-500 transition-colors">Layanan</span>
             </a>
 
-            <a href="{{ route('materials.index') }}" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
+            <a href="{{ route('materials.index') }}" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
                 <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                 </div>
                 <span class="text-sm font-bold text-gray-700 group-hover:text-blue-600 transition-colors">Bahan Ajar</span>
             </a>
 
-            <a href="{{ route('pengaduan.index') }}" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all duration-300">
+            <a href="{{ route('pengaduan.index') }}" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all duration-300">
                 <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                 </div>
                 <span class="text-sm font-bold text-gray-700 group-hover:text-amber-500 transition-colors">Pengaduan</span>
             </a>
 
-            <a href="{{ route('beranda') }}#profil" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-100 hover:border-emerald-200 hover:shadow-md transition-all duration-300">
+            <a href="{{ route('beranda') }}#profil" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-gray-100 hover:border-emerald-200 hover:shadow-md transition-all duration-300">
                 <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                 </div>
                 <span class="text-sm font-bold text-gray-700 group-hover:text-emerald-600 transition-colors">Profil Sekolah</span>
             </a>
 
-            <a href="{{ route('berita.index') }}" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all duration-300">
+            <a href="{{ route('berita.index') }}" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all duration-300">
                 <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
                 </div>
                 <span class="text-sm font-bold text-gray-700 group-hover:text-purple-600 transition-colors">Berita</span>
             </a>
 
-            <a href="{{ route('beranda') }}#galeri" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-100 hover:border-pink-200 hover:shadow-md transition-all duration-300">
+            <a href="{{ route('beranda') }}#galeri" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-gray-100 hover:border-pink-200 hover:shadow-md transition-all duration-300">
                 <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center group-hover:bg-pink-600 group-hover:text-white transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                 </div>
                 <span class="text-sm font-bold text-gray-700 group-hover:text-pink-600 transition-colors">Galeri</span>
             </a>
 
-            <a href="{{ route('beranda') }}#kontak" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-100 hover:border-teal-200 hover:shadow-md transition-all duration-300">
+            <a href="{{ route('beranda') }}#kontak" target="_blank" class="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-gray-100 hover:border-teal-200 hover:shadow-md transition-all duration-300">
                 <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                 </div>
@@ -152,7 +152,7 @@
         {{-- ===== Edit Statistik Beranda ===== --}}
         <div class="mt-10">
             <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-5">Edit Statistik Beranda</h2>
-            <form action="{{ route('admin.settings.update') }}" method="POST" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+            <form action="{{ route('admin.settings.update') }}" method="POST" class="bg-white rounded-xl border border-gray-100 shadow-sm p-8">
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
