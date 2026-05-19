@@ -40,18 +40,26 @@ class PortalController extends Controller
     }
 
     /**
-     * Halaman Detail Layanan
+     * Halaman Detail Layanan (Informasi)
      */
     public function layanan(string $slug)
     {
         $layanan = Service::where('slug', $slug)->firstOrFail();
         
-        // Fetch 3 other services for the "Layanan Lainnya" section
-        $otherServices = Service::where('slug', '!=', $slug)
-                                ->take(3)
-                                ->get();
+        // Fetch other services for navigation sidebar
+        $otherServices = Service::where('slug', '!=', $slug)->get();
 
         return view('layanan', compact('layanan', 'otherServices'));
+    }
+
+    /**
+     * Halaman Dokumentasi / Panduan Lengkap Layanan
+     */
+    public function dokumentasi(string $slug)
+    {
+        $layanan = Service::where('slug', $slug)->firstOrFail();
+
+        return view('layanan.dokumentasi', compact('layanan'));
     }
 
     /**

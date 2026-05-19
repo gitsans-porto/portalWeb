@@ -27,9 +27,9 @@
             </div>
             <div>
                 <label class="block text-xs font-black text-gray-400 uppercase tracking-wider mb-2">Caption Singkat (Opsional)</label>
-                <div class="flex gap-4">
-                    <input type="text" name="caption" placeholder="Contoh: Praktek Jurusan TKJ" class="flex-1 px-5 py-3 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-red-100 outline-none font-medium text-sm">
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-md transition-colors shadow-sm text-sm whitespace-nowrap">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <input type="text" name="caption" placeholder="Contoh: Praktek Jurusan TKJ" class="flex-1 w-full px-5 py-3 rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-red-100 outline-none font-medium text-sm">
+                    <button type="submit" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-md transition-colors shadow-sm text-sm whitespace-nowrap">
                         Unggah Foto
                     </button>
                 </div>

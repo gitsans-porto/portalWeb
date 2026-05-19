@@ -33,10 +33,7 @@
 
             {{-- FORMULIR LAPORAN --}}
             <div class="bg-white rounded-[3rem] shadow-xl shadow-gray-200/50 border border-gray-100 p-8 sm:p-12 mb-10 reveal">
-                <div class="flex items-center gap-5 mb-10">
-                    <span class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-red-100">
-                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                    </span>
+                <div class="mb-10">
                     <div>
                         <h2 class="text-3xl font-black text-gray-900 tracking-tight">Buat Laporan Baru</h2>
                         <p class="text-gray-400 text-sm">Isi detail laporan di bawah ini. Semua laporan akan ditindaklanjuti.</p>

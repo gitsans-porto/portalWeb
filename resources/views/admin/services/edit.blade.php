@@ -86,13 +86,56 @@
                             </div>
                             <div class="grid grid-cols-1 gap-4">
                                 <input type="text" name="sop[{{ $index }}][title]" value="{{ $step['title'] ?? '' }}" placeholder="Judul Langkah (Contoh: Login ke Sistem)" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
-                                <textarea name="sop[{{ $index }}][desc]" rows="3" placeholder="Deskripsi detail apa yang harus dilakukan..." class="tinymce-editor w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed">{{ $step['desc'] ?? '' }}</textarea>
+                                
+                                @php
+                                    $hasSub = isset($step['sub_chapters']) && count($step['sub_chapters']) > 0;
+                                @endphp
+                                <div class="quill-container bg-white rounded-xl main-quill-container {{ $hasSub ? 'hidden' : '' }}">
+                                    <div class="quill-editor" style="height: 200px;">{!! $step['desc'] ?? '' !!}</div>
+                                    <textarea name="sop[{{ $index }}][desc]" class="hidden-quill-input" style="display:none;"></textarea>
+                                </div>
+                                <div class="sub-chapter-notice text-sm text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-100 flex items-start gap-2 {{ $hasSub ? '' : 'hidden' }}">
+                                    <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    <span>Pengeditan deskripsi utama dinonaktifkan karena bab ini memiliki sub-bab. Halaman publik hanya akan menampilkan sub-bab.</span>
+                                </div>
+                                
+                                {{-- Sub Chapters --}}
+                                <div class="mt-4 pl-4 md:pl-8 border-l-2 border-red-100">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h5 class="text-xs font-black uppercase text-gray-500 tracking-widest">Sub-Bab (Opsional)</h5>
+                                        <button type="button" class="add-sub-step text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                                            + Tambah Sub-Bab
+                                        </button>
+                                    </div>
+                                    <div class="sub-chapters-container space-y-4">
+                                        @foreach($step['sub_chapters'] ?? [] as $subIndex => $subStep)
+                                            <div class="sub-step bg-white rounded-xl p-5 border border-gray-200 relative shadow-sm" data-subindex="{{ $subIndex }}">
+                                                <div class="flex justify-between items-center mb-4">
+                                                    <div class="flex items-center gap-2">
+                                                        <div class="w-6 h-6 bg-red-100 text-red-600 rounded-md flex items-center justify-center font-bold text-xs">{{ $index + 1 }}.<span class="sub-index-num">{{ $subIndex + 1 }}</span></div>
+                                                        <h6 class="text-sm font-bold text-gray-700">Sub-Bab</h6>
+                                                    </div>
+                                                    <button type="button" class="remove-sub-step text-gray-400 hover:text-red-500 transition-colors">
+                                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                                    </button>
+                                                </div>
+                                                <div class="grid grid-cols-1 gap-3">
+                                                    <input type="text" name="sop[{{ $index }}][sub_chapters][{{ $subIndex }}][title]" value="{{ $subStep['title'] ?? '' }}" placeholder="Judul Sub-Bab (Contoh: Tahap 1)" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 outline-none transition-all font-semibold text-gray-800 text-sm" required>
+                                                    <div class="quill-container bg-white rounded-lg">
+                                                        <div class="quill-editor" style="height: 150px;">{!! $subStep['desc'] ?? '' !!}</div>
+                                                        <textarea name="sop[{{ $index }}][sub_chapters][{{ $subIndex }}][desc]" class="hidden-quill-input" style="display:none;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
 
-                @if(count($sopData) == 0)
+                @if(empty($sopData) || count($sopData) == 0)
                     <div id="empty-sop" class="py-12 border-2 border-dashed border-gray-100 rounded-[2rem] text-center">
                         <p class="text-gray-400 italic">Belum ada langkah yang ditambahkan.</p>
                     </div>
@@ -198,7 +241,47 @@
         </div>
         <div class="grid grid-cols-1 gap-4">
             <input type="text" name="sop[__INDEX__][title]" placeholder="Judul Langkah" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all font-bold text-gray-900" required>
-            <textarea name="sop[__INDEX__][desc]" rows="3" placeholder="Deskripsi detail..." class="tinymce-editor w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all text-sm text-gray-600 leading-relaxed"></textarea>
+            
+            <div class="quill-container bg-white rounded-xl main-quill-container">
+                <div class="quill-editor" style="height: 200px;"></div>
+                <textarea name="sop[__INDEX__][desc]" class="hidden-quill-input" style="display:none;"></textarea>
+            </div>
+            <div class="sub-chapter-notice text-sm text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-100 flex items-start gap-2 hidden">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Pengeditan deskripsi utama dinonaktifkan karena bab ini memiliki sub-bab. Halaman publik hanya akan menampilkan sub-bab.</span>
+            </div>
+            
+            {{-- Sub Chapters --}}
+            <div class="mt-4 pl-4 md:pl-8 border-l-2 border-red-100">
+                <div class="flex items-center justify-between mb-3">
+                    <h5 class="text-xs font-black uppercase text-gray-500 tracking-widest">Sub-Bab (Opsional)</h5>
+                    <button type="button" class="add-sub-step text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                        + Tambah Sub-Bab
+                    </button>
+                </div>
+                <div class="sub-chapters-container space-y-4"></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="sub-sop-template">
+    <div class="sub-step bg-white rounded-xl p-5 border border-gray-200 relative shadow-sm" data-subindex="__SUBINDEX__">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-red-100 text-red-600 rounded-md flex items-center justify-center font-bold text-xs">__PINDEX__.<span class="sub-index-num">__NUM__</span></div>
+                <h6 class="text-sm font-bold text-gray-700">Sub-Bab</h6>
+            </div>
+            <button type="button" class="remove-sub-step text-gray-400 hover:text-red-500 transition-colors">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+            </button>
+        </div>
+        <div class="grid grid-cols-1 gap-3">
+            <input type="text" name="sop[__INDEX__][sub_chapters][__SUBINDEX__][title]" placeholder="Judul Sub-Bab (Contoh: Tahap 1)" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 outline-none transition-all font-semibold text-gray-800 text-sm" required>
+            <div class="quill-container bg-white rounded-lg">
+                <div class="quill-editor" style="height: 150px;"></div>
+                <textarea name="sop[__INDEX__][sub_chapters][__SUBINDEX__][desc]" class="hidden-quill-input" style="display:none;"></textarea>
+            </div>
         </div>
     </div>
 </template>
@@ -225,7 +308,27 @@
     </div>
 </template>
 
-<script src="https://cdn.jsdelivr.net/npm/tinymce@7/tinymce.min.js" referrerpolicy="origin"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill-image-resize-module@3.0.0/image-resize.min.js"></script>
+<style>
+    .ql-toolbar.ql-snow {
+        border-top-left-radius: 0.75rem;
+        border-top-right-radius: 0.75rem;
+        border-color: #e5e7eb;
+        background-color: #f9fafb;
+    }
+    .ql-container.ql-snow {
+        border-bottom-left-radius: 0.75rem;
+        border-bottom-right-radius: 0.75rem;
+        border-color: #e5e7eb;
+    }
+    .ql-editor {
+        font-family: inherit;
+        font-size: 0.875rem;
+        color: #4b5563;
+    }
+</style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -252,106 +355,192 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    const tinymceConfig = {
-        target: null, // akan di-set secara dinamis
-        height: 400,
-        menubar: false,
-        plugins: [
-            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'help', 'wordcount'
-        ],
-        toolbar: 'fullscreen | undo redo | blocks | ' +
-        'bold italic underline | alignleft aligncenter ' +
-        'alignright alignjustify | bullist numlist outdent indent | ' +
-        'link image media table | removeformat | help',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; color:#4a5568 }',
-        images_upload_handler: function (blobInfo, progress) {
-            return new Promise((resolve, reject) => {
-                const xhr = new XMLHttpRequest();
-                xhr.withCredentials = false;
-                xhr.open('POST', '{{ route("admin.tinymce.upload") }}');
-                
-                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                if (csrfToken) {
-                    xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+    // Quill Image Handler
+    function imageHandler() {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.onchange = () => {
+            const file = input.files[0];
+            
+            // Validate file size (max 200KB)
+            if (file.size > 200 * 1024) {
+                alert('Ukuran gambar melebihi batas 200KB! Silakan kompres gambar Anda terlebih dahulu.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            fetch('{{ route("admin.tinymce.upload") }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
-
-                xhr.upload.onprogress = (e) => {
-                    progress(e.loaded / e.total * 100);
-                };
-
-                xhr.onload = () => {
-                    if (xhr.status === 403) {
-                        reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
-                        return;
-                    }
-                    if (xhr.status < 200 || xhr.status >= 300) {
-                        reject('HTTP Error: ' + xhr.status);
-                        return;
-                    }
-
-                    const json = JSON.parse(xhr.responseText);
-
-                    if (!json || typeof json.location != 'string') {
-                        reject('Invalid JSON: ' + xhr.responseText);
-                        return;
-                    }
-                    resolve(json.location);
-                };
-
-                xhr.onerror = () => {
-                    reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
-                };
-
-                const formData = new FormData();
-                formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-                xhr.send(formData);
+            })
+            .then(response => response.json())
+            .then(result => {
+                if(result.location) {
+                    const range = this.quill.getSelection();
+                    this.quill.insertEmbed(range.index, 'image', result.location);
+                } else {
+                    alert('Upload gagal');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat mengunggah gambar');
             });
-        },
-        setup: function (editor) {
-            editor.on('change', function () {
-                editor.save();
-            });
+        };
+    }
+
+    const quillOptions = {
+        theme: 'snow',
+        modules: {
+            imageResize: {
+                displaySize: true
+            },
+            keyboard: {
+                bindings: {
+                    disableListAutofill: {
+                        key: ' ',
+                        collapsed: true,
+                        format: { list: false },
+                        prefix: /^\s*?([a-zA-Z0-9]+\.|-|\*)$/,
+                        handler: function(range, context) {
+                            this.quill.insertText(range.index, ' ');
+                            return false;
+                        }
+                    }
+                }
+            },
+            toolbar: {
+                container: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    ['clean']
+                ],
+                handlers: {
+                    image: imageHandler
+                }
+            }
         }
     };
 
-    // Inisialisasi awal pada elemen yang sudah ada
-    tinymce.init({
-        ...tinymceConfig,
-        selector: '.tinymce-editor'
+    const quillInstances = [];
+
+    // Inisialisasi Quill awal
+    document.querySelectorAll('.quill-editor').forEach(function(el) {
+        const quill = new Quill(el, quillOptions);
+        quillInstances.push({
+            quill: quill,
+            container: el.closest('.quill-container')
+        });
     });
 
-    // Form submit trigger save
+    // Form submit trigger save for Quill
     const form = document.getElementById('edit-service-form');
     if (form) {
-        form.addEventListener('submit', function() {
-            tinymce.triggerSave();
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+
+            // Remove old error messages and red borders
+            document.querySelectorAll('.quill-error-msg').forEach(el => el.remove());
+            document.querySelectorAll('.quill-container').forEach(el => {
+                el.classList.remove('border', 'border-red-500');
+            });
+
+            quillInstances.forEach(instance => {
+                const hiddenInput = instance.container.querySelector('.hidden-quill-input');
+                const isHidden = instance.container.classList.contains('hidden');
+                
+                let content = instance.quill.root.innerHTML;
+                let textContent = instance.quill.getText().trim();
+                
+                if (hiddenInput) {
+                    hiddenInput.value = content;
+                }
+
+                // If this editor is visible, validate it
+                if (!isHidden) {
+                    // It is empty if there's no text and no images
+                    if (textContent === '' && !content.includes('<img')) {
+                        isValid = false;
+                        
+                        // Add red border
+                        instance.container.classList.add('border', 'border-red-500');
+                        
+                        // Add error message text
+                        const errorMsg = document.createElement('p');
+                        errorMsg.className = 'quill-error-msg text-xs text-red-600 font-bold mt-1.5 ml-1';
+                        errorMsg.textContent = 'Bagian ini tidak boleh kosong!';
+                        instance.container.parentNode.insertBefore(errorMsg, instance.container.nextSibling);
+                    }
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+                alert('Terdapat bagian deskripsi tata cara yang masih kosong. Mohon periksa kembali!');
+                
+                // Switch to SOP tab if needed
+                const tabSop = document.getElementById('content-tab-sop');
+                if (tabSop && tabSop.style.display === 'none') {
+                    window.switchAdminTab('sop');
+                }
+            }
         });
     }
 
     // SOP logic
-    // SOP logic
     const container = document.getElementById('sop-container');
     const addButton = document.getElementById('add-step');
     const template = document.getElementById('sop-template').innerHTML;
+    const subTemplate = document.getElementById('sub-sop-template').innerHTML;
     const emptyMsg = document.getElementById('empty-sop');
 
     function updateNumbers() {
         const steps = container.querySelectorAll('.sop-step');
         steps.forEach((step, index) => {
             const num = index + 1;
+            step.dataset.index = index;
             step.querySelector('.step-number').textContent = num;
             step.querySelector('.index-num').textContent = num;
             
-            // Update input names
-            const inputs = step.querySelectorAll('input, textarea');
-            inputs.forEach(input => {
-                const name = input.getAttribute('name');
-                if (name) {
-                    input.setAttribute('name', name.replace(/\[\d+\]/, `[${index}]`));
-                }
+            // Update input names for main chapter
+            const titleInput = step.querySelector(`input[name^="sop["]`);
+            if (titleInput) titleInput.setAttribute('name', `sop[${index}][title]`);
+            const descInput = step.querySelector(`textarea[name^="sop["]`);
+            if (descInput) descInput.setAttribute('name', `sop[${index}][desc]`);
+
+            // Update sub chapters
+            const subSteps = step.querySelectorAll('.sub-step');
+            const mainQuill = step.querySelector('.main-quill-container');
+            const notice = step.querySelector('.sub-chapter-notice');
+
+            if (subSteps.length > 0) {
+                if (mainQuill) mainQuill.classList.add('hidden');
+                if (notice) notice.classList.remove('hidden');
+            } else {
+                if (mainQuill) mainQuill.classList.remove('hidden');
+                if (notice) notice.classList.add('hidden');
+            }
+
+            subSteps.forEach((subStep, subIndex) => {
+                const subNum = subIndex + 1;
+                subStep.dataset.subindex = subIndex;
+                subStep.querySelector('.sub-index-num').textContent = subNum;
+                
+                const subTitleInput = subStep.querySelector(`input[name*="[sub_chapters]"]`);
+                if (subTitleInput) subTitleInput.setAttribute('name', `sop[${index}][sub_chapters][${subIndex}][title]`);
+                const subDescInput = subStep.querySelector(`textarea[name*="[sub_chapters]"]`);
+                if (subDescInput) subDescInput.setAttribute('name', `sop[${index}][sub_chapters][${subIndex}][desc]`);
             });
         });
 
@@ -373,24 +562,73 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(div.firstElementChild);
         updateNumbers();
         
-        // Inisialisasi TinyMCE untuk textarea yang baru ditambahkan
-        const newTextarea = container.lastElementChild.querySelector('.tinymce-editor');
-        if (newTextarea) {
-            tinymce.init({
-                ...tinymceConfig,
-                target: newTextarea
+        // Inisialisasi Quill untuk elemen yang baru ditambahkan
+        const newEditor = container.lastElementChild.querySelector('.quill-editor');
+        if (newEditor) {
+            const quill = new Quill(newEditor, quillOptions);
+            quillInstances.push({
+                quill: quill,
+                container: newEditor.closest('.quill-container')
             });
         }
     });
 
     container.addEventListener('click', function(e) {
+        // Remove Main Chapter
         if (e.target.closest('.remove-step')) {
             const stepEl = e.target.closest('.sop-step');
-            const textarea = stepEl.querySelector('.tinymce-editor');
-            if (textarea && tinymce.get(textarea.id)) {
-                tinymce.get(textarea.id).remove();
-            }
+            // Remove all quills in this step from quillInstances array
+            const editorEls = stepEl.querySelectorAll('.quill-editor');
+            editorEls.forEach(editorEl => {
+                const qIndex = quillInstances.findIndex(i => i.container.contains(editorEl));
+                if(qIndex > -1) {
+                    quillInstances.splice(qIndex, 1);
+                }
+            });
             stepEl.remove();
+            updateNumbers();
+        }
+
+        // Add Sub Chapter
+        if (e.target.closest('.add-sub-step')) {
+            const stepEl = e.target.closest('.sop-step');
+            const subContainer = stepEl.querySelector('.sub-chapters-container');
+            const index = stepEl.dataset.index;
+            const pIndex = parseInt(index) + 1;
+            const subIndex = subContainer.querySelectorAll('.sub-step').length;
+
+            const html = subTemplate
+                .replace(/__INDEX__/g, index)
+                .replace(/__SUBINDEX__/g, subIndex)
+                .replace(/__PINDEX__/g, pIndex)
+                .replace(/__NUM__/g, subIndex + 1);
+
+            const div = document.createElement('div');
+            div.innerHTML = html;
+            subContainer.appendChild(div.firstElementChild);
+            updateNumbers();
+
+            const newEditor = subContainer.lastElementChild.querySelector('.quill-editor');
+            if (newEditor) {
+                const quill = new Quill(newEditor, quillOptions);
+                quillInstances.push({
+                    quill: quill,
+                    container: newEditor.closest('.quill-container')
+                });
+            }
+        }
+
+        // Remove Sub Chapter
+        if (e.target.closest('.remove-sub-step')) {
+            const subStepEl = e.target.closest('.sub-step');
+            const editorEl = subStepEl.querySelector('.quill-editor');
+            if(editorEl) {
+                const qIndex = quillInstances.findIndex(i => i.container.contains(editorEl));
+                if(qIndex > -1) {
+                    quillInstances.splice(qIndex, 1);
+                }
+            }
+            subStepEl.remove();
             updateNumbers();
         }
     });

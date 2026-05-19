@@ -244,7 +244,7 @@
     {{-- ======== STATISTIK ======== --}}
     <section class="pb-16 pt-4 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-3 gap-6 lg:gap-10 reveal">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-10 reveal">
 
                 <div class="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center mb-4">
@@ -296,44 +296,56 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="relative group">
+                {{-- Tombol Scroll Kiri --}}
+                <button onclick="scrollBeranda('news-container', -1)" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-5 z-20 bg-white shadow-lg border border-gray-100 rounded-full w-12 h-12 flex items-center justify-center text-gray-600 hover:text-primary hover:scale-110 transition-all opacity-0 group-hover:opacity-100 hidden md:flex" aria-label="Geser Kiri">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                </button>
 
-                @forelse($latestNews as $index => $item)
-                    <div class="news-card group reveal reveal-delay-{{ $index + 1 }}">
-                        <div class="news-card-image overflow-hidden aspect-video relative">
-                            @if($item->image)
-                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            @else
-                                <div class="w-full h-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                                    </svg>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="text-xs font-semibold text-white bg-red-600 px-2.5 py-1 rounded-full">
-                                    {{ $item->category ?? 'Umum' }}
-                                </span>
-                                <span class="text-xs text-gray-400">
-                                    {{ $item->published_at ? $item->published_at->format('d M Y') : $item->created_at->format('d M Y') }}
-                                </span>
+                <div id="news-container" class="flex overflow-x-auto gap-6 snap-x snap-mandatory pb-8 pt-4 -mx-4 px-4 sm:mx-0 sm:px-0" style="scrollbar-width: none;">
+
+                    @forelse($latestNews as $index => $item)
+                        <div class="news-card group flex-none w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-start">
+                            <div class="news-card-image overflow-hidden aspect-video relative">
+                                @if($item->image)
+                                    <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                @else
+                                    <div class="w-full h-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                        </svg>
+                                    </div>
+                                @endif
                             </div>
-                            <h3 class="font-bold text-gray-900 mb-2 leading-snug hover:text-red-600 transition-colors">
-                                <a href="{{ route('berita.show', $item->slug) }}">{{ $item->title }}</a>
-                            </h3>
-                            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
-                                {{ Str::limit(strip_tags($item->content), 100) }}
-                            </p>
+                            <div class="p-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-semibold text-white bg-red-600 px-2.5 py-1 rounded-full">
+                                        {{ $item->category ?? 'Umum' }}
+                                    </span>
+                                    <span class="text-xs text-gray-400">
+                                        {{ $item->published_at ? $item->published_at->format('d M Y') : $item->created_at->format('d M Y') }}
+                                    </span>
+                                </div>
+                                <h3 class="font-bold text-gray-900 mb-2 leading-snug hover:text-red-600 transition-colors">
+                                    <a href="{{ route('berita.show', $item->slug) }}">{{ $item->title }}</a>
+                                </h3>
+                                <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
+                                    {{ Str::limit(strip_tags($item->content), 100) }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                @empty
-                    <div class="col-span-full py-12 text-center">
-                        <p class="text-gray-400 italic">Belum ada berita terbaru saat ini.</p>
-                    </div>
-                @endforelse
+                    @empty
+                        <div class="w-full py-12 text-center">
+                            <p class="text-gray-400 italic">Belum ada berita terbaru saat ini.</p>
+                        </div>
+                    @endforelse
 
+                </div>
+
+                {{-- Tombol Scroll Kanan --}}
+                <button onclick="scrollBeranda('news-container', 1)" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-5 z-20 bg-white shadow-lg border border-gray-100 rounded-full w-12 h-12 flex items-center justify-center text-gray-600 hover:text-primary hover:scale-110 transition-all opacity-0 group-hover:opacity-100 hidden md:flex" aria-label="Geser Kanan">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </button>
             </div>
 
             </div>
@@ -355,21 +367,33 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6 reveal reveal-delay-2">
-                @forelse($galleries ?? [] as $index => $gallery)
-                    <div class="aspect-square relative overflow-hidden rounded-2xl group cursor-pointer shadow-sm">
-                        <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->caption ?? 'Galeri Kegiatan' }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            @if($gallery->caption)
-                                <p class="text-white font-bold text-sm lg:text-base translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{{ $gallery->caption }}</p>
-                            @endif
+            <div class="relative group">
+                {{-- Tombol Scroll Kiri --}}
+                <button onclick="scrollBeranda('gallery-container', -1)" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-5 z-20 bg-white shadow-lg border border-gray-100 rounded-full w-12 h-12 flex items-center justify-center text-gray-600 hover:text-primary hover:scale-110 transition-all opacity-0 group-hover:opacity-100 hidden md:flex" aria-label="Geser Kiri">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+
+                <div id="gallery-container" class="flex overflow-x-auto gap-4 lg:gap-6 snap-x snap-mandatory pb-8 pt-4 -mx-4 px-4 sm:mx-0 sm:px-0" style="scrollbar-width: none;">
+                    @forelse($galleries ?? [] as $index => $gallery)
+                        <div class="aspect-square relative overflow-hidden rounded-2xl group cursor-pointer shadow-sm flex-none w-[75vw] sm:w-[calc(50%-8px)] md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] snap-start">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->caption ?? 'Galeri Kegiatan' }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                @if($gallery->caption)
+                                    <p class="text-white font-bold text-sm lg:text-base translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{{ $gallery->caption }}</p>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                @empty
-                    <div class="col-span-full py-12 text-center">
-                        <p class="text-gray-400 italic">Belum ada foto kegiatan.</p>
-                    </div>
-                @endforelse
+                    @empty
+                        <div class="w-full py-12 text-center">
+                            <p class="text-gray-400 italic">Belum ada foto kegiatan.</p>
+                        </div>
+                    @endforelse
+                </div>
+
+                {{-- Tombol Scroll Kanan --}}
+                <button onclick="scrollBeranda('gallery-container', 1)" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-5 z-20 bg-white shadow-lg border border-gray-100 rounded-full w-12 h-12 flex items-center justify-center text-gray-600 hover:text-primary hover:scale-110 transition-all opacity-0 group-hover:opacity-100 hidden md:flex" aria-label="Geser Kanan">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </button>
             </div>
         </div>
     </section>
@@ -404,5 +428,31 @@
             </div>
         </div>
     </section>
+
+    @push('scripts')
+    <script>
+        function scrollBeranda(containerId, direction) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            // Scroll by slightly less than the width of one card to ensure next card is visible
+            const scrollAmount = container.clientWidth * 0.8 * direction;
+            container.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Custom styling to hide scrollbar across browsers, but allow scrolling
+        const style = document.createElement('style');
+        style.innerHTML = `
+            #news-container::-webkit-scrollbar,
+            #gallery-container::-webkit-scrollbar {
+                display: none;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+    @endpush
 
 @endsection

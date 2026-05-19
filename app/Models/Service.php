@@ -15,14 +15,17 @@ class Service extends Model
         'color',
         'icon',
         'url',
+        'docs_url',
         'audiences',
+        'features',
         'sop',
         'faq',
     ];
 
     protected $casts = [
         'audiences' => 'json',
-        'sop' => 'json',
-        'faq' => 'json',
+        'features'  => 'json',
+        'sop'       => 'json',
+        'faq'       => 'json',
     ];
 }

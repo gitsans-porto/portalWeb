@@ -92,6 +92,16 @@
     color: var(--color-text-muted, #9ca3af);
 }
 
+.navbar.scrolled #mobile-menu-btn {
+    background: var(--color-primary-50) !important;
+    border-color: var(--color-primary-100) !important;
+    color: var(--color-primary) !important;
+}
+
+.navbar.scrolled #mobile-menu-btn:hover {
+    background: var(--color-primary-100) !important;
+}
+
 .nav-link {
     position: relative;
     color: rgba(255, 255, 255, 0.9);
@@ -718,7 +728,7 @@
 .mobile-menu-overlay {
     position: fixed;
     inset: 0;
-    z-index: 90;
+    z-index: 105;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
     opacity: 0;
@@ -736,7 +746,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 95;
+    z-index: 110;
     width: 80%;
     max-width: 320px;
     background: white;

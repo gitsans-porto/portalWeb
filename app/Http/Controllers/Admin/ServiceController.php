@@ -35,15 +35,26 @@ class ServiceController extends Controller
             'url' => 'required|url',
             'sop' => 'nullable|array',
             'sop.*.title' => 'required_with:sop|string|max:255',
-            'sop.*.desc' => 'required_with:sop|string',
+            'sop.*.desc' => 'nullable|string',
+            'sop.*.sub_chapters' => 'nullable|array',
+            'sop.*.sub_chapters.*.title' => 'required_with:sop.*.sub_chapters|string|max:255',
+            'sop.*.sub_chapters.*.desc' => 'nullable|string',
             'faq' => 'nullable|array',
             'faq.*.q' => 'required_with:faq|string|max:255',
             'faq.*.a' => 'required_with:faq|string',
         ]);
 
+        // Process sub_chapters to ensure numeric keys if they exist
+        $sopData = isset($validated['sop']) ? array_values($validated['sop']) : [];
+        foreach ($sopData as &$step) {
+            if (isset($step['sub_chapters']) && is_array($step['sub_chapters'])) {
+                $step['sub_chapters'] = array_values($step['sub_chapters']);
+            }
+        }
+
         $service->update([
             'url' => $validated['url'],
-            'sop' => isset($validated['sop']) ? array_values($validated['sop']) : [], // ensure numeric keys
+            'sop' => $sopData,
             'faq' => isset($validated['faq']) ? array_values($validated['faq']) : [], // ensure numeric keys
         ]);
 

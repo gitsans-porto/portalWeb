@@ -20,7 +20,7 @@ class AdminController extends Controller
     public function uploadImage(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:200',
         ]);
 
         if ($request->hasFile('file')) {

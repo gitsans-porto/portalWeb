@@ -29,6 +29,8 @@
             z-index: 50;
             transition: all 0.3s ease;
             border-right: 1px solid rgba(0,0,0,0.06); /* Subtle border instead of color contrast */
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar-link {
@@ -129,6 +131,7 @@
             .main-content {
                 margin-left: 0;
                 padding: 24px 20px;
+            }
         }
 
         /* Alert Circular Progress Animation */
@@ -153,7 +156,7 @@
     {{-- Sidebar --}}
     <aside class="admin-sidebar" id="adminSidebar">
         {{-- Logo Area --}}
-        <div class="px-8 py-10 flex items-center gap-3">
+        <div class="px-8 py-10 flex items-center gap-3 flex-shrink-0">
             <div class="w-12 h-12 bg-white border border-gray-200 rounded-xl flex items-center justify-center p-1.5 overflow-hidden shadow-sm">
                 <img src="{{ asset('images/LogoSMKN1LimbotoNoBG.png') }}" alt="Logo SMKN 1 Limboto" class="w-full h-full object-contain">
             </div>
@@ -164,7 +167,7 @@
         </div>
 
         {{-- Nav Links --}}
-        <nav class="mt-4">
+        <nav class="flex-1 overflow-y-auto pb-4" style="scrollbar-width: none;">
             <a href="{{ route('beranda') }}" target="_blank" class="sidebar-link">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -271,19 +274,21 @@
                 <span>Laporan Masalah</span>
             </a>
 
-            {{-- Logout --}}
-            <div class="absolute bottom-6 left-0 right-0 px-4">
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="sidebar-link w-[calc(100%-32px)] border-none bg-transparent cursor-pointer">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                        <span>Keluar</span>
-                    </button>
-                </form>
-            </div>
+            {{-- Logout is moved out of nav to be fixed at bottom --}}
         </nav>
+
+        {{-- Logout --}}
+        <div class="p-4 border-t border-gray-100 flex-shrink-0">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="sidebar-link w-full border-none bg-transparent cursor-pointer !m-0 justify-start">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span>Keluar</span>
+                </button>
+            </form>
+        </div>
     </aside>
 
     {{-- Overlay for mobile --}}
