@@ -5,62 +5,43 @@
 @section('content')
 
     {{-- ===== HEADER ===== --}}
-<<<<<<< HEAD
     <section class="detail-hero" style="min-height: 0; padding-top: 7rem; padding-bottom: 2rem;">
-        <div class="detail-hero-bg" style="background-image: url('{{ asset('images/gambarSekolah.jpeg') }}')"></div>
+        <div class="detail-hero-bg" style="background-color: #111827; background-image: url('{{ asset('images/gambarSekolah.jpeg') }}')"></div>
         <div class="detail-hero-overlay"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {{-- Breadcrumb --}}
-            <nav class="flex items-center justify-center gap-2 text-sm text-white/40 mb-4">
-                <a href="{{ route('beranda') }}" class="hover:text-white/70 transition-colors">Beranda</a>
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-                <a href="{{ route('mading.index') }}" class="hover:text-white/70 transition-colors">Mading Digital</a>
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-                <span class="text-white/70">Buat Karya</span>
-            </nav>
+            {{-- Breadcrumb & Back Button --}}
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+                <a href="{{ route('mading.index') }}"
+                    class="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+                    style="font-size: 0.85rem; font-weight: 700; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; backdrop-filter: blur(4px);">
+                    <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Kembali ke Mading
+                </a>
 
-            <div class="flex flex-col items-center text-center">
+                <nav class="flex items-center gap-2 text-sm text-white/40">
+                    <a href="{{ route('beranda') }}" class="hover:text-white/70 transition-colors">Beranda</a>
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                    <a href="{{ route('mading.index') }}" class="hover:text-white/70 transition-colors">Mading Digital</a>
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                    <span class="text-white/70">Buat Karya</span>
+                </nav>
+            </div>
+
+            <div class="flex flex-col items-center text-center mt-4">
                 <h1 class="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight leading-tight">
                     Buat <span style="color:#fca5a5;">Karya</span> Baru
                 </h1>
                 <p class="text-sm text-white/70 max-w-xl leading-relaxed">
-                    Bagikan tulisan, poster, atau momen serumu ke seluruh warga sekolah.
+                    Bagikan tulisan, poster, atau momen serumu ke seluruh warga sekolah. Karyamu akan tayang setelah direview oleh tim redaksi.
                 </p>
             </div>
-=======
-    <section
-        style="background: #f8f9fc; padding: 48px 0 60px; border-bottom: 1px solid #e2e8f0; position: relative; overflow: hidden;">
-        <div
-            style="position:absolute; top:-20px; right:-20px; width:150px; height:150px; background:rgba(220,38,38,0.03); border-radius:50%; blur:60px;">
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <a href="{{ route('mading.index') }}"
-                style="display:inline-flex;align-items:center;gap:8px;color:#64748b;
-                          font-size:0.85rem;font-weight:700;text-decoration:none;margin-bottom:28px;
-                          padding:8px 16px; background:white; border:1px solid #e2e8f0; border-radius:12px; transition:all 0.2s;"
-                onmouseenter="this.style.borderColor='#dc2626';this.style.color='#dc2626';this.style.transform='translateX(-4px)';"
-                onmouseleave="this.style.borderColor='#e2e8f0';this.style.color='#64748b';this.style.transform='translateX(0)';">
-                <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Kembali ke Mading
-            </a>
-
-            <h1 style="font-size:clamp(1.75rem,5vw,2.5rem);font-weight:900;color:#1e293b;
-                           line-height:1.2;margin:0 0 12px; letter-spacing:-0.02em;">
-                Buat <span style="color:#dc2626;">Karya</span> Baru
-            </h1>
-            <p style="color:#64748b; font-size:1rem; max-width:600px; line-height:1.6;">
-                Bagikan tulisan, poster, atau momen serumu ke seluruh warga sekolah.
-                Karyamu akan tayang setelah direview oleh tim redaksi.
-            </p>
->>>>>>> e589073fd1916c50204875066b7b7c8cf7c27336
         </div>
     </section>
 
@@ -90,10 +71,10 @@
                                 <div class="input-group">
                                     <label
                                         style="display:block; font-size:0.75rem; font-weight:800; color:#1e293b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
-                                        Kelas / Instansi
+                                        Kelas / Instansi <span style="color:#ef4444;">*</span>
                                     </label>
                                     <input type="text" name="author_class" id="author_class"
-                                        value="{{ old('author_class') }}"
+                                        value="{{ old('author_class') }}" required
                                         style="width:100%; padding:14px 18px; border-radius:14px; border:1.5px solid #e2e8f0; font-size:0.95rem; font-weight:600; transition:all 0.2s;"
                                         placeholder="Contoh: XII RPL 1" oninput="updatePreview()">
                                 </div>
