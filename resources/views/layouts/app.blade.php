@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/LogoSMKN1LimbotoNoBG.png') }}">
     <title>@yield('title', 'Portal Layanan') — SMKN 1 Limboto</title>
     <meta name="description"
         content="@yield('meta_description', 'Portal Layanan Sistem Informasi Terpadu SMKN 1 Limboto — Akses E-Raport, LMS, Dapodik, dan PeKaeL dalam satu platform.')">

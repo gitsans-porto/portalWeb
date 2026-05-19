@@ -415,6 +415,7 @@
         border-top-right-radius: 0.375rem;
         border-color: #e5e7eb;
         background-color: #f9fafb;
+        padding-right: 45px !important; /* Make room for fullscreen button */
     }
     .ql-container.ql-snow {
         border-bottom-left-radius: 0.375rem;
@@ -425,6 +426,86 @@
         font-family: inherit;
         font-size: 0.875rem;
         color: #4b5563;
+    }
+
+    /* Custom ordered list numbering continuity inside Quill */
+    .ql-editor {
+        counter-reset: ql-ol-counter;
+    }
+    .ql-editor ol {
+        list-style-type: none !important;
+        counter-reset: none !important;
+    }
+    .ql-editor ol li:not([class*="ql-indent-"]) {
+        counter-increment: ql-ol-counter;
+    }
+    .ql-editor ol li:not([class*="ql-indent-"])::before {
+        content: counter(ql-ol-counter) ". " !important;
+        display: inline-block !important;
+        white-space: nowrap !important;
+        width: 1.5em !important;
+        margin-left: -1.5em !important;
+        margin-right: 0.3em !important;
+        text-align: right !important;
+        font-weight: bold !important;
+    }
+
+    /* Fullscreen editor styles */
+    .quill-container.is-fullscreen {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 99999 !important;
+        margin: 0 !important;
+        padding: 1.5rem !important;
+        background-color: rgba(15, 23, 42, 0.6) !important; /* backdrop color */
+        backdrop-filter: blur(8px) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .quill-container.is-fullscreen .ql-toolbar {
+        width: 90% !important;
+        max-width: 1100px !important;
+        border-top-left-radius: 0.5rem !important;
+        border-top-right-radius: 0.5rem !important;
+        background-color: #f9fafb !important;
+        border: 1px solid #e5e7eb !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    }
+    .quill-container.is-fullscreen .ql-container {
+        width: 90% !important;
+        max-width: 1100px !important;
+        height: 70vh !important;
+        background-color: white !important;
+        border: 1px solid #e5e7eb !important;
+        border-top: none !important;
+        border-bottom-left-radius: 0.5rem !important;
+        border-bottom-right-radius: 0.5rem !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    }
+    .quill-container.is-fullscreen .btn-fullscreen-quill {
+        right: calc(5% + 10px) !important;
+        top: 22px !important;
+    }
+
+    /* CSS rules to guarantee visibility toggling of expand/shrink icons */
+    .quill-container .icon-shrink {
+        display: none !important;
+    }
+    .quill-container .icon-expand {
+        display: block !important;
+    }
+    .quill-container.is-fullscreen .icon-shrink {
+        display: block !important;
+    }
+    .quill-container.is-fullscreen .icon-expand {
+        display: none !important;
     }
 </style>
 <script>
@@ -551,13 +632,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const quillInstances = [];
 
+    function addFullscreenButton(container) {
+        if (!container || container.querySelector('.btn-fullscreen-quill')) return;
+        
+        container.classList.add('relative');
+        
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-fullscreen-quill absolute top-2 right-2 z-20 p-1.5 bg-white border border-gray-200 rounded text-gray-500 hover:text-gray-900 hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center justify-center';
+        btn.title = 'Perbesar / Perkecil Editor';
+        btn.style.height = '28px';
+        btn.style.width = '28px';
+        btn.innerHTML = `
+            <svg class="w-4 h-4 icon-expand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            </svg>
+            <svg class="w-4 h-4 icon-shrink" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        `;
+        
+        container.appendChild(btn);
+        
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const isFullscreen = container.classList.toggle('is-fullscreen');
+            
+            if (isFullscreen) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
     // Inisialisasi Quill awal
     document.querySelectorAll('.quill-editor').forEach(function(el) {
         const quill = new Quill(el, quillOptions);
+        const container = el.closest('.quill-container');
         quillInstances.push({
             quill: quill,
-            container: el.closest('.quill-container')
+            container: container
         });
+        addFullscreenButton(container);
     });
 
     // Form submit trigger save for Quill
@@ -736,10 +855,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const newEditor = container.lastElementChild.querySelector('.quill-editor');
             if (newEditor) {
                 const quill = new Quill(newEditor, quillOptions);
+                const newContainer = newEditor.closest('.quill-container');
                 quillInstances.push({
                     quill: quill,
-                    container: newEditor.closest('.quill-container')
+                    container: newContainer
                 });
+                addFullscreenButton(newContainer);
             }
         });
     }
@@ -783,10 +904,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const newEditor = subContainer.lastElementChild.querySelector('.quill-editor');
                 if (newEditor) {
                     const quill = new Quill(newEditor, quillOptions);
+                    const newContainer = newEditor.closest('.quill-container');
                     quillInstances.push({
                         quill: quill,
-                        container: newEditor.closest('.quill-container')
+                        container: newContainer
                     });
+                    addFullscreenButton(newContainer);
                 }
             }
 

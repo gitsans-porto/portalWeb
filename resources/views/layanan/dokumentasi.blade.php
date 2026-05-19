@@ -356,7 +356,10 @@
 
     /* Quill Editor Content Styles */
     .ql-editor ul { list-style-type: disc !important; padding-left: 1.5rem !important; margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
-    .ql-editor ol { list-style-type: decimal !important; padding-left: 1.5rem !important; margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
+    .ql-editor { counter-reset: ql-ol-counter; }
+    .ql-editor ol { list-style-type: none !important; padding-left: 1.5rem !important; margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; counter-reset: none !important; }
+    .ql-editor ol li:not([class*="ql-indent-"]) { counter-increment: ql-ol-counter; }
+    .ql-editor ol li:not([class*="ql-indent-"])::before { content: counter(ql-ol-counter) ". " !important; display: inline-block !important; white-space: nowrap !important; width: 1.5em !important; margin-left: -1.5em !important; margin-right: 0.3em !important; text-align: right !important; font-weight: bold !important; }
     .ql-editor p { margin-bottom: 0.5rem !important; }
     .ql-editor a { color: #2563eb !important; text-decoration: underline !important; font-weight: 600 !important; transition: color 0.15s ease-in-out !important; }
     .ql-editor a:hover { color: #1d4ed8 !important; text-decoration: none !important; }

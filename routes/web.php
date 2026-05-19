@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 use Illuminate\Support\Facades\Artisan;
 
+
 Route::get('/', [PortalController::class, 'index'])->name('beranda');
 Route::get('/layanan/{slug}', [PortalController::class, 'layanan'])->name('layanan.detail');
 Route::get('/layanan/{slug}/dokumentasi', [PortalController::class, 'dokumentasi'])->name('layanan.dokumentasi');
@@ -114,3 +115,4 @@ Route::get('/migrate-sekarang/{token}', function ($token) {
     Artisan::call('migrate', ['--force' => true]);
     return 'Database berhasil di-update di server!';
 });
+
