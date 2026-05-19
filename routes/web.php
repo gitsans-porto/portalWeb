@@ -66,7 +66,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Bahan Ajar Management
     Route::resource('subjects', App\Http\Controllers\Admin\SubjectController::class)->except(['create', 'edit', 'show']);
-    Route::resource('materials', App\Http\Controllers\Admin\MaterialController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('materials', App\Http\Controllers\Admin\MaterialController::class)->only(['index', 'store', 'update', 'destroy']);
 
     // Jurusan (Majors) Management
     Route::post('/majors', [App\Http\Controllers\Admin\SubjectController::class, 'storeMajor'])->name('majors.store');

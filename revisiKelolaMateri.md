@@ -1,0 +1,15 @@
+Perhatikan penjelasan di bawah ini untuk revisi bagian Kelola Materi pada halaman Admin!
+1. Dalam form tambah materi terdapat sebuah kolom memilih mata pelajaran. Pada opsi pilihan, formatnya kita ubah menjadi [Nama Mapel (Jenis Mapel)]. Contoh: Matematika (Umum).
+
+2. Kemudian Tambahkan kolom input combobox untuk pilih jurusan dan juga tambahkan input dropdown untuk memilih tingkat kelas (kelas 10, 11, 12). Input mapel hanya akan aktif (dapat diinteraksi) jika kedua pilihan tersebut sudah diisi (Tambahkan teks kecil di bawah kolomnya "Silahkan pilih jurusan dan kelas terlebih dahulu untuk mengaktifkan kolom ini", dan teks itu akan hilang ketika kolom mapel sudah bisa diinteraksi). Jadi urutan input datanya adalah:
+    a. Judul Materi (Input Teks)
+    b. Pilih Jurusan (Input Combobox, placeholder "Pilih Jurusan")
+    c. Pilih Tingkat Kelas (Input Dropdown, placeholder "Pilih Tingkat Kelas")
+    d. Pilih Mata Pelajaran (Input Combobox, placeholder "Pilih Mata Pelajaran"). Opsi mapel yang akan muncul disini tergantung dengan kedua pilihan di atas. Jika mapel tidak tertaut dengan pilihan filter tersebut maka opsi tidak akan muncul di filter ini.
+
+3. Kemudian di Tipe Materi "Unggah File", saya sudah mencoba drop file dan juga klik untuk upload di area tersebut. File yang saya pilih dari lokal berhasil terunggah, namun setelah file itu terunggah, file tersebut tidak ada tandanya untuk menunjukkan bahwa file tersebut sudah berhasil terunggah. Oleh karena itu ketika file di drop di area tersebut ataupun file di klik untuk mengunggah file dari lokal, berikan progress bar atau animasi loading di tengah area tersebut yang menunjukkan bahwa file sedang proses diunggah. Setelah itu ketika proses unggah selesai, selain file tersebut tetap ada, tambahkan juga teks informasi di bawah area tersebut mengenai file yang terunggah (Contoh: "File: Nama File.pdf (Ukuran: 2MB)"). Selain itu pastikan agar file yang diupload hanya berupa file dengan ekstensi PDF dan PPT saja, selain itu ditolak. Untuk ukuran batasi maksimal 25 MB. Jika lebih maka akan muncul teks kecil di bawahnya dengan warna merah bertuliskan peringatan "Ukuran file melebihi batas maksimal 25 MB.".
+
+4. Pada form tambah materi ini terdapat 3 tombol yakni "Batal", "Simpan Sebagai Draf" dan "Publikasikan Sekarang". 
+    - Hilangkan tombol batal dan ganti dengan icon "x" yang diletakkan di pojok kanan atas halaman form, sehingga ketika icon tersebut diklik maka form akan tertutup alias membatalkan tambah materi.
+    - Sekarang tersisa 2 tombol. Sisakan ruang di sebelah tombol simpan  sebagai draf untuk menaruh teks kecil bertuliskan "Simpan sebagai draft untuk dipublikasi nanti, atau langsung publikasikan sekarang". (lihat contoh pada gambar yang saya upload di chat)
+    - Untuk warna dari tombol "Simpan sebagai draf" ubah jadi warna putih dengan stroke hitam dan tulisan hitam. 
