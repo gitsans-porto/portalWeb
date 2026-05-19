@@ -15,7 +15,8 @@
         <div class="absolute top-20 right-1/4 w-40 h-40 rounded-full bg-white/[0.015] blur-2xl"
             style="animation: float 6s ease-in-out infinite 1s;"></div>
 
-        <div class="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center pt-32 pb-16 lg:pt-40 lg:pb-24">
+        {{-- Text Content Area (Centered Vertically) --}}
+        <div class="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center flex-grow pt-32 pb-8">
 
             {{-- Glassmorphism Welcome Badge --}}
             <div class="inline-flex items-center gap-2 px-5 py-2.5 mb-7 rounded-full border border-white/20 backdrop-blur-md bg-white/10">
@@ -30,14 +31,16 @@
             </h1>
 
             {{-- Sub Description --}}
-            <p class="text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-10">
+            <p class="text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-6">
                 Akses seluruh layanan digital SMKN 1 Limboto dalam satu platform terpadu.
             </p>
+        </div>
 
-            {{-- Layanan Cards --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+        {{-- Layanan Cards Container (Anchored at bottom edge of Hero) --}}
+        <div class="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full layanan-grid">
                 @foreach($layananList as $index => $item)
-                    @php $ic = 'text-red-500'; @endphp
+                    @php $ic = 'text-white'; @endphp
                     <a href="{{ route('layanan.detail', $item->slug) }}"
                         class="layanan-card group reveal reveal-delay-{{ $index + 1 }} text-left">
 
