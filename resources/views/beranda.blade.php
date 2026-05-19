@@ -313,7 +313,7 @@
                         </div>
                         <div class="p-6">
                             <div class="flex items-center gap-2 mb-3">
-                                <span class="text-xs font-semibold text-primary bg-red-50 px-2.5 py-1 rounded-full">
+                                <span class="text-xs font-semibold text-white bg-red-600 px-2.5 py-1 rounded-full">
                                     {{ $item->category ?? 'Umum' }}
                                 </span>
                                 <span class="text-xs text-gray-400">

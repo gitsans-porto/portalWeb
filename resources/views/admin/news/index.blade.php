@@ -19,7 +19,7 @@
         </div>
 
         {{-- Table Card --}}
-        <div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
+        <div class="bg-white rounded-none shadow-sm border border-gray-100 overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -46,7 +46,7 @@
                                 </td>
                                 <td class="px-8 py-5">
                                     <div class="font-bold text-gray-900 mb-1 group-hover:text-red-600 transition-colors">{{ $article->title }}</div>
-                                    <span class="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md bg-red-50 text-red-600">{{ $article->category ?? 'Umum' }}</span>
+                                    <span class="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md bg-red-600 text-white">{{ $article->category ?? 'Umum' }}</span>
                                 </td>
                                 <td class="px-8 py-5 text-center">
                                     <div class="text-sm font-medium text-gray-600">
