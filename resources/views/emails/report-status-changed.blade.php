@@ -1,7 +1,7 @@
 @component('mail::message')
 # Pembaruan Status Laporan Anda
 
-Halo, **{{ $report->full_name }}**!
+Halo, **{{ $report->full_name ?: 'Anonymous' }}**!
 
 Status laporan Anda telah diperbarui oleh admin.
 

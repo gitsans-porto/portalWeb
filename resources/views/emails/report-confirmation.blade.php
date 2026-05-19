@@ -1,7 +1,7 @@
 @component('mail::message')
 # Laporan Anda Telah Diterima
 
-Halo, **{{ $report->full_name }}**!
+Halo, **{{ $report->full_name ?: 'Anonymous' }}**!
 
 Terima kasih telah menyampaikan laporan kepada kami.
 Laporan Anda dengan kategori **{{ $report->type }} — {{ $report->category }}** telah berhasil kami terima.
